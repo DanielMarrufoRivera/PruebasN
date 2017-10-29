@@ -29,13 +29,14 @@ public class FrmInterfaz1 extends javax.swing.JFrame {
     String rfcr;
     double impuesto;
     int entradafac;
+
     public FrmInterfaz1() {
         initComponents();
         url = "";
         impuesto = 0;
         LblTipo.setText("Nose~Soft");
         rfcr = "";
-        entradafac=0;
+        entradafac = 0;
 
     }
 
@@ -58,7 +59,6 @@ public class FrmInterfaz1 extends javax.swing.JFrame {
         LblTipo = new javax.swing.JLabel();
         Lbl3 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
-        jLabel1 = new javax.swing.JLabel();
         LblNombree = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
         Lbl4 = new javax.swing.JLabel();
@@ -67,7 +67,6 @@ public class FrmInterfaz1 extends javax.swing.JFrame {
         LblNombrer = new javax.swing.JLabel();
         LblFecha = new javax.swing.JLabel();
         LblRFCE = new javax.swing.JLabel();
-        LblImpuestos = new javax.swing.JLabel();
         BtnSalir = new javax.swing.JButton();
         pestanaGenerarreporte = new javax.swing.JPanel();
         jButton1 = new javax.swing.JButton();
@@ -77,6 +76,14 @@ public class FrmInterfaz1 extends javax.swing.JFrame {
         jLabel6 = new javax.swing.JLabel();
         jLabel7 = new javax.swing.JLabel();
         TXTanyo = new javax.swing.JTextField();
+        jLabel8 = new javax.swing.JLabel();
+        jLabel9 = new javax.swing.JLabel();
+        Lblimpuesto = new javax.swing.JLabel();
+        jLabel11 = new javax.swing.JLabel();
+        jLabel12 = new javax.swing.JLabel();
+        Lblganancias = new javax.swing.JLabel();
+        LblPerdidas = new javax.swing.JLabel();
+        Lblutilidadbruta = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -103,21 +110,18 @@ public class FrmInterfaz1 extends javax.swing.JFrame {
         PestanaLeerarchivo.setLayout(PestanaLeerarchivoLayout);
         PestanaLeerarchivoLayout.setHorizontalGroup(
             PestanaLeerarchivoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(PestanaLeerarchivoLayout.createSequentialGroup()
-                .addGap(212, 212, 212)
-                .addComponent(BtnCargar)
-                .addGap(0, 0, Short.MAX_VALUE))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, PestanaLeerarchivoLayout.createSequentialGroup()
-                .addContainerGap(35, Short.MAX_VALUE)
-                .addGroup(PestanaLeerarchivoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, PestanaLeerarchivoLayout.createSequentialGroup()
-                        .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 255, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(TxtRFC, javax.swing.GroupLayout.PREFERRED_SIZE, 116, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(153, 153, 153))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, PestanaLeerarchivoLayout.createSequentialGroup()
-                        .addComponent(BtnSalir1, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(71, 71, 71))))
+                .addContainerGap(654, Short.MAX_VALUE)
+                .addComponent(BtnSalir1, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(71, 71, 71))
+            .addGroup(PestanaLeerarchivoLayout.createSequentialGroup()
+                .addGap(177, 177, 177)
+                .addGroup(PestanaLeerarchivoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(BtnCargar)
+                    .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 255, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
+                .addComponent(TxtRFC, javax.swing.GroupLayout.PREFERRED_SIZE, 116, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         PestanaLeerarchivoLayout.setVerticalGroup(
             PestanaLeerarchivoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -126,11 +130,11 @@ public class FrmInterfaz1 extends javax.swing.JFrame {
                 .addGroup(PestanaLeerarchivoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(TxtRFC, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(38, 38, 38)
+                .addGap(29, 29, 29)
                 .addComponent(BtnCargar, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(107, 107, 107)
+                .addGap(116, 116, 116)
                 .addComponent(BtnSalir1)
-                .addContainerGap(30, Short.MAX_VALUE))
+                .addContainerGap(60, Short.MAX_VALUE))
         );
 
         jTabbedPane1.addTab("Leer Archivo", PestanaLeerarchivo);
@@ -138,21 +142,18 @@ public class FrmInterfaz1 extends javax.swing.JFrame {
         LblTipo.setFont(new java.awt.Font("Tahoma", 3, 24)); // NOI18N
         LblTipo.setText("___________");
 
-        Lbl3.setFont(new java.awt.Font("Book Antiqua", 0, 18)); // NOI18N
+        Lbl3.setFont(new java.awt.Font("Book Antiqua", 0, 14)); // NOI18N
         Lbl3.setText("Nombre Emisor:");
 
-        jLabel3.setFont(new java.awt.Font("Book Antiqua", 0, 18)); // NOI18N
+        jLabel3.setFont(new java.awt.Font("Book Antiqua", 0, 14)); // NOI18N
         jLabel3.setText("RFC EMISOR:");
-
-        jLabel1.setFont(new java.awt.Font("Tw Cen MT", 1, 24)); // NOI18N
-        jLabel1.setText("IMPUESTOS");
 
         LblNombree.setText("___________________________");
 
-        jLabel4.setFont(new java.awt.Font("Book Antiqua", 0, 18)); // NOI18N
+        jLabel4.setFont(new java.awt.Font("Book Antiqua", 0, 14)); // NOI18N
         jLabel4.setText("RFC RECEPTOR:");
 
-        Lbl4.setFont(new java.awt.Font("Book Antiqua", 0, 18)); // NOI18N
+        Lbl4.setFont(new java.awt.Font("Book Antiqua", 0, 14)); // NOI18N
         Lbl4.setText("Nombre Receptor:");
 
         LblRFCR.setText("___________________________");
@@ -166,10 +167,6 @@ public class FrmInterfaz1 extends javax.swing.JFrame {
 
         LblRFCE.setText("___________________________");
 
-        LblImpuestos.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
-        LblImpuestos.setForeground(new java.awt.Color(255, 0, 51));
-        LblImpuestos.setText("_______________");
-
         BtnSalir.setText("Salir");
         BtnSalir.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -182,49 +179,39 @@ public class FrmInterfaz1 extends javax.swing.JFrame {
         pestanaconsultaLayout.setHorizontalGroup(
             pestanaconsultaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(pestanaconsultaLayout.createSequentialGroup()
-                .addComponent(LblTipo, javax.swing.GroupLayout.PREFERRED_SIZE, 168, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(41, 41, 41)
                 .addGroup(pestanaconsultaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pestanaconsultaLayout.createSequentialGroup()
-                        .addGap(0, 0, Short.MAX_VALUE)
-                        .addComponent(Lbl4)
-                        .addGap(28, 28, 28)
-                        .addComponent(LblNombrer)
-                        .addGap(48, 48, 48))
                     .addGroup(pestanaconsultaLayout.createSequentialGroup()
-                        .addGroup(pestanaconsultaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addGroup(pestanaconsultaLayout.createSequentialGroup()
-                                .addGap(285, 285, 285)
-                                .addComponent(jLabel4))
-                            .addGroup(pestanaconsultaLayout.createSequentialGroup()
-                                .addComponent(Lbl2)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(LblFecha, javax.swing.GroupLayout.PREFERRED_SIZE, 146, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                        .addComponent(LblRFCR, javax.swing.GroupLayout.PREFERRED_SIZE, 203, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
-            .addGroup(pestanaconsultaLayout.createSequentialGroup()
-                .addGroup(pestanaconsultaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addComponent(LblTipo, javax.swing.GroupLayout.PREFERRED_SIZE, 168, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(41, 41, 41)
+                        .addComponent(Lbl2)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(LblFecha, javax.swing.GroupLayout.PREFERRED_SIZE, 146, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(pestanaconsultaLayout.createSequentialGroup()
                         .addContainerGap()
                         .addGroup(pestanaconsultaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(jLabel3)
-                            .addComponent(Lbl3))
-                        .addGroup(pestanaconsultaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(pestanaconsultaLayout.createSequentialGroup()
-                                .addGap(18, 18, 18)
-                                .addComponent(LblRFCE, javax.swing.GroupLayout.PREFERRED_SIZE, 203, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(pestanaconsultaLayout.createSequentialGroup()
+                                .addComponent(Lbl3)
                                 .addGap(49, 49, 49)
-                                .addComponent(LblNombree))))
-                    .addGroup(pestanaconsultaLayout.createSequentialGroup()
-                        .addGap(37, 37, 37)
-                        .addGroup(pestanaconsultaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel1)
+                                .addComponent(LblNombree))
                             .addGroup(pestanaconsultaLayout.createSequentialGroup()
-                                .addComponent(LblImpuestos, javax.swing.GroupLayout.PREFERRED_SIZE, 388, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(43, 43, 43)
-                                .addComponent(BtnSalir, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE)))))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                                .addComponent(jLabel3)
+                                .addGap(18, 18, 18)
+                                .addComponent(LblRFCE, javax.swing.GroupLayout.PREFERRED_SIZE, 203, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addGap(67, 67, 67)
+                        .addGroup(pestanaconsultaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addGroup(pestanaconsultaLayout.createSequentialGroup()
+                                .addComponent(Lbl4)
+                                .addGap(28, 28, 28)
+                                .addComponent(LblNombrer))
+                            .addGroup(pestanaconsultaLayout.createSequentialGroup()
+                                .addComponent(jLabel4)
+                                .addGap(0, 0, 0)
+                                .addComponent(LblRFCR, javax.swing.GroupLayout.PREFERRED_SIZE, 203, javax.swing.GroupLayout.PREFERRED_SIZE)))))
+                .addContainerGap(89, Short.MAX_VALUE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pestanaconsultaLayout.createSequentialGroup()
+                .addGap(0, 0, Short.MAX_VALUE)
+                .addComponent(BtnSalir, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(97, 97, 97))
         );
         pestanaconsultaLayout.setVerticalGroup(
             pestanaconsultaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -235,35 +222,25 @@ public class FrmInterfaz1 extends javax.swing.JFrame {
                         .addGroup(pestanaconsultaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(Lbl2)
                             .addComponent(LblFecha))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGap(18, 18, 18)
                         .addGroup(pestanaconsultaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel4)
-                            .addComponent(LblRFCR, javax.swing.GroupLayout.PREFERRED_SIZE, 9, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(12, 12, 12)
-                        .addGroup(pestanaconsultaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(Lbl4)
-                            .addComponent(LblNombrer))
-                        .addGap(68, 68, 68))
-                    .addGroup(pestanaconsultaLayout.createSequentialGroup()
-                        .addComponent(LblTipo)
-                        .addGap(88, 88, 88)
-                        .addGroup(pestanaconsultaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(LblRFCR, javax.swing.GroupLayout.PREFERRED_SIZE, 9, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jLabel3)
                             .addComponent(LblRFCE, javax.swing.GroupLayout.PREFERRED_SIZE, 9, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(12, 12, 12)
+                        .addGap(26, 26, 26)
                         .addGroup(pestanaconsultaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(Lbl4)
+                            .addComponent(LblNombrer)
                             .addComponent(Lbl3)
-                            .addComponent(LblNombree))))
-                .addGroup(pestanaconsultaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(LblNombree))
+                        .addGap(48, 48, 48))
                     .addGroup(pestanaconsultaLayout.createSequentialGroup()
-                        .addGap(49, 49, 49)
-                        .addComponent(jLabel1)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(LblImpuestos)
-                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pestanaconsultaLayout.createSequentialGroup()
-                        .addComponent(BtnSalir)
-                        .addContainerGap())))
+                        .addComponent(LblTipo)
+                        .addGap(146, 146, 146)))
+                .addGap(20, 20, 20)
+                .addComponent(BtnSalir)
+                .addContainerGap(27, Short.MAX_VALUE))
         );
 
         jTabbedPane1.addTab("Consulta Del Archivo", pestanaconsulta);
@@ -285,16 +262,18 @@ public class FrmInterfaz1 extends javax.swing.JFrame {
 
         jLabel7.setText("Ingresa el año");
 
+        jLabel8.setText("IMPUESTO");
+
+        jLabel9.setText("GANANCIAS");
+
+        jLabel11.setText("UTILIDAD BRUTA");
+
+        jLabel12.setText("PERDIDAS");
+
         javax.swing.GroupLayout pestanaGenerarreporteLayout = new javax.swing.GroupLayout(pestanaGenerarreporte);
         pestanaGenerarreporte.setLayout(pestanaGenerarreporteLayout);
         pestanaGenerarreporteLayout.setHorizontalGroup(
             pestanaGenerarreporteLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pestanaGenerarreporteLayout.createSequentialGroup()
-                .addGap(0, 0, Short.MAX_VALUE)
-                .addComponent(jLabel6)
-                .addGap(18, 18, 18)
-                .addComponent(cmbxMes, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(33, 33, 33))
             .addGroup(pestanaGenerarreporteLayout.createSequentialGroup()
                 .addGroup(pestanaGenerarreporteLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(pestanaGenerarreporteLayout.createSequentialGroup()
@@ -303,15 +282,37 @@ public class FrmInterfaz1 extends javax.swing.JFrame {
                         .addGap(18, 18, 18)
                         .addComponent(cmbxTipoDeReporte1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(pestanaGenerarreporteLayout.createSequentialGroup()
+                        .addGap(60, 60, 60)
+                        .addGroup(pestanaGenerarreporteLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(pestanaGenerarreporteLayout.createSequentialGroup()
+                                .addComponent(jLabel12)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(LblPerdidas))
+                            .addGroup(pestanaGenerarreporteLayout.createSequentialGroup()
+                                .addComponent(jLabel11)
+                                .addGap(43, 43, 43)
+                                .addComponent(Lblutilidadbruta))
+                            .addGroup(pestanaGenerarreporteLayout.createSequentialGroup()
+                                .addComponent(jLabel9)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(Lblganancias))
+                            .addGroup(pestanaGenerarreporteLayout.createSequentialGroup()
+                                .addComponent(jLabel8)
+                                .addGap(36, 36, 36)
+                                .addComponent(Lblimpuesto))))
+                    .addGroup(pestanaGenerarreporteLayout.createSequentialGroup()
                         .addGap(27, 27, 27)
                         .addComponent(jLabel7)
                         .addGap(18, 18, 18)
-                        .addComponent(TXTanyo, javax.swing.GroupLayout.PREFERRED_SIZE, 78, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(220, Short.MAX_VALUE))
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pestanaGenerarreporteLayout.createSequentialGroup()
-                .addGap(0, 0, Short.MAX_VALUE)
-                .addComponent(jButton1)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addComponent(TXTanyo, javax.swing.GroupLayout.PREFERRED_SIZE, 78, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(264, 264, 264)
+                        .addComponent(jLabel6)
+                        .addGap(26, 26, 26)
+                        .addComponent(cmbxMes, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(pestanaGenerarreporteLayout.createSequentialGroup()
+                        .addGap(251, 251, 251)
+                        .addComponent(jButton1)))
+                .addContainerGap(179, Short.MAX_VALUE))
         );
         pestanaGenerarreporteLayout.setVerticalGroup(
             pestanaGenerarreporteLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -328,7 +329,23 @@ public class FrmInterfaz1 extends javax.swing.JFrame {
                     .addComponent(TXTanyo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(155, Short.MAX_VALUE))
+                .addGap(52, 52, 52)
+                .addGroup(pestanaGenerarreporteLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel8)
+                    .addComponent(Lblimpuesto))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(pestanaGenerarreporteLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel9)
+                    .addComponent(Lblganancias))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(pestanaGenerarreporteLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel12)
+                    .addComponent(LblPerdidas))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 38, Short.MAX_VALUE)
+                .addGroup(pestanaGenerarreporteLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel11)
+                    .addComponent(Lblutilidadbruta))
+                .addGap(27, 27, 27))
         );
 
         jTabbedPane1.addTab("Generar Reporte", pestanaGenerarreporte);
@@ -338,14 +355,12 @@ public class FrmInterfaz1 extends javax.swing.JFrame {
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addComponent(jTabbedPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 574, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 488, Short.MAX_VALUE))
+                .addComponent(jTabbedPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 898, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 0, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addComponent(jTabbedPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 293, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 516, Short.MAX_VALUE))
+            .addComponent(jTabbedPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 397, javax.swing.GroupLayout.PREFERRED_SIZE)
         );
 
         pack();
@@ -355,173 +370,182 @@ public class FrmInterfaz1 extends javax.swing.JFrame {
         // TODO add your handling code here:
         System.exit(1);
     }//GEN-LAST:event_BtnSalirActionPerformed
+    private void Cargar() {
 
-    private void BtnCargarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnCargarActionPerformed
-        // TODO add your handling code here:
-
-        int a=JOptionPane.showConfirmDialog(rootPane, "jljkjklk");
-        
-        JOptionPane.showMessageDialog(rootPane, "es lo que vale su respuesta"+a);
-        
         try {
             //int opa;
             //do {
-                JFileChooser dato = new JFileChooser();
-                int op = dato.showOpenDialog(this);
+            JFileChooser dato = new JFileChooser();
+            int op = dato.showOpenDialog(this);
 
-                if (op == JFileChooser.APPROVE_OPTION) {
+            if (op == JFileChooser.APPROVE_OPTION) {
 
-                    url = dato.getSelectedFile().getPath();
-                }
+                url = dato.getSelectedFile().getPath();
+            }
 
-                if (url == "") {
+            if (url == "") {
 
-                    JOptionPane.showMessageDialog(null, "No Seleccionaste Nada");
-                } else {
+                JOptionPane.showMessageDialog(null, "No Seleccionaste Nada");
+            } else {
 
-                    archivoXML mi_archivo = new archivoXML(url);
-                    mi_archivo.open();
+                archivoXML mi_archivo = new archivoXML(url);
+                mi_archivo.open();
+                try {
+                    Vector vector_resultado = new Vector();
+                    NodeList root = mi_archivo.getRoot();
+                    //Padre
+                    Node comprobante = mi_archivo.getNode("cfdi:Comprobante", root);
+                    String folio = mi_archivo.getNodeAttr("folio", comprobante);
+                    String importe = mi_archivo.getNodeAttr("subTotal", comprobante);
+                    String fecha = mi_archivo.getNodeAttr("fecha", comprobante);
+                    System.out.println(folio);
+                    System.out.println(importe);
+                    System.out.println(fecha);
+                    //Emisor
+                    Node emisor = mi_archivo.getNode("cfdi:Emisor", comprobante.getChildNodes());
+                    String rfce = mi_archivo.getNodeAttr("rfc", emisor);
+                    nombree = mi_archivo.getNodeAttr("nombre", emisor);
+                    System.out.println(rfce);
+                    System.out.println(nombree);
+                    //Receptor
+                    Node receptor = mi_archivo.getNode("cfdi:Receptor", comprobante.getChildNodes());
+                    rfcr = mi_archivo.getNodeAttr("rfc", receptor);
+                    String nombrer = mi_archivo.getNodeAttr("nombre", receptor);
+                    System.out.println(rfcr);
+                    System.out.println(nombrer);
+                    //Traslados
+                    Node Traslados = mi_archivo.getNode("cfdi:Impuestos", comprobante.getChildNodes());
+                    String traslados = mi_archivo.getNodeAttr("totalImpuestosTrasladados", Traslados);
+                    String retenciones = mi_archivo.getNodeAttr("totalImpuestosRetenidos", Traslados);
+                    System.out.println(traslados);
+                    System.out.println(retenciones);
+
+                    LblNombree.setText(nombree);
+                    LblFecha.setText(fecha);
+                    //LblImpuestos.setText(String.valueOf("Aqui Se Mostrará Su Determinado Valor"));
+                    LblNombrer.setText(nombrer);
+                    LblRFCR.setText(rfcr);
+                    this.LblRFCE.setText(rfce);
+
+                    //Esto es para insertar osease guardar en la base los datos
                     try {
-                        Vector vector_resultado = new Vector();
-                        NodeList root = mi_archivo.getRoot();
-                        //Padre
-                        Node comprobante = mi_archivo.getNode("cfdi:Comprobante", root);
-                        String folio = mi_archivo.getNodeAttr("folio", comprobante);
-                        String importe = mi_archivo.getNodeAttr("subTotal", comprobante);
-                        String fecha = mi_archivo.getNodeAttr("fecha", comprobante);
-                        System.out.println(folio);
-                        System.out.println(importe);
-                        System.out.println(fecha);
-                        //Emisor
-                        Node emisor = mi_archivo.getNode("cfdi:Emisor", comprobante.getChildNodes());
-                        String rfce = mi_archivo.getNodeAttr("rfc", emisor);
-                        nombree = mi_archivo.getNodeAttr("nombre", emisor);
-                        System.out.println(rfce);
-                        System.out.println(nombree);
-                        //Receptor
-                        Node receptor = mi_archivo.getNode("cfdi:Receptor", comprobante.getChildNodes());
-                        rfcr = mi_archivo.getNodeAttr("rfc", receptor);
-                        String nombrer = mi_archivo.getNodeAttr("nombre", receptor);
-                        System.out.println(rfcr);
-                        System.out.println(nombrer);
-                        //Traslados
-                        Node Traslados = mi_archivo.getNode("cfdi:Impuestos", comprobante.getChildNodes());
-                        String traslados = mi_archivo.getNodeAttr("totalImpuestosTrasladados", Traslados);
-                        String retenciones = mi_archivo.getNodeAttr("totalImpuestosRetenidos", Traslados);
-                        System.out.println(traslados);
-                        System.out.println(retenciones);
-
-                        LblNombree.setText(nombree);
-                        LblFecha.setText(fecha);
-                        LblImpuestos.setText(String.valueOf("Aqui Se Mostrará Su Determinado Valor"));
-                        LblNombrer.setText(nombrer);
-                        LblRFCR.setText(rfcr);
-                        this.LblRFCE.setText(rfce);
-
-                        //Esto es para insertar osease guardar en la base los datos
-                        try {
-                            //Conectamos con la base de datos
-                            Conexion mConexion = new Conexion();
-                            mConexion.Conectar("localhost", "nose_prueba", "root", "nose");
-                            //Formamos una instruccion DML -INSERT
-                            String INSERT = "insert into recibo_factura values ('?1','?2','?3','?4','?5','?6','?7','?8')";
-                            INSERT = INSERT.replace("?1", folio);
-                            INSERT = INSERT.replace("?2", importe);
-                            INSERT = INSERT.replace("?3", fecha);
-                            INSERT = INSERT.replace("?4", nombrer);
-                            INSERT = INSERT.replace("?5", nombree);
-                            INSERT = INSERT.replace("?6", rfcr);
-                            INSERT = INSERT.replace("?7", rfce);
-                            INSERT = INSERT.replace("?8", "1");
-                            //Llamamos al metodo que se encuentra en la clase conexión en el packete BaseDatos
-                            mConexion.ejecutarActualizacion(INSERT);
-                            JOptionPane.showMessageDialog(this, "guardado");
-                            this.setVisible(false);
-
-                        } catch (Exception error) {
-                            JOptionPane.showMessageDialog(this, "Error de guardar en la base de datos");
-                            System.out.println(error.toString());
-                        }
-                        /*  System.out.println(TxtRFC.getText());
-                        if (TxtRFC.getText().equals(rfce.toString())) {
-                            //Recibo
-                            /*LblNombree.setText(nombree);
-                            LblFecha.setText(fecha);
-                            LblTipo.setText("Recibo");
-                            LblRFCE.setText(rfce);
-                            impuesto = mCalculos.CalcularImpuestosRecibo(Float.parseFloat(importe));
-                            LblImpuestos.setText(String.valueOf("impuesto"));
-                            try {
-                                //Conectamos con la base de datos
-                                Conexion mConexion = new Conexion();
-                                mConexion.Conectar("localhost", "nose_prueba", "root", "nose");
-                                //Formamos una instruccion DML -INSERT
-                                String INSERT = "insert into recibo_factura values ('?1','?2','?3','?4','?5','?6','?7','?8')";
-                                INSERT = INSERT.replace("?1", folio);
-                                INSERT = INSERT.replace("?2", importe);
-                                INSERT = INSERT.replace("?3", fecha);
-                                INSERT = INSERT.replace("?4", nombrer);
-                                INSERT = INSERT.replace("?5", nombree);
-                                INSERT = INSERT.replace("?6", rfcr);
-                                INSERT = INSERT.replace("?7", rfce);
-                                INSERT = INSERT.replace("?8", "1");
-                                //Llamamos al metodo que se encuentra en la clase conexión en el packete BaseDatos
-                                mConexion.ejecutarActualizacion(INSERT);
-                                JOptionPane.showMessageDialog(this, "guardado");
-                                this.setVisible(false);
-                            } catch (Exception error) {
-                                JOptionPane.showMessageDialog(this, "Error de guardar en la base de datos");
-                                System.out.println(error.toString());
-                            }
-
-                        } else if (TxtRFC.getText().equals(rfcr.toString())) {
-                            //Factura
-                            LblNombrer.setText(nombrer);
-                            LblTipo.setText("Factura");
-                            LblRFCR.setText(rfcr);
-                            impuesto = mCalculos.CalcularImpuestosFactura(Float.parseFloat(importe));
-                            this.LblImpuestos.setText(String.valueOf(impuesto));
-
-                            try {
-                                //Conectamos con la base de datos
-                                Conexion mConexion = new Conexion();
-                                mConexion.Conectar("localhost", "nose_prueba", "root", "nose");
-                                //Formamos una instruccion DML -INSERT
-                                String INSERT = "insert into recibo_factura values ('?1','?2','?3','?4','?5','?6','?7','?8')";
-                                INSERT = INSERT.replace("?1", folio);
-                                INSERT = INSERT.replace("?2", importe);
-                                INSERT = INSERT.replace("?3", fecha);
-                                INSERT = INSERT.replace("?4", nombrer);
-                                INSERT = INSERT.replace("?5", nombree);
-                                INSERT = INSERT.replace("?6", rfcr);
-                                INSERT = INSERT.replace("?7", rfce);
-                                //munero 2 para identiificar el tipo en la base de datos como una factura
-                                INSERT = INSERT.replace("?8", "2");
-                                //Llamamos al metodo que se encuentra en la clase conexión en el packete BaseDatos
-                                mConexion.ejecutarActualizacion(INSERT);
-                                JOptionPane.showMessageDialog(this, "guardado");
-                                this.setVisible(false);
-                            } catch (Exception error) {
-                                JOptionPane.showMessageDialog(this, "Error de guardar en la base de datos");
-                                System.out.println(error.toString());
-                            }
-                        }*/
+                        //Conectamos con la base de datos
+                        Conexion mConexion = new Conexion();
+                        mConexion.Conectar("localhost", "nose_prueba", "root", "nose");
+                        //Formamos una instruccion DML -INSERT
+                        String INSERT = "insert into recibo_factura values ('?1','?2','?3','?4','?5','?6','?7','?8')";
+                        INSERT = INSERT.replace("?1", folio);
+                        INSERT = INSERT.replace("?2", importe);
+                        INSERT = INSERT.replace("?3", fecha);
+                        INSERT = INSERT.replace("?4", nombrer);
+                        INSERT = INSERT.replace("?5", nombree);
+                        INSERT = INSERT.replace("?6", rfcr);
+                        INSERT = INSERT.replace("?7", rfce);
+                        INSERT = INSERT.replace("?8", "1");
+                        //Llamamos al metodo que se encuentra en la clase conexión en el packete BaseDatos
+                        mConexion.ejecutarActualizacion(INSERT);
+                        JOptionPane.showMessageDialog(this, "guardado");
+                        this.setVisible(false);
 
                     } catch (Exception error) {
-                        JOptionPane.showMessageDialog(null, "Error No Puedes abrir ese archivo");
+                        JOptionPane.showMessageDialog(this, "Error de guardar en la base de datos");
+                        System.out.println(error.toString());
                     }
-                    if (rfcr.toString() == "") {
-                        JOptionPane.showMessageDialog(null, "ESTE NO ES UN ARCHIVO FACTURA NI RECIBO");
+                    /*  System.out.println(TxtRFC.getText());
+                     if (TxtRFC.getText().equals(rfce.toString())) {
+                     //Recibo
+                     /*LblNombree.setText(nombree);
+                     LblFecha.setText(fecha);
+                     LblTipo.setText("Recibo");
+                     LblRFCE.setText(rfce);
+                     impuesto = mCalculos.CalcularImpuestosRecibo(Float.parseFloat(importe));
+                     LblImpuestos.setText(String.valueOf("impuesto"));
+                     try {
+                     //Conectamos con la base de datos
+                     Conexion mConexion = new Conexion();
+                     mConexion.Conectar("localhost", "nose_prueba", "root", "nose");
+                     //Formamos una instruccion DML -INSERT
+                     String INSERT = "insert into recibo_factura values ('?1','?2','?3','?4','?5','?6','?7','?8')";
+                     INSERT = INSERT.replace("?1", folio);
+                     INSERT = INSERT.replace("?2", importe);
+                     INSERT = INSERT.replace("?3", fecha);
+                     INSERT = INSERT.replace("?4", nombrer);
+                     INSERT = INSERT.replace("?5", nombree);
+                     INSERT = INSERT.replace("?6", rfcr);
+                     INSERT = INSERT.replace("?7", rfce);
+                     INSERT = INSERT.replace("?8", "1");
+                     //Llamamos al metodo que se encuentra en la clase conexión en el packete BaseDatos
+                     mConexion.ejecutarActualizacion(INSERT);
+                     JOptionPane.showMessageDialog(this, "guardado");
+                     this.setVisible(false);
+                     } catch (Exception error) {
+                     JOptionPane.showMessageDialog(this, "Error de guardar en la base de datos");
+                     System.out.println(error.toString());
+                     }
 
-                    }
+                     } else if (TxtRFC.getText().equals(rfcr.toString())) {
+                     //Factura
+                     LblNombrer.setText(nombrer);
+                     LblTipo.setText("Factura");
+                     LblRFCR.setText(rfcr);
+                     impuesto = mCalculos.CalcularImpuestosFactura(Float.parseFloat(importe));
+                     this.LblImpuestos.setText(String.valueOf(impuesto));
+
+                     try {
+                     //Conectamos con la base de datos
+                     Conexion mConexion = new Conexion();
+                     mConexion.Conectar("localhost", "nose_prueba", "root", "nose");
+                     //Formamos una instruccion DML -INSERT
+                     String INSERT = "insert into recibo_factura values ('?1','?2','?3','?4','?5','?6','?7','?8')";
+                     INSERT = INSERT.replace("?1", folio);
+                     INSERT = INSERT.replace("?2", importe);
+                     INSERT = INSERT.replace("?3", fecha);
+                     INSERT = INSERT.replace("?4", nombrer);
+                     INSERT = INSERT.replace("?5", nombree);
+                     INSERT = INSERT.replace("?6", rfcr);
+                     INSERT = INSERT.replace("?7", rfce);
+                     //munero 2 para identiificar el tipo en la base de datos como una factura
+                     INSERT = INSERT.replace("?8", "2");
+                     //Llamamos al metodo que se encuentra en la clase conexión en el packete BaseDatos
+                     mConexion.ejecutarActualizacion(INSERT);
+                     JOptionPane.showMessageDialog(this, "guardado");
+                     this.setVisible(false);
+                     } catch (Exception error) {
+                     JOptionPane.showMessageDialog(this, "Error de guardar en la base de datos");
+                     System.out.println(error.toString());
+                     }
+                     }*/
+
+                } catch (Exception error) {
+                    JOptionPane.showMessageDialog(null, "Error No Puedes abrir ese archivo");
                 }
+                if (rfcr.toString() == "") {
+                    JOptionPane.showMessageDialog(null, "ESTE NO ES UN ARCHIVO FACTURA NI RECIBO");
+
+                }
+            }
                 //opa = JOptionPane.showConfirmDialog(rootPane, "Desea Cargar Otro Archivo?");
 
-                // } while ((opa != 1) && (opa != 2));
+            // } while ((opa != 1) && (opa != 2));
         } catch (Exception error) {
             JOptionPane.showMessageDialog(null, "Error No Puedes abrir ese archivo");
             //System.out.print(error.toString());
         }
+
+    }
+    private void BtnCargarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnCargarActionPerformed
+        // TODO add your handling code here:
+        if (entradafac == 0) {
+            Cargar();
+        } else if (entradafac > 0) {
+            int a = JOptionPane.showConfirmDialog(rootPane, "Seguro que quieres cargar otra factura o recibo?");
+            if (a == 0) {
+                Cargar();
+            }
+
+        }
+
+        entradafac = 1;
     }//GEN-LAST:event_BtnCargarActionPerformed
 
     private void BtnSalir1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnSalir1ActionPerformed
@@ -575,25 +599,31 @@ public class FrmInterfaz1 extends javax.swing.JFrame {
     private javax.swing.JLabel Lbl3;
     private javax.swing.JLabel Lbl4;
     private javax.swing.JLabel LblFecha;
-    private javax.swing.JLabel LblImpuestos;
     private javax.swing.JLabel LblNombree;
     private javax.swing.JLabel LblNombrer;
+    private javax.swing.JLabel LblPerdidas;
     private javax.swing.JLabel LblRFCE;
     private javax.swing.JLabel LblRFCR;
     private javax.swing.JLabel LblTipo;
+    private javax.swing.JLabel Lblganancias;
+    private javax.swing.JLabel Lblimpuesto;
+    private javax.swing.JLabel Lblutilidadbruta;
     private javax.swing.JPanel PestanaLeerarchivo;
     private javax.swing.JTextField TXTanyo;
     private javax.swing.JTextField TxtRFC;
     private javax.swing.JComboBox cmbxMes;
     private javax.swing.JComboBox cmbxTipoDeReporte1;
     private javax.swing.JButton jButton1;
-    private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel11;
+    private javax.swing.JLabel jLabel12;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
+    private javax.swing.JLabel jLabel8;
+    private javax.swing.JLabel jLabel9;
     private javax.swing.JTabbedPane jTabbedPane1;
     private javax.swing.JPanel pestanaGenerarreporte;
     private javax.swing.JPanel pestanaconsulta;
