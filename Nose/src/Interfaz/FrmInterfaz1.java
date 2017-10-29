@@ -5,6 +5,7 @@
  */
 package Interfaz;
 
+import BaseDatos.Conexion;
 import XMLL.archivoXML;
 import java.util.Vector;
 import javax.swing.JFileChooser;
@@ -27,13 +28,14 @@ public class FrmInterfaz1 extends javax.swing.JFrame {
     Calculos mCalculos = new Calculos();
     String rfcr;
     double impuesto;
-
+    int entradafac;
     public FrmInterfaz1() {
         initComponents();
         url = "";
         impuesto = 0;
         LblTipo.setText("Nose~Soft");
-        rfcr="";
+        rfcr = "";
+        entradafac=0;
 
     }
 
@@ -46,34 +48,39 @@ public class FrmInterfaz1 extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        BtnSalir = new javax.swing.JButton();
+        jTabbedPane1 = new javax.swing.JTabbedPane();
+        PestanaLeerarchivo = new javax.swing.JPanel();
         BtnCargar = new javax.swing.JButton();
         TxtRFC = new javax.swing.JTextField();
-        LblImpuestos = new javax.swing.JLabel();
-        Lbl2 = new javax.swing.JLabel();
-        LblFecha = new javax.swing.JLabel();
-        Lbl3 = new javax.swing.JLabel();
-        LblNombree = new javax.swing.JLabel();
-        jLabel1 = new javax.swing.JLabel();
-        LblTipo = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
+        BtnSalir1 = new javax.swing.JButton();
+        pestanaconsulta = new javax.swing.JPanel();
+        LblTipo = new javax.swing.JLabel();
+        Lbl3 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
-        LblRFCE = new javax.swing.JLabel();
-        LblRFCR = new javax.swing.JLabel();
-        LblNombrer = new javax.swing.JLabel();
+        jLabel1 = new javax.swing.JLabel();
+        LblNombree = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
         Lbl4 = new javax.swing.JLabel();
+        LblRFCR = new javax.swing.JLabel();
+        Lbl2 = new javax.swing.JLabel();
+        LblNombrer = new javax.swing.JLabel();
+        LblFecha = new javax.swing.JLabel();
+        LblRFCE = new javax.swing.JLabel();
+        LblImpuestos = new javax.swing.JLabel();
+        BtnSalir = new javax.swing.JButton();
+        pestanaGenerarreporte = new javax.swing.JPanel();
+        jButton1 = new javax.swing.JButton();
+        jLabel5 = new javax.swing.JLabel();
+        cmbxMes = new javax.swing.JComboBox();
+        cmbxTipoDeReporte1 = new javax.swing.JComboBox();
+        jLabel6 = new javax.swing.JLabel();
+        jLabel7 = new javax.swing.JLabel();
+        TXTanyo = new javax.swing.JTextField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
-        BtnSalir.setText("Salir");
-        BtnSalir.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                BtnSalirActionPerformed(evt);
-            }
-        });
-
-        BtnCargar.setText("Abrir archivo");
+        BtnCargar.setText("Cargar Archivo");
         BtnCargar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 BtnCargarActionPerformed(evt);
@@ -82,37 +89,65 @@ public class FrmInterfaz1 extends javax.swing.JFrame {
 
         TxtRFC.setEditable(false);
 
-        LblImpuestos.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
-        LblImpuestos.setForeground(new java.awt.Color(255, 0, 51));
-        LblImpuestos.setText("_______________");
+        jLabel2.setFont(new java.awt.Font("Adobe Arabic", 0, 24)); // NOI18N
+        jLabel2.setText("Introduzca RFC:");
 
-        Lbl2.setFont(new java.awt.Font("Book Antiqua", 0, 18)); // NOI18N
-        Lbl2.setText("Fecha:");
+        BtnSalir1.setText("Salir");
+        BtnSalir1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                BtnSalir1ActionPerformed(evt);
+            }
+        });
 
-        LblFecha.setText("_______________________");
+        javax.swing.GroupLayout PestanaLeerarchivoLayout = new javax.swing.GroupLayout(PestanaLeerarchivo);
+        PestanaLeerarchivo.setLayout(PestanaLeerarchivoLayout);
+        PestanaLeerarchivoLayout.setHorizontalGroup(
+            PestanaLeerarchivoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(PestanaLeerarchivoLayout.createSequentialGroup()
+                .addGap(212, 212, 212)
+                .addComponent(BtnCargar)
+                .addGap(0, 0, Short.MAX_VALUE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, PestanaLeerarchivoLayout.createSequentialGroup()
+                .addContainerGap(35, Short.MAX_VALUE)
+                .addGroup(PestanaLeerarchivoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, PestanaLeerarchivoLayout.createSequentialGroup()
+                        .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 255, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(TxtRFC, javax.swing.GroupLayout.PREFERRED_SIZE, 116, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(153, 153, 153))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, PestanaLeerarchivoLayout.createSequentialGroup()
+                        .addComponent(BtnSalir1, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(71, 71, 71))))
+        );
+        PestanaLeerarchivoLayout.setVerticalGroup(
+            PestanaLeerarchivoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(PestanaLeerarchivoLayout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(PestanaLeerarchivoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(TxtRFC, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(38, 38, 38)
+                .addComponent(BtnCargar, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(107, 107, 107)
+                .addComponent(BtnSalir1)
+                .addContainerGap(30, Short.MAX_VALUE))
+        );
 
-        Lbl3.setFont(new java.awt.Font("Book Antiqua", 0, 18)); // NOI18N
-        Lbl3.setText("Nombre Emisor:");
-
-        LblNombree.setText("___________________________");
-
-        jLabel1.setFont(new java.awt.Font("Tw Cen MT", 1, 24)); // NOI18N
-        jLabel1.setText("IMPUESTOS");
+        jTabbedPane1.addTab("Leer Archivo", PestanaLeerarchivo);
 
         LblTipo.setFont(new java.awt.Font("Tahoma", 3, 24)); // NOI18N
         LblTipo.setText("___________");
 
-        jLabel2.setFont(new java.awt.Font("Adobe Arabic", 0, 24)); // NOI18N
-        jLabel2.setText("Introduzca RFC:");
+        Lbl3.setFont(new java.awt.Font("Book Antiqua", 0, 18)); // NOI18N
+        Lbl3.setText("Nombre Emisor:");
 
         jLabel3.setFont(new java.awt.Font("Book Antiqua", 0, 18)); // NOI18N
         jLabel3.setText("RFC EMISOR:");
 
-        LblRFCE.setText("___________________________");
+        jLabel1.setFont(new java.awt.Font("Tw Cen MT", 1, 24)); // NOI18N
+        jLabel1.setText("IMPUESTOS");
 
-        LblRFCR.setText("___________________________");
-
-        LblNombrer.setText("___________________________");
+        LblNombree.setText("___________________________");
 
         jLabel4.setFont(new java.awt.Font("Book Antiqua", 0, 18)); // NOI18N
         jLabel4.setText("RFC RECEPTOR:");
@@ -120,199 +155,382 @@ public class FrmInterfaz1 extends javax.swing.JFrame {
         Lbl4.setFont(new java.awt.Font("Book Antiqua", 0, 18)); // NOI18N
         Lbl4.setText("Nombre Receptor:");
 
+        LblRFCR.setText("___________________________");
+
+        Lbl2.setFont(new java.awt.Font("Book Antiqua", 0, 18)); // NOI18N
+        Lbl2.setText("Fecha:");
+
+        LblNombrer.setText("___________________________");
+
+        LblFecha.setText("_______________________");
+
+        LblRFCE.setText("___________________________");
+
+        LblImpuestos.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+        LblImpuestos.setForeground(new java.awt.Color(255, 0, 51));
+        LblImpuestos.setText("_______________");
+
+        BtnSalir.setText("Salir");
+        BtnSalir.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                BtnSalirActionPerformed(evt);
+            }
+        });
+
+        javax.swing.GroupLayout pestanaconsultaLayout = new javax.swing.GroupLayout(pestanaconsulta);
+        pestanaconsulta.setLayout(pestanaconsultaLayout);
+        pestanaconsultaLayout.setHorizontalGroup(
+            pestanaconsultaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(pestanaconsultaLayout.createSequentialGroup()
+                .addComponent(LblTipo, javax.swing.GroupLayout.PREFERRED_SIZE, 168, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(41, 41, 41)
+                .addGroup(pestanaconsultaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pestanaconsultaLayout.createSequentialGroup()
+                        .addGap(0, 0, Short.MAX_VALUE)
+                        .addComponent(Lbl4)
+                        .addGap(28, 28, 28)
+                        .addComponent(LblNombrer)
+                        .addGap(48, 48, 48))
+                    .addGroup(pestanaconsultaLayout.createSequentialGroup()
+                        .addGroup(pestanaconsultaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addGroup(pestanaconsultaLayout.createSequentialGroup()
+                                .addGap(285, 285, 285)
+                                .addComponent(jLabel4))
+                            .addGroup(pestanaconsultaLayout.createSequentialGroup()
+                                .addComponent(Lbl2)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(LblFecha, javax.swing.GroupLayout.PREFERRED_SIZE, 146, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addComponent(LblRFCR, javax.swing.GroupLayout.PREFERRED_SIZE, 203, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
+            .addGroup(pestanaconsultaLayout.createSequentialGroup()
+                .addGroup(pestanaconsultaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(pestanaconsultaLayout.createSequentialGroup()
+                        .addContainerGap()
+                        .addGroup(pestanaconsultaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(jLabel3)
+                            .addComponent(Lbl3))
+                        .addGroup(pestanaconsultaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(pestanaconsultaLayout.createSequentialGroup()
+                                .addGap(18, 18, 18)
+                                .addComponent(LblRFCE, javax.swing.GroupLayout.PREFERRED_SIZE, 203, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(pestanaconsultaLayout.createSequentialGroup()
+                                .addGap(49, 49, 49)
+                                .addComponent(LblNombree))))
+                    .addGroup(pestanaconsultaLayout.createSequentialGroup()
+                        .addGap(37, 37, 37)
+                        .addGroup(pestanaconsultaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel1)
+                            .addGroup(pestanaconsultaLayout.createSequentialGroup()
+                                .addComponent(LblImpuestos, javax.swing.GroupLayout.PREFERRED_SIZE, 388, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(43, 43, 43)
+                                .addComponent(BtnSalir, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE)))))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
+        pestanaconsultaLayout.setVerticalGroup(
+            pestanaconsultaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(pestanaconsultaLayout.createSequentialGroup()
+                .addGap(50, 50, 50)
+                .addGroup(pestanaconsultaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addGroup(pestanaconsultaLayout.createSequentialGroup()
+                        .addGroup(pestanaconsultaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(Lbl2)
+                            .addComponent(LblFecha))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(pestanaconsultaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jLabel4)
+                            .addComponent(LblRFCR, javax.swing.GroupLayout.PREFERRED_SIZE, 9, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(12, 12, 12)
+                        .addGroup(pestanaconsultaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(Lbl4)
+                            .addComponent(LblNombrer))
+                        .addGap(68, 68, 68))
+                    .addGroup(pestanaconsultaLayout.createSequentialGroup()
+                        .addComponent(LblTipo)
+                        .addGap(88, 88, 88)
+                        .addGroup(pestanaconsultaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jLabel3)
+                            .addComponent(LblRFCE, javax.swing.GroupLayout.PREFERRED_SIZE, 9, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(12, 12, 12)
+                        .addGroup(pestanaconsultaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(Lbl3)
+                            .addComponent(LblNombree))))
+                .addGroup(pestanaconsultaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(pestanaconsultaLayout.createSequentialGroup()
+                        .addGap(49, 49, 49)
+                        .addComponent(jLabel1)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(LblImpuestos)
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pestanaconsultaLayout.createSequentialGroup()
+                        .addComponent(BtnSalir)
+                        .addContainerGap())))
+        );
+
+        jTabbedPane1.addTab("Consulta Del Archivo", pestanaconsulta);
+
+        jButton1.setText("Generar Reporte");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
+
+        jLabel5.setText("Elige El Tipo De Reporte");
+
+        cmbxMes.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Enero", "Febrero", "Marzo", "Abril", "Mayo", "Junio", "Julio", "Agosto", "Septiembre", "Octubre", "Noviembre", "Diciembre" }));
+
+        cmbxTipoDeReporte1.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Reporte Mensual", "Reporte Anual" }));
+
+        jLabel6.setText("Elige El Mes");
+
+        jLabel7.setText("Ingresa el año");
+
+        javax.swing.GroupLayout pestanaGenerarreporteLayout = new javax.swing.GroupLayout(pestanaGenerarreporte);
+        pestanaGenerarreporte.setLayout(pestanaGenerarreporteLayout);
+        pestanaGenerarreporteLayout.setHorizontalGroup(
+            pestanaGenerarreporteLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pestanaGenerarreporteLayout.createSequentialGroup()
+                .addGap(0, 0, Short.MAX_VALUE)
+                .addComponent(jLabel6)
+                .addGap(18, 18, 18)
+                .addComponent(cmbxMes, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(33, 33, 33))
+            .addGroup(pestanaGenerarreporteLayout.createSequentialGroup()
+                .addGroup(pestanaGenerarreporteLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(pestanaGenerarreporteLayout.createSequentialGroup()
+                        .addGap(91, 91, 91)
+                        .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 134, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addComponent(cmbxTipoDeReporte1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(pestanaGenerarreporteLayout.createSequentialGroup()
+                        .addGap(27, 27, 27)
+                        .addComponent(jLabel7)
+                        .addGap(18, 18, 18)
+                        .addComponent(TXTanyo, javax.swing.GroupLayout.PREFERRED_SIZE, 78, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(220, Short.MAX_VALUE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pestanaGenerarreporteLayout.createSequentialGroup()
+                .addGap(0, 0, Short.MAX_VALUE)
+                .addComponent(jButton1)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
+        pestanaGenerarreporteLayout.setVerticalGroup(
+            pestanaGenerarreporteLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(pestanaGenerarreporteLayout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(pestanaGenerarreporteLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 19, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(cmbxTipoDeReporte1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(8, 8, 8)
+                .addGroup(pestanaGenerarreporteLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(cmbxMes, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, 19, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel7, javax.swing.GroupLayout.PREFERRED_SIZE, 19, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(TXTanyo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(155, Short.MAX_VALUE))
+        );
+
+        jTabbedPane1.addTab("Generar Reporte", pestanaGenerarreporte);
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addContainerGap()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(jLabel3)
-                            .addComponent(Lbl3))
-                        .addGap(17, 17, 17)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(layout.createSequentialGroup()
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(LblTipo, javax.swing.GroupLayout.PREFERRED_SIZE, 168, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addGroup(layout.createSequentialGroup()
-                                        .addGap(97, 97, 97)
-                                        .addComponent(jLabel2)))
-                                .addGap(23, 23, 23)
-                                .addComponent(TxtRFC, javax.swing.GroupLayout.PREFERRED_SIZE, 168, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(layout.createSequentialGroup()
-                                .addGap(31, 31, 31)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addGroup(layout.createSequentialGroup()
-                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                            .addGroup(layout.createSequentialGroup()
-                                                .addComponent(LblRFCE, javax.swing.GroupLayout.PREFERRED_SIZE, 203, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                                .addGap(82, 82, 82)
-                                                .addComponent(jLabel4))
-                                            .addGroup(layout.createSequentialGroup()
-                                                .addComponent(Lbl2)
-                                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                                .addComponent(LblFecha, javax.swing.GroupLayout.PREFERRED_SIZE, 146, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                                        .addComponent(LblRFCR, javax.swing.GroupLayout.PREFERRED_SIZE, 203, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                    .addComponent(jLabel1)
-                                    .addGroup(layout.createSequentialGroup()
-                                        .addComponent(LblNombree)
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                        .addComponent(Lbl4)
-                                        .addGap(28, 28, 28)
-                                        .addComponent(LblNombrer)
-                                        .addGap(48, 48, 48))))))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(43, 43, 43)
-                        .addComponent(LblImpuestos, javax.swing.GroupLayout.PREFERRED_SIZE, 388, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 74, Short.MAX_VALUE)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(38, 38, 38)
-                        .addComponent(BtnSalir, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addComponent(BtnCargar))
-                .addContainerGap(78, Short.MAX_VALUE))
+                .addComponent(jTabbedPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 574, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 488, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addContainerGap()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(BtnCargar, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(TxtRFC, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel2))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addContainerGap(104, Short.MAX_VALUE)
-                        .addComponent(LblTipo)
-                        .addGap(27, 27, 27)))
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(Lbl2)
-                    .addComponent(LblFecha))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                        .addComponent(jLabel3)
-                        .addComponent(LblRFCE, javax.swing.GroupLayout.PREFERRED_SIZE, 9, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                        .addComponent(jLabel4)
-                        .addComponent(LblRFCR, javax.swing.GroupLayout.PREFERRED_SIZE, 9, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(12, 12, 12)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(Lbl3)
-                            .addComponent(Lbl4)
-                            .addComponent(LblNombrer)))
-                    .addGroup(layout.createSequentialGroup()
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(LblNombree)))
-                .addGap(41, 41, 41)
-                .addComponent(jLabel1)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(LblImpuestos)
-                    .addComponent(BtnSalir))
-                .addGap(109, 109, 109))
+                .addComponent(jTabbedPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 293, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 516, Short.MAX_VALUE))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void BtnCargarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnCargarActionPerformed
-        // TODO add your handling code here:
-
-        try {
-            JFileChooser dato = new JFileChooser();
-            int op = dato.showOpenDialog(this);
-
-            if (op == JFileChooser.APPROVE_OPTION) {
-
-                url = dato.getSelectedFile().getPath();
-
-            }
-
-            if (url == "") {
-
-                JOptionPane.showMessageDialog(null, "No Seleccionaste Nada");
-            } else {
-                
-                archivoXML mi_archivo = new archivoXML(url);
-                mi_archivo.open();
-                try{
-                Vector vector_resultado = new Vector();
-                NodeList root = mi_archivo.getRoot();
-
-                //Padre
-                Node comprobante = mi_archivo.getNode("cfdi:Comprobante", root);
-                String folio = mi_archivo.getNodeAttr("folio", comprobante);
-                String importe = mi_archivo.getNodeAttr("subTotal", comprobante);
-                String fecha = mi_archivo.getNodeAttr("fecha", comprobante);
-                System.out.println(folio);
-                System.out.println(importe);
-                System.out.println(fecha);
-                //Emisor
-                Node emisor = mi_archivo.getNode("cfdi:Emisor", comprobante.getChildNodes());
-                String rfce = mi_archivo.getNodeAttr("rfc", emisor);
-                nombree = mi_archivo.getNodeAttr("nombre", emisor);
-                System.out.println(rfce);
-                System.out.println(nombree);
-                //Receptor
-                Node receptor = mi_archivo.getNode("cfdi:Receptor", comprobante.getChildNodes());
-                 rfcr = mi_archivo.getNodeAttr("rfc", receptor);
-                String nombrer = mi_archivo.getNodeAttr("nombre", receptor);
-                System.out.println(rfcr);
-                System.out.println(nombrer);
-                //Traslados
-                Node Traslados = mi_archivo.getNode("cfdi:Impuestos", comprobante.getChildNodes());
-                String traslados = mi_archivo.getNodeAttr("totalImpuestosTrasladados", Traslados);
-                String retenciones = mi_archivo.getNodeAttr("totalImpuestosRetenidos", Traslados);
-                System.out.println(traslados);
-                System.out.println(retenciones);
-
-           // if(TxtRFC.getText().equals(rfce.toString())){
-                //Recibo
-                LblNombree.setText(nombree);
-                LblFecha.setText(fecha);
-                // LblTipo.setText("Recibo");
-                LblRFCE.setText(rfce);
-                // impuesto = mCalculos.CalcularImpuestosRecibo(Float.parseFloat(importe));
-                LblImpuestos.setText(String.valueOf("Aqui Se Mostrará Su Determinado Valor"));
-
-            // }else
-                //  if(TxtRFC.getText().equals(rfcr.toString())){
-                //Factura
-                LblNombrer.setText(nombrer);
-                //  LblTipo.setText("Factura");
-                LblRFCR.setText(rfcr);
-                // impuesto = mCalculos.CalcularImpuestosFactura(Float.parseFloat(importe));
-                //this.LblImpuestos.setText(String.valueOf(impuesto));
-
-                //}else
-                }catch(Exception error){
-                                JOptionPane.showMessageDialog(null, "Error No Puedes abrir ese archivo");
-
-                }
-                if (rfcr.toString() == "") {
-                    JOptionPane.showMessageDialog(null, "ESTE NO ES UN ARCHIVO FACTURA NI RECIBO");
-
-                }
-            }
-
-        } catch (Exception error) {
-            JOptionPane.showMessageDialog(null, "Error No Puedes abrir ese archivo");
-            //System.out.print(error.toString());
-
-        }
-    }//GEN-LAST:event_BtnCargarActionPerformed
-
     private void BtnSalirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnSalirActionPerformed
         // TODO add your handling code here:
         System.exit(1);
     }//GEN-LAST:event_BtnSalirActionPerformed
+
+    private void BtnCargarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnCargarActionPerformed
+        // TODO add your handling code here:
+
+        int a=JOptionPane.showConfirmDialog(rootPane, "jljkjklk");
+        
+        JOptionPane.showMessageDialog(rootPane, "es lo que vale su respuesta"+a);
+        
+        try {
+            //int opa;
+            //do {
+                JFileChooser dato = new JFileChooser();
+                int op = dato.showOpenDialog(this);
+
+                if (op == JFileChooser.APPROVE_OPTION) {
+
+                    url = dato.getSelectedFile().getPath();
+                }
+
+                if (url == "") {
+
+                    JOptionPane.showMessageDialog(null, "No Seleccionaste Nada");
+                } else {
+
+                    archivoXML mi_archivo = new archivoXML(url);
+                    mi_archivo.open();
+                    try {
+                        Vector vector_resultado = new Vector();
+                        NodeList root = mi_archivo.getRoot();
+                        //Padre
+                        Node comprobante = mi_archivo.getNode("cfdi:Comprobante", root);
+                        String folio = mi_archivo.getNodeAttr("folio", comprobante);
+                        String importe = mi_archivo.getNodeAttr("subTotal", comprobante);
+                        String fecha = mi_archivo.getNodeAttr("fecha", comprobante);
+                        System.out.println(folio);
+                        System.out.println(importe);
+                        System.out.println(fecha);
+                        //Emisor
+                        Node emisor = mi_archivo.getNode("cfdi:Emisor", comprobante.getChildNodes());
+                        String rfce = mi_archivo.getNodeAttr("rfc", emisor);
+                        nombree = mi_archivo.getNodeAttr("nombre", emisor);
+                        System.out.println(rfce);
+                        System.out.println(nombree);
+                        //Receptor
+                        Node receptor = mi_archivo.getNode("cfdi:Receptor", comprobante.getChildNodes());
+                        rfcr = mi_archivo.getNodeAttr("rfc", receptor);
+                        String nombrer = mi_archivo.getNodeAttr("nombre", receptor);
+                        System.out.println(rfcr);
+                        System.out.println(nombrer);
+                        //Traslados
+                        Node Traslados = mi_archivo.getNode("cfdi:Impuestos", comprobante.getChildNodes());
+                        String traslados = mi_archivo.getNodeAttr("totalImpuestosTrasladados", Traslados);
+                        String retenciones = mi_archivo.getNodeAttr("totalImpuestosRetenidos", Traslados);
+                        System.out.println(traslados);
+                        System.out.println(retenciones);
+
+                        LblNombree.setText(nombree);
+                        LblFecha.setText(fecha);
+                        LblImpuestos.setText(String.valueOf("Aqui Se Mostrará Su Determinado Valor"));
+                        LblNombrer.setText(nombrer);
+                        LblRFCR.setText(rfcr);
+                        this.LblRFCE.setText(rfce);
+
+                        //Esto es para insertar osease guardar en la base los datos
+                        try {
+                            //Conectamos con la base de datos
+                            Conexion mConexion = new Conexion();
+                            mConexion.Conectar("localhost", "nose_prueba", "root", "nose");
+                            //Formamos una instruccion DML -INSERT
+                            String INSERT = "insert into recibo_factura values ('?1','?2','?3','?4','?5','?6','?7','?8')";
+                            INSERT = INSERT.replace("?1", folio);
+                            INSERT = INSERT.replace("?2", importe);
+                            INSERT = INSERT.replace("?3", fecha);
+                            INSERT = INSERT.replace("?4", nombrer);
+                            INSERT = INSERT.replace("?5", nombree);
+                            INSERT = INSERT.replace("?6", rfcr);
+                            INSERT = INSERT.replace("?7", rfce);
+                            INSERT = INSERT.replace("?8", "1");
+                            //Llamamos al metodo que se encuentra en la clase conexión en el packete BaseDatos
+                            mConexion.ejecutarActualizacion(INSERT);
+                            JOptionPane.showMessageDialog(this, "guardado");
+                            this.setVisible(false);
+
+                        } catch (Exception error) {
+                            JOptionPane.showMessageDialog(this, "Error de guardar en la base de datos");
+                            System.out.println(error.toString());
+                        }
+                        /*  System.out.println(TxtRFC.getText());
+                        if (TxtRFC.getText().equals(rfce.toString())) {
+                            //Recibo
+                            /*LblNombree.setText(nombree);
+                            LblFecha.setText(fecha);
+                            LblTipo.setText("Recibo");
+                            LblRFCE.setText(rfce);
+                            impuesto = mCalculos.CalcularImpuestosRecibo(Float.parseFloat(importe));
+                            LblImpuestos.setText(String.valueOf("impuesto"));
+                            try {
+                                //Conectamos con la base de datos
+                                Conexion mConexion = new Conexion();
+                                mConexion.Conectar("localhost", "nose_prueba", "root", "nose");
+                                //Formamos una instruccion DML -INSERT
+                                String INSERT = "insert into recibo_factura values ('?1','?2','?3','?4','?5','?6','?7','?8')";
+                                INSERT = INSERT.replace("?1", folio);
+                                INSERT = INSERT.replace("?2", importe);
+                                INSERT = INSERT.replace("?3", fecha);
+                                INSERT = INSERT.replace("?4", nombrer);
+                                INSERT = INSERT.replace("?5", nombree);
+                                INSERT = INSERT.replace("?6", rfcr);
+                                INSERT = INSERT.replace("?7", rfce);
+                                INSERT = INSERT.replace("?8", "1");
+                                //Llamamos al metodo que se encuentra en la clase conexión en el packete BaseDatos
+                                mConexion.ejecutarActualizacion(INSERT);
+                                JOptionPane.showMessageDialog(this, "guardado");
+                                this.setVisible(false);
+                            } catch (Exception error) {
+                                JOptionPane.showMessageDialog(this, "Error de guardar en la base de datos");
+                                System.out.println(error.toString());
+                            }
+
+                        } else if (TxtRFC.getText().equals(rfcr.toString())) {
+                            //Factura
+                            LblNombrer.setText(nombrer);
+                            LblTipo.setText("Factura");
+                            LblRFCR.setText(rfcr);
+                            impuesto = mCalculos.CalcularImpuestosFactura(Float.parseFloat(importe));
+                            this.LblImpuestos.setText(String.valueOf(impuesto));
+
+                            try {
+                                //Conectamos con la base de datos
+                                Conexion mConexion = new Conexion();
+                                mConexion.Conectar("localhost", "nose_prueba", "root", "nose");
+                                //Formamos una instruccion DML -INSERT
+                                String INSERT = "insert into recibo_factura values ('?1','?2','?3','?4','?5','?6','?7','?8')";
+                                INSERT = INSERT.replace("?1", folio);
+                                INSERT = INSERT.replace("?2", importe);
+                                INSERT = INSERT.replace("?3", fecha);
+                                INSERT = INSERT.replace("?4", nombrer);
+                                INSERT = INSERT.replace("?5", nombree);
+                                INSERT = INSERT.replace("?6", rfcr);
+                                INSERT = INSERT.replace("?7", rfce);
+                                //munero 2 para identiificar el tipo en la base de datos como una factura
+                                INSERT = INSERT.replace("?8", "2");
+                                //Llamamos al metodo que se encuentra en la clase conexión en el packete BaseDatos
+                                mConexion.ejecutarActualizacion(INSERT);
+                                JOptionPane.showMessageDialog(this, "guardado");
+                                this.setVisible(false);
+                            } catch (Exception error) {
+                                JOptionPane.showMessageDialog(this, "Error de guardar en la base de datos");
+                                System.out.println(error.toString());
+                            }
+                        }*/
+
+                    } catch (Exception error) {
+                        JOptionPane.showMessageDialog(null, "Error No Puedes abrir ese archivo");
+                    }
+                    if (rfcr.toString() == "") {
+                        JOptionPane.showMessageDialog(null, "ESTE NO ES UN ARCHIVO FACTURA NI RECIBO");
+
+                    }
+                }
+                //opa = JOptionPane.showConfirmDialog(rootPane, "Desea Cargar Otro Archivo?");
+
+                // } while ((opa != 1) && (opa != 2));
+        } catch (Exception error) {
+            JOptionPane.showMessageDialog(null, "Error No Puedes abrir ese archivo");
+            //System.out.print(error.toString());
+        }
+    }//GEN-LAST:event_BtnCargarActionPerformed
+
+    private void BtnSalir1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnSalir1ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_BtnSalir1ActionPerformed
+
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jButton1ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -352,6 +570,7 @@ public class FrmInterfaz1 extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton BtnCargar;
     private javax.swing.JButton BtnSalir;
+    private javax.swing.JButton BtnSalir1;
     private javax.swing.JLabel Lbl2;
     private javax.swing.JLabel Lbl3;
     private javax.swing.JLabel Lbl4;
@@ -362,10 +581,21 @@ public class FrmInterfaz1 extends javax.swing.JFrame {
     private javax.swing.JLabel LblRFCE;
     private javax.swing.JLabel LblRFCR;
     private javax.swing.JLabel LblTipo;
+    private javax.swing.JPanel PestanaLeerarchivo;
+    private javax.swing.JTextField TXTanyo;
     private javax.swing.JTextField TxtRFC;
+    private javax.swing.JComboBox cmbxMes;
+    private javax.swing.JComboBox cmbxTipoDeReporte1;
+    private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
+    private javax.swing.JLabel jLabel5;
+    private javax.swing.JLabel jLabel6;
+    private javax.swing.JLabel jLabel7;
+    private javax.swing.JTabbedPane jTabbedPane1;
+    private javax.swing.JPanel pestanaGenerarreporte;
+    private javax.swing.JPanel pestanaconsulta;
     // End of variables declaration//GEN-END:variables
 }
