@@ -12,6 +12,11 @@ import javax.swing.JFileChooser;
 import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
 import Calculos.*;
+import com.itextpdf.text.Document;
+import com.itextpdf.text.Paragraph;
+import com.itextpdf.text.pdf.PdfWriter;
+import java.io.File;
+import java.io.FileOutputStream;
 import javax.swing.JOptionPane;
 
 /**
@@ -84,6 +89,9 @@ public class FrmInterfaz1 extends javax.swing.JFrame {
         Lblganancias = new javax.swing.JLabel();
         LblPerdidas = new javax.swing.JLabel();
         Lblutilidadbruta = new javax.swing.JLabel();
+        TXTSueldo = new javax.swing.JTextField();
+        jLabel10 = new javax.swing.JLabel();
+        jtxtdir = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -121,7 +129,7 @@ public class FrmInterfaz1 extends javax.swing.JFrame {
                     .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 255, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addComponent(TxtRFC, javax.swing.GroupLayout.PREFERRED_SIZE, 116, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(327, Short.MAX_VALUE))
         );
         PestanaLeerarchivoLayout.setVerticalGroup(
             PestanaLeerarchivoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -134,7 +142,7 @@ public class FrmInterfaz1 extends javax.swing.JFrame {
                 .addComponent(BtnCargar, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(116, 116, 116)
                 .addComponent(BtnSalir1)
-                .addContainerGap(60, Short.MAX_VALUE))
+                .addContainerGap(134, Short.MAX_VALUE))
         );
 
         jTabbedPane1.addTab("Leer Archivo", PestanaLeerarchivo);
@@ -178,14 +186,12 @@ public class FrmInterfaz1 extends javax.swing.JFrame {
         pestanaconsulta.setLayout(pestanaconsultaLayout);
         pestanaconsultaLayout.setHorizontalGroup(
             pestanaconsultaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pestanaconsultaLayout.createSequentialGroup()
+                .addGap(0, 0, Short.MAX_VALUE)
+                .addComponent(BtnSalir, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(97, 97, 97))
             .addGroup(pestanaconsultaLayout.createSequentialGroup()
                 .addGroup(pestanaconsultaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(pestanaconsultaLayout.createSequentialGroup()
-                        .addComponent(LblTipo, javax.swing.GroupLayout.PREFERRED_SIZE, 168, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(41, 41, 41)
-                        .addComponent(Lbl2)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(LblFecha, javax.swing.GroupLayout.PREFERRED_SIZE, 146, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(pestanaconsultaLayout.createSequentialGroup()
                         .addContainerGap()
                         .addGroup(pestanaconsultaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
@@ -206,19 +212,25 @@ public class FrmInterfaz1 extends javax.swing.JFrame {
                             .addGroup(pestanaconsultaLayout.createSequentialGroup()
                                 .addComponent(jLabel4)
                                 .addGap(0, 0, 0)
-                                .addComponent(LblRFCR, javax.swing.GroupLayout.PREFERRED_SIZE, 203, javax.swing.GroupLayout.PREFERRED_SIZE)))))
-                .addContainerGap(89, Short.MAX_VALUE))
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pestanaconsultaLayout.createSequentialGroup()
-                .addGap(0, 0, Short.MAX_VALUE)
-                .addComponent(BtnSalir, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(97, 97, 97))
+                                .addComponent(LblRFCR, javax.swing.GroupLayout.PREFERRED_SIZE, 203, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                    .addGroup(pestanaconsultaLayout.createSequentialGroup()
+                        .addComponent(LblTipo, javax.swing.GroupLayout.PREFERRED_SIZE, 168, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(41, 41, 41)
+                        .addComponent(Lbl2)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(LblFecha, javax.swing.GroupLayout.PREFERRED_SIZE, 146, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(187, Short.MAX_VALUE))
         );
         pestanaconsultaLayout.setVerticalGroup(
             pestanaconsultaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(pestanaconsultaLayout.createSequentialGroup()
-                .addGap(50, 50, 50)
                 .addGroup(pestanaconsultaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addGroup(pestanaconsultaLayout.createSequentialGroup()
+                        .addGap(50, 50, 50)
+                        .addComponent(LblTipo)
+                        .addGap(146, 146, 146))
+                    .addGroup(pestanaconsultaLayout.createSequentialGroup()
+                        .addGap(40, 40, 40)
                         .addGroup(pestanaconsultaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(Lbl2)
                             .addComponent(LblFecha))
@@ -234,13 +246,10 @@ public class FrmInterfaz1 extends javax.swing.JFrame {
                             .addComponent(LblNombrer)
                             .addComponent(Lbl3)
                             .addComponent(LblNombree))
-                        .addGap(48, 48, 48))
-                    .addGroup(pestanaconsultaLayout.createSequentialGroup()
-                        .addComponent(LblTipo)
-                        .addGap(146, 146, 146)))
+                        .addGap(48, 48, 48)))
                 .addGap(20, 20, 20)
                 .addComponent(BtnSalir)
-                .addContainerGap(27, Short.MAX_VALUE))
+                .addContainerGap(101, Short.MAX_VALUE))
         );
 
         jTabbedPane1.addTab("Consulta Del Archivo", pestanaconsulta);
@@ -270,6 +279,8 @@ public class FrmInterfaz1 extends javax.swing.JFrame {
 
         jLabel12.setText("PERDIDAS");
 
+        jLabel10.setText("Ingresa El Sueldo Mensual");
+
         javax.swing.GroupLayout pestanaGenerarreporteLayout = new javax.swing.GroupLayout(pestanaGenerarreporte);
         pestanaGenerarreporte.setLayout(pestanaGenerarreporteLayout);
         pestanaGenerarreporteLayout.setHorizontalGroup(
@@ -277,71 +288,89 @@ public class FrmInterfaz1 extends javax.swing.JFrame {
             .addGroup(pestanaGenerarreporteLayout.createSequentialGroup()
                 .addGroup(pestanaGenerarreporteLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(pestanaGenerarreporteLayout.createSequentialGroup()
-                        .addGap(91, 91, 91)
-                        .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 134, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(18, 18, 18)
-                        .addComponent(cmbxTipoDeReporte1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(pestanaGenerarreporteLayout.createSequentialGroup()
                         .addGap(60, 60, 60)
                         .addGroup(pestanaGenerarreporteLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(pestanaGenerarreporteLayout.createSequentialGroup()
-                                .addComponent(jLabel12)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addGap(60, 60, 60)
                                 .addComponent(LblPerdidas))
                             .addGroup(pestanaGenerarreporteLayout.createSequentialGroup()
                                 .addComponent(jLabel11)
                                 .addGap(43, 43, 43)
                                 .addComponent(Lblutilidadbruta))
+                            .addComponent(jLabel12)
+                            .addComponent(jLabel9)
+                            .addComponent(jLabel8)
                             .addGroup(pestanaGenerarreporteLayout.createSequentialGroup()
-                                .addComponent(jLabel9)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(Lblganancias))
-                            .addGroup(pestanaGenerarreporteLayout.createSequentialGroup()
-                                .addComponent(jLabel8)
-                                .addGap(36, 36, 36)
-                                .addComponent(Lblimpuesto))))
+                                .addGroup(pestanaGenerarreporteLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addGroup(pestanaGenerarreporteLayout.createSequentialGroup()
+                                        .addGap(69, 69, 69)
+                                        .addComponent(Lblganancias))
+                                    .addGroup(pestanaGenerarreporteLayout.createSequentialGroup()
+                                        .addGap(87, 87, 87)
+                                        .addComponent(Lblimpuesto)))
+                                .addGap(82, 82, 82)
+                                .addComponent(jButton1)
+                                .addGap(57, 57, 57)
+                                .addComponent(jtxtdir, javax.swing.GroupLayout.PREFERRED_SIZE, 95, javax.swing.GroupLayout.PREFERRED_SIZE))))
                     .addGroup(pestanaGenerarreporteLayout.createSequentialGroup()
-                        .addGap(27, 27, 27)
+                        .addGap(168, 168, 168)
+                        .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 134, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addComponent(cmbxTipoDeReporte1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(pestanaGenerarreporteLayout.createSequentialGroup()
+                        .addGap(48, 48, 48)
                         .addComponent(jLabel7)
                         .addGap(18, 18, 18)
-                        .addComponent(TXTanyo, javax.swing.GroupLayout.PREFERRED_SIZE, 78, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(264, 264, 264)
-                        .addComponent(jLabel6)
-                        .addGap(26, 26, 26)
-                        .addComponent(cmbxMes, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(pestanaGenerarreporteLayout.createSequentialGroup()
-                        .addGap(251, 251, 251)
-                        .addComponent(jButton1)))
-                .addContainerGap(179, Short.MAX_VALUE))
+                        .addGroup(pestanaGenerarreporteLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(pestanaGenerarreporteLayout.createSequentialGroup()
+                                .addComponent(jLabel10, javax.swing.GroupLayout.PREFERRED_SIZE, 125, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(31, 31, 31)
+                                .addComponent(TXTSueldo, javax.swing.GroupLayout.PREFERRED_SIZE, 78, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(pestanaGenerarreporteLayout.createSequentialGroup()
+                                .addComponent(TXTanyo, javax.swing.GroupLayout.PREFERRED_SIZE, 78, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(118, 118, 118)
+                                .addComponent(jLabel6)
+                                .addGap(29, 29, 29)
+                                .addComponent(cmbxMes, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))))
+                .addContainerGap(399, Short.MAX_VALUE))
         );
         pestanaGenerarreporteLayout.setVerticalGroup(
             pestanaGenerarreporteLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(pestanaGenerarreporteLayout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(pestanaGenerarreporteLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 19, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(cmbxTipoDeReporte1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(8, 8, 8)
-                .addGroup(pestanaGenerarreporteLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(cmbxMes, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, 19, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel7, javax.swing.GroupLayout.PREFERRED_SIZE, 19, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(TXTanyo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(52, 52, 52)
-                .addGroup(pestanaGenerarreporteLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel8)
-                    .addComponent(Lblimpuesto))
+                .addGroup(pestanaGenerarreporteLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(pestanaGenerarreporteLayout.createSequentialGroup()
+                        .addGap(10, 10, 10)
+                        .addGroup(pestanaGenerarreporteLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 19, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(cmbxTipoDeReporte1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(18, 18, 18)
+                        .addGroup(pestanaGenerarreporteLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jLabel10, javax.swing.GroupLayout.PREFERRED_SIZE, 19, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(TXTSueldo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(18, 18, 18)
+                        .addGroup(pestanaGenerarreporteLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jLabel7, javax.swing.GroupLayout.PREFERRED_SIZE, 19, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(TXTanyo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, 19, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(cmbxMes, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(62, 62, 62)
+                        .addComponent(Lblimpuesto)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(Lblganancias))
+                    .addGroup(pestanaGenerarreporteLayout.createSequentialGroup()
+                        .addGap(145, 145, 145)
+                        .addGroup(pestanaGenerarreporteLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jtxtdir, javax.swing.GroupLayout.PREFERRED_SIZE, 18, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                .addGap(39, 39, 39)
+                .addComponent(jLabel8)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(pestanaGenerarreporteLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel9)
-                    .addComponent(Lblganancias))
+                .addComponent(jLabel9)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(pestanaGenerarreporteLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel12)
-                    .addComponent(LblPerdidas))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 38, Short.MAX_VALUE)
+                .addComponent(jLabel12)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(LblPerdidas)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 44, Short.MAX_VALUE)
                 .addGroup(pestanaGenerarreporteLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel11)
                     .addComponent(Lblutilidadbruta))
@@ -534,6 +563,7 @@ public class FrmInterfaz1 extends javax.swing.JFrame {
 
     }
     private void BtnCargarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnCargarActionPerformed
+
         // TODO add your handling code here:
         if (entradafac == 0) {
             Cargar();
@@ -554,6 +584,29 @@ public class FrmInterfaz1 extends javax.swing.JFrame {
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         // TODO add your handling code here:
+                String d=jtxtdir.getText();
+       // String a=this.jtxtcont.getText();
+        try {
+                    JFileChooser dlg = new JFileChooser();
+        int option = dlg.showSaveDialog(this);
+
+        if (option == JFileChooser.APPROVE_OPTION) {
+
+            File f = dlg.getSelectedFile();
+            String f1 = f.toString();
+            this.jtxtdir.setText(f1);
+        }
+String a="esta variable contiene este texto que se metera al documento pdf "+this.getName();
+            FileOutputStream archivo=  new FileOutputStream(d+".pdf");
+            Document doc= new Document();
+            PdfWriter.getInstance(doc, archivo);
+            doc.open();
+            doc.add(new Paragraph(a));
+            doc.close();
+            JOptionPane.showMessageDialog(null, "Documento creado con exito");
+        } catch (Exception e) {
+        JOptionPane.showMessageDialog(null,"error"+e);
+        }
     }//GEN-LAST:event_jButton1ActionPerformed
 
     /**
@@ -609,11 +662,13 @@ public class FrmInterfaz1 extends javax.swing.JFrame {
     private javax.swing.JLabel Lblimpuesto;
     private javax.swing.JLabel Lblutilidadbruta;
     private javax.swing.JPanel PestanaLeerarchivo;
+    private javax.swing.JTextField TXTSueldo;
     private javax.swing.JTextField TXTanyo;
     private javax.swing.JTextField TxtRFC;
     private javax.swing.JComboBox cmbxMes;
     private javax.swing.JComboBox cmbxTipoDeReporte1;
     private javax.swing.JButton jButton1;
+    private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
     private javax.swing.JLabel jLabel12;
     private javax.swing.JLabel jLabel2;
@@ -625,6 +680,7 @@ public class FrmInterfaz1 extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLabel9;
     private javax.swing.JTabbedPane jTabbedPane1;
+    private javax.swing.JLabel jtxtdir;
     private javax.swing.JPanel pestanaGenerarreporte;
     private javax.swing.JPanel pestanaconsulta;
     // End of variables declaration//GEN-END:variables
