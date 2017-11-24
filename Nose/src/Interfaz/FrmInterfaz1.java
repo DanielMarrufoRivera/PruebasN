@@ -23,8 +23,11 @@ import java.awt.event.KeyEvent;
 import java.io.File;
 import java.io.FileOutputStream;
 import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.util.Calendar;
 import java.util.Vector;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.Icon;
 import javax.swing.ImageIcon;
 import javax.swing.JFileChooser;
@@ -66,7 +69,7 @@ public class FrmInterfaz1 extends javax.swing.JFrame {
     String metodo_pago;
     private TableRowSorter trsFiltro;
     String rfcactivo;
-    
+
     public FrmInterfaz1() {
         initComponents();
         url = "";
@@ -85,7 +88,7 @@ public class FrmInterfaz1 extends javax.swing.JFrame {
         Icon icono3 = new ImageIcon(imagen.getImage().getScaledInstance(this.LblImagen3.getWidth(), this.LblImagen3.getHeight(), 100));
         this.LblImagen3.setIcon(icono);
         this.repaint();
-        
+
     }
 
     /**
@@ -615,23 +618,23 @@ public class FrmInterfaz1 extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
     private void Cargar() {
-        
+
         try {
             //int opa;
             //do {
             JFileChooser dato = new JFileChooser();
             int op = dato.showOpenDialog(this);
-            
+
             if (op == JFileChooser.APPROVE_OPTION) {
-                
+
                 url = dato.getSelectedFile().getPath();
             }
-            
+
             if (url == "") {
-                
+
                 JOptionPane.showMessageDialog(null, "No Seleccionaste Nada");
             } else {
-                
+
                 archivoXML mi_archivo = new archivoXML(url);
                 mi_archivo.open();
                 try {
@@ -732,11 +735,11 @@ public class FrmInterfaz1 extends javax.swing.JFrame {
                             JOptionPane.showMessageDialog(this, "Error de guardar en la base de datos");
                             System.out.println(error.toString());
                         }
-                        
+
                     } else if (rfcactivo.equals(rfcr.toString())) {
                         //Factura
                         if (this.RBCombustible.isSelected()) {
-                            
+
                             if (((this.RBCombustible.isSelected() && (metodo_pago.equals("04"))) || (this.RBCombustible.isSelected() && (metodo_pago.equals("Tarjeta credito"))))) {
                                 LblNombree1.setText(nombree);
                                 LblNombrer1.setText(nombrer);
@@ -744,7 +747,7 @@ public class FrmInterfaz1 extends javax.swing.JFrame {
                                 LblTipo1.setText("Factura");
                                 LblRFCE1.setText(rfce);
                                 LblRFCR1.setText(rfcr);
-                                
+
                                 try {
                                     //Conectamos con la base de datos
                                     Conexion mConexion = new Conexion();
@@ -770,10 +773,10 @@ public class FrmInterfaz1 extends javax.swing.JFrame {
                                     JOptionPane.showMessageDialog(this, "Error de guardar en la base de datos");
                                     System.out.println(error.toString());
                                 }
-                                
+
                                 JOptionPane.showMessageDialog(null, "Se apagado con tarjeta de credito");
                             } else {
-                                
+
                                 LblNombree1.setText(nombree);
                                 LblNombrer1.setText(nombrer);
                                 LblFecha1.setText(fecha);
@@ -781,7 +784,7 @@ public class FrmInterfaz1 extends javax.swing.JFrame {
                                 LblRFCE1.setText(rfce);
                                 LblRFCR1.setText(rfcr);
                                 impuesto = mCalculos.CalcularImpuestosFactura(Float.parseFloat(importe));
-                                
+
                                 try {
                                     //Conectamos con la base de datos
                                     Conexion mConexion = new Conexion();
@@ -807,11 +810,11 @@ public class FrmInterfaz1 extends javax.swing.JFrame {
                                     JOptionPane.showMessageDialog(this, "Error de guardar en la base de datos");
                                     System.out.println(error.toString());
                                 }
-                                
+
                                 JOptionPane.showMessageDialog(null, "Se apagado con en efectivo");
-                                
+
                             }
-                            
+
                         } else {
                             LblNombree1.setText(nombree);
                             LblNombrer1.setText(nombrer);
@@ -820,7 +823,7 @@ public class FrmInterfaz1 extends javax.swing.JFrame {
                             LblRFCE1.setText(rfce);
                             LblRFCR1.setText(rfcr);
                             impuesto = mCalculos.CalcularImpuestosFactura(Float.parseFloat(importe));
-                            
+
                             try {
                                 //Conectamos con la base de datos
                                 Conexion mConexion = new Conexion();
@@ -846,11 +849,11 @@ public class FrmInterfaz1 extends javax.swing.JFrame {
                                 JOptionPane.showMessageDialog(this, "Error de guardar en la base de datos");
                                 System.out.println(error.toString());
                             }
-                            
+
                         }
-                        
+
                     } else {
-                        
+
                         JOptionPane.showMessageDialog(null, "RFC NO ENCONTRADO");
                     }
                 } catch (Exception error) {
@@ -858,7 +861,7 @@ public class FrmInterfaz1 extends javax.swing.JFrame {
                 }
                 if (rfcr.toString() == "") {
                     JOptionPane.showMessageDialog(null, "ESTE NO ES UN ARCHIVO FACTURA NI RECIBO");
-                    
+
                 }
             }
             //opa = JOptionPane.showConfirmDialog(rootPane, "Desea Cargar Otro Archivo?");
@@ -868,11 +871,11 @@ public class FrmInterfaz1 extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(null, "Error No Puedes abrir ese archivo");
             //System.out.print(error.toString());
         }
-        
+
     }
-    
+
     private void pestanaconsultaGainedFocus(java.awt.event.FocusEvent evt) {
-        
+
     }
     private void formWindowGainedFocus(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowGainedFocus
         // TODO add your handling code here:
@@ -910,6 +913,76 @@ public class FrmInterfaz1 extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_formWindowGainedFocus
 
+    public void consultar() throws SQLException, Exception {
+
+        //Conectamos con la base de datos
+        Conexion mConexion = new Conexion();
+        //mConexion.Conectar("localhost", "banco", "user_banco", "13-79");
+        mConexion.Conectar("localhost", "nose_prueba", "root", "nose");
+        //String impuestos = ("select SUM(Impuesto) as total from recibo_factura where fecha >= '?2-?1-01' and fecha <= '?2-?1-31';");
+        //Realizamos una consulta sobre las tablas
+        String consulta = "select rfc from usuarios where id=1";
+        ResultSet listausuario = mConexion.ejecutarConsulta(consulta);
+        // System.out.println(listaClientes.getFloat("Importe"));
+
+        if (listausuario != null) {
+            //Recorremos cada registro de la lista de datos
+            while (listausuario.next()) {
+                {
+                    this.rfcactivo = listausuario.getString("rfc");
+
+                }
+            }
+
+        }
+    }
+
+    public void insertarusuario(int id, String rfc) {
+        try {
+            Conexion mConexion = new Conexion();
+            try {
+                mConexion.Conectar("localhost", "nose_prueba", "root", "nose");
+            } catch (Exception ex) {
+                Logger.getLogger(FrmInterfaz1.class.getName()).log(Level.SEVERE, null, ex);
+            }
+            //Formamos una instruccion DML -INSERT
+            String INSERT = "insert into usuario values (?1,'?2')";
+            INSERT = INSERT.replace("?1", String.valueOf(id));
+            INSERT = INSERT.replace("?2", String.valueOf(rfc));
+            //Llamamos al metodo que se encuentra en la clase conexión en el packete BaseDatos
+            mConexion.ejecutarActualizacion(INSERT);
+            JOptionPane.showMessageDialog(this, "guardado");
+            //            this.setVisible(false);
+
+        } catch (SQLException ex) {
+            Logger.getLogger(FrmInterfaz1.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
+    }
+    public void actualizarusuario(int id, String rfc) {
+        try {
+            Conexion mConexion = new Conexion();
+            try {
+                mConexion.Conectar("localhost", "nose_prueba", "root", "nose");
+            } catch (Exception ex) {
+                Logger.getLogger(FrmInterfaz1.class.getName()).log(Level.SEVERE, null, ex);
+            }
+            //Formamos una instruccion DML -INSERT
+            String INSERT = "update into usuario where id=1";
+            INSERT = INSERT.replace("?1", String.valueOf(id));
+            INSERT = INSERT.replace("?2", String.valueOf(rfc));
+            //Llamamos al metodo que se encuentra en la clase conexión en el packete BaseDatos
+            mConexion.ejecutarActualizacion(INSERT);
+            JOptionPane.showMessageDialog(this, "guardado");
+            //            this.setVisible(false);
+
+        } catch (SQLException ex) {
+            Logger.getLogger(FrmInterfaz1.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
+    }
+    
+    
     private void RBtnAnualMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_RBtnAnualMouseClicked
         // TODO add your handling code here:
         if (this.RBtnAnual.isSelected()) {
@@ -923,7 +996,7 @@ public class FrmInterfaz1 extends javax.swing.JFrame {
         if (this.RBtnMensual.isSelected()) {
             this.cmbxMes.setEnabled(true);
             JOptionPane.showMessageDialog(null, "Mensual");
-            
+
         }
 
     }//GEN-LAST:event_RBtnMensualMouseClicked
@@ -949,7 +1022,7 @@ public class FrmInterfaz1 extends javax.swing.JFrame {
             //             } else if (this.RBtnAnual.isSelected()) {
 
             this.cmbxMes.setEnabled(true);
-            
+
             mes = (String) this.cmbxMes.getSelectedItem();
 
             //this.jPanel1.add(imagen);
@@ -979,7 +1052,7 @@ public class FrmInterfaz1 extends javax.swing.JFrame {
             } else if (mes == "Diciembre") {
                 mes = String.valueOf("12");
             }
-            
+
             if ((this.TXTanyo.getText().equals(""))) {
                 JOptionPane.showMessageDialog(null, "Campos Vacios");
             } else if (((Integer.parseInt(this.TXTanyo.getText())) > Calendario.getWeekYear()) && ((Integer.parseInt(mes) > Calendario.get(Calendar.MONTH)))) {
@@ -987,39 +1060,39 @@ public class FrmInterfaz1 extends javax.swing.JFrame {
             } else if (((Integer.parseInt(this.TXTanyo.getText())) == Calendario.getWeekYear()) && ((Integer.parseInt(mes) > Calendario.get(Calendar.MONTH)))) {
                 JOptionPane.showMessageDialog(null, " Upss Verifica tu mes");
             } else if (((Integer.parseInt(this.TXTanyo.getText())) < Calendario.getWeekYear())) {
-                
+
                 System.out.println(mes);
                 anyo = this.TXTanyo.getText();
                 mCalculos = new Calculos();
                 result = mCalculos.ImpuestosMensuales(mes, anyo);
                 result2 = mCalculos.ImpuestosMensualesF(mes, anyo);
-                
+
                 if ((result == 0) && (result2 == 0)) {
                     JOptionPane.showMessageDialog(null, "no existen facturas ni recibos en esta fecha");
                 } else {
-                    
+
                     this.Lblimpuesto.setText(String.valueOf(result + result2));
-                    
+
                     Ganacias = mCalculos.CalcularGananciasPerdidasMensuales();
                     if (Ganacias > 0) {
                         this.Lblganancias.setText(String.valueOf(Ganacias));
                         this.LblPerdidas.setText("0");
                         this.Ganancia = Ganacias;
                         this.Perdida = 0;
-                        
+
                     } else if (Ganacias < 0) {
                         this.Lblganancias.setText("0");
                         this.LblPerdidas.setText(String.valueOf(Ganacias));
                         this.Perdida = Ganacias;
                         this.Ganacias = 0;
-                        
+
                     }
                     System.out.println(result);
                     Fecha = anyo + "-" + mes + "-" + "01";
                     System.out.println(Fecha);
                     System.out.println(Ganacias);
                     System.out.println(Perdida);
-                    
+
                     try {
                         //Conectamos con la base de datos
 
@@ -1046,20 +1119,20 @@ public class FrmInterfaz1 extends javax.swing.JFrame {
                     // String a=this.jtxtcont.getText();
                     try {
                         JOptionPane.showMessageDialog(this, "Selecciona La Ruta En Donde Se Guardará El Reporte");
-                        
+
                         JFileChooser dlg = new JFileChooser();
                         int option = dlg.showSaveDialog(this);
                         Image imagen = Image.getInstance("C:\\Users\\Acer\\Documents\\Septimo Semestre\\Nacho-Scrum\\Pruebas_Nose\\PruebasN\\Nose\\src\\IMG-20171104-WA0004.jpg");
                         imagen.setAbsolutePosition(400f, 650f);
                         imagen.scalePercent(30f);
                         imagen.setAlignment(Element.ALIGN_RIGHT);
-                        
+
                         if (option == JFileChooser.APPROVE_OPTION) {
-                            
+
                             File f = dlg.getSelectedFile();
                             f1 = f.toString();
                             this.jtxtdir.setText(f1);
-                            
+
                         }
                         String a = "Reporte del mes de " + this.cmbxMes.getSelectedItem().toString() + " " + this.TXTanyo.getText() + "\n" + "Impuestos mensuales: " + this.Lblimpuesto.getText() + "\n Ganancias Mensuales: " + this.Lblganancias.getText() + "\n Pedidas Mensuales: " + this.LblPerdidas.getText();
                         FileOutputStream archivo = new FileOutputStream(f1 + ".pdf");
@@ -1077,9 +1150,9 @@ public class FrmInterfaz1 extends javax.swing.JFrame {
                         JOptionPane.showMessageDialog(null, "error" + e);
                     }
                 }
-                
+
             } else if (((Integer.parseInt(this.TXTanyo.getText())) == Calendario.getWeekYear()) && ((Integer.parseInt(mes) <= Calendario.get(Calendar.MONTH)))) {
-                
+
                 System.out.println(mes);
                 anyo = this.TXTanyo.getText();
                 mCalculos = new Calculos();
@@ -1087,29 +1160,29 @@ public class FrmInterfaz1 extends javax.swing.JFrame {
                 if (result == 0) {
                     JOptionPane.showMessageDialog(null, "No existen facturas ni recibos en esta fecha");
                 } else {
-                    
+
                     this.Lblimpuesto.setText(String.valueOf(result));
                     Ganacias = mCalculos.CalcularGananciasPerdidasMensuales();
                     if (Ganacias > 0) {
-                        
+
                         this.Lblganancias.setText("0");
                         this.LblPerdidas.setText(String.valueOf(Ganacias));
                         this.Perdida = Ganacias;
                         this.Ganacias = 0;
-                        
+
                     } else if (Ganacias < 0) {
                         this.Lblganancias.setText(String.valueOf(Ganacias));
                         this.LblPerdidas.setText("0");
                         this.Ganancia = Ganacias;
                         this.Perdida = 0;
-                        
+
                     }
                     System.out.println(result);
                     Fecha = anyo + "-" + mes + "-" + "01";
                     System.out.println(Fecha);
                     System.out.println(Ganacias);
                     System.out.println(Perdida);
-                    
+
                     try {
                         //Conectamos con la base de datos
 
@@ -1136,28 +1209,28 @@ public class FrmInterfaz1 extends javax.swing.JFrame {
                     // String a=this.jtxtcont.getText();
                     try {
                         JOptionPane.showMessageDialog(this, "Selecciona La Ruta En Donde Se Guardará El Reporte");
-                        
+
                         JFileChooser dlg = new JFileChooser();
                         int option = dlg.showSaveDialog(this);
                         Image imagen = Image.getInstance("C:\\Users\\Acer\\Documents\\Septimo Semestre\\Nacho-Scrum\\Pruebas_Nose\\PruebasN\\Nose\\src\\IMG-20171104-WA0004.jpg");
                         imagen.setAbsolutePosition(400f, 650f);
                         imagen.scalePercent(30f);
                         imagen.setAlignment(Element.ALIGN_RIGHT);
-                        
+
                         if (option == JFileChooser.APPROVE_OPTION) {
-                            
+
                             File f = dlg.getSelectedFile();
                             f1 = f.toString();
                             this.jtxtdir.setText(f1);
-                            
+
                         }
                         String a = "Reporte del mes de " + this.cmbxMes.getSelectedItem().toString() + " " + this.TXTanyo.getText() + "\n" + "Impuestos mensuales: " + this.Lblimpuesto.getText() + "\n Ganancias Mensuales: " + this.Lblganancias.getText() + "\n Pedidas Mensuales: " + this.LblPerdidas.getText();
                         FileOutputStream archivo = new FileOutputStream(f1 + ".pdf");
                         Document doc = new Document();
                         PdfWriter.getInstance(doc, archivo);
-                        
+
                         doc.open();
-                        
+
                         Font fuente = new Font();
                         fuente.setSize(18);
                         fuente.setFamily(FontFamily.TIMES_ROMAN.toString());
@@ -1168,42 +1241,42 @@ public class FrmInterfaz1 extends javax.swing.JFrame {
                     } catch (Exception e) {
                         JOptionPane.showMessageDialog(null, "error" + e);
                     }
-                    
+
                 }
                 System.out.println(mes);
                 anyo = this.TXTanyo.getText();
                 mCalculos = new Calculos();
                 result = mCalculos.ImpuestosMensuales(mes, anyo);
                 result2 = mCalculos.ImpuestosMensualesF(mes, anyo);
-                
+
                 if ((result == 0) && (result2 == 0)) {
                     JOptionPane.showMessageDialog(null, "no existen facturas ni recibos en esta fecha");
                 } else {
-                    
+
                     this.Lblimpuesto.setText(String.valueOf(result + result2));
-                    
+
                     Ganacias = mCalculos.CalcularGananciasPerdidasMensuales();
                     if (Ganacias > 0) {
-                        
+
                         this.Lblganancias.setText("0");
                         this.LblPerdidas.setText(String.valueOf(Ganacias));
                         this.Perdida = Ganacias;
                         this.Ganacias = 0;
-                        
+
                     } else if (Ganacias < 0) {
-                        
+
                         this.Lblganancias.setText(String.valueOf(Ganacias));
                         this.LblPerdidas.setText("0");
                         this.Ganancia = Ganacias;
                         this.Perdida = 0;
-                        
+
                     }
                     System.out.println(result);
                     Fecha = anyo + "-" + mes + "-" + "01";
                     System.out.println(Fecha);
                     System.out.println(Ganacias);
                     System.out.println(Perdida);
-                    
+
                     try {
                         //Conectamos con la base de datos
 
@@ -1230,20 +1303,20 @@ public class FrmInterfaz1 extends javax.swing.JFrame {
                     // String a=this.jtxtcont.getText();
                     try {
                         JOptionPane.showMessageDialog(this, "Selecciona La Ruta En Donde Se Guardará El Reporte");
-                        
+
                         JFileChooser dlg = new JFileChooser();
                         int option = dlg.showSaveDialog(this);
                         Image imagen = Image.getInstance("C:\\Users\\Acer\\Documents\\Septimo Semestre\\Nacho-Scrum\\Pruebas_Nose\\PruebasN\\Nose\\src\\IMG-20171104-WA0004.jpg");
                         imagen.setAbsolutePosition(400f, 650f);
                         imagen.scalePercent(30f);
                         imagen.setAlignment(Element.ALIGN_RIGHT);
-                        
+
                         if (option == JFileChooser.APPROVE_OPTION) {
-                            
+
                             File f = dlg.getSelectedFile();
                             f1 = f.toString();
                             this.jtxtdir.setText(f1);
-                            
+
                         }
                         String a = "Reporte del mes de " + this.cmbxMes.getSelectedItem().toString() + " " + this.TXTanyo.getText() + "\n" + "Impuestos mensuales: " + this.Lblimpuesto.getText() + "\n Ganancias Mensuales: " + this.Lblganancias.getText() + "\n Pedidas Mensuales: " + this.LblPerdidas.getText();
                         FileOutputStream archivo = new FileOutputStream(f1 + ".pdf");
@@ -1270,27 +1343,27 @@ public class FrmInterfaz1 extends javax.swing.JFrame {
                 this.Ganancia = mCalculos.GananciasAnuales(anyo);
                 this.Perdida = mCalculos.PerdidasAnuales(anyo);
                 this.impuesto = mCalculos.ImpuestosAnuales(anyo);
-                
+
                 this.Lblganancias.setText(String.valueOf(Ganancia));
                 this.LblPerdidas.setText(String.valueOf(Perdida));
                 this.Lblimpuesto.setText(String.valueOf(impuesto));
-                
+
                 try {
                     JOptionPane.showMessageDialog(this, "Selecciona La Ruta En Donde Se Guardará El Reporte");
-                    
+
                     JFileChooser dlg = new JFileChooser();
                     int option = dlg.showSaveDialog(this);
                     Image imagen = Image.getInstance("C:\\Users\\Acer\\Documents\\Septimo Semestre\\Nacho-Scrum\\Pruebas_Nose\\PruebasN\\Nose\\src\\IMG-20171104-WA0004.jpg");
                     imagen.setAbsolutePosition(400f, 650f);
                     imagen.scalePercent(30f);
                     imagen.setAlignment(Element.ALIGN_RIGHT);
-                    
+
                     if (option == JFileChooser.APPROVE_OPTION) {
-                        
+
                         File f = dlg.getSelectedFile();
                         f1 = f.toString();
                         this.jtxtdir.setText(f1);
-                        
+
                     }
                     String a = "Reporte del año" + this.TXTanyo.getText() + "\n" + "Impuestos mensuales: " + this.Lblimpuesto.getText() + "\n Ganancias Mensuales: " + this.Lblganancias.getText() + "\n Pedidas Mensuales: " + this.LblPerdidas.getText();
                     FileOutputStream archivo = new FileOutputStream(f1 + ".pdf");
@@ -1307,10 +1380,10 @@ public class FrmInterfaz1 extends javax.swing.JFrame {
                 } catch (Exception e) {
                     JOptionPane.showMessageDialog(null, "error" + e);
                 }
-                
+
                 JOptionPane.showMessageDialog(null, "Reporte Anual");
             }
-            
+
         } else {
             JOptionPane.showMessageDialog(null, "Porfavor seleccione si el reporte es Mensual ó Anual");
         }
@@ -1329,7 +1402,7 @@ public class FrmInterfaz1 extends javax.swing.JFrame {
                 String cadena = (TxtBuscar.getText());
                 TxtBuscar.setText(cadena);
                 repaint();
-                
+
             }
         });
         trsFiltro = new TableRowSorter(this.TFacturasRecibos.getModel());
@@ -1351,11 +1424,12 @@ public class FrmInterfaz1 extends javax.swing.JFrame {
 
         // TODO add your handling code here:
         if (this.Lblactivo.getText().equals("")) {
-            
+
             rfcactivo = JOptionPane.showInputDialog(null, "Favor De Ingresar Tu RFC");
             this.Lblactivo.setText(rfcactivo);
+            this.insertarusuario(1, rfcactivo);
         } else {
-            
+
             if (entradafac == 0) {
                 Cargar();
             } else if (entradafac > 0) {
@@ -1363,7 +1437,7 @@ public class FrmInterfaz1 extends javax.swing.JFrame {
                 if (a == 0) {
                     Cargar();
                 }
-                
+
             }
             entradafac = 1;
         }
@@ -1373,27 +1447,25 @@ public class FrmInterfaz1 extends javax.swing.JFrame {
 
         // TODO add your handling code here:
         if (this.RBEditar.isSelected()) {
-            
+
             if (this.TxtRfcactivo.getText().equals("")) {
                 JOptionPane.showMessageDialog(null, "No Ingresaste nada");
-                
+
             } else {
                 int a = JOptionPane.showConfirmDialog(rootPane, "Estas Seguro Que Tu Rfc Es Correcto (Esto puede generar que no se realizen los calculos si esta incorrecto tu rfc)");
                 if (a == 0) {
-                    
+
                     this.Lblactivo.setText(this.TxtRfcactivo.getText());
-                    
+                    this.actualizarusuario(1, TxtRfcactivo.getText());
                 }
             }
-            
-        }else if(this.RBEditar.isEnabled()){
-        
-                        JOptionPane.showMessageDialog(null, "Favor De Palomear El Activo");
 
-        
-        
+        } else if (this.RBEditar.isEnabled()) {
+
+            JOptionPane.showMessageDialog(null, "Por seguridad Favor De Palomear El Editar");
+
         }
-        
+
 
     }//GEN-LAST:event_jButton2ActionPerformed
 
@@ -1411,7 +1483,7 @@ public class FrmInterfaz1 extends javax.swing.JFrame {
                 if ("Nimbus".equals(info.getName())) {
                     javax.swing.UIManager.setLookAndFeel(info.getClassName());
                     break;
-                    
+
                 }
             }
         } catch (ClassNotFoundException ex) {
