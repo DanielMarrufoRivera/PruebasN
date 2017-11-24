@@ -6,18 +6,35 @@
 package Interfaz;
 
 import BaseDatos.Conexion;
-import XMLL.archivoXML;
-import java.util.Vector;
-import javax.swing.JFileChooser;
-import org.w3c.dom.Node;
-import org.w3c.dom.NodeList;
 import Calculos.*;
+import XMLL.archivoXML;
 import com.itextpdf.text.Document;
+import com.itextpdf.text.Element;
+import com.itextpdf.text.Font;
+import com.itextpdf.text.Font.FontFamily;
+import com.itextpdf.text.Image;
 import com.itextpdf.text.Paragraph;
+import com.itextpdf.text.Phrase;
+import com.itextpdf.text.pdf.PdfPCell;
+import com.itextpdf.text.pdf.PdfPTable;
 import com.itextpdf.text.pdf.PdfWriter;
+import java.awt.event.KeyAdapter;
+import java.awt.event.KeyEvent;
 import java.io.File;
 import java.io.FileOutputStream;
+import java.sql.ResultSet;
+import java.util.Calendar;
+import java.util.Vector;
+import javax.swing.Icon;
+import javax.swing.ImageIcon;
+import javax.swing.JFileChooser;
 import javax.swing.JOptionPane;
+import javax.swing.RowFilter;
+import javax.swing.table.DefaultTableModel;
+import javax.swing.table.TableRowSorter;
+import org.w3c.dom.Node;
+import org.w3c.dom.NodeList;
+import sun.util.calendar.BaseCalendar.Date;
 
 /**
  *
@@ -34,15 +51,41 @@ public class FrmInterfaz1 extends javax.swing.JFrame {
     String rfcr;
     double impuesto;
     int entradafac;
-
+    double Ganancia;
+    double Perdida;
+    float result;
+    float result2;
+    float Sueldo;
+    float Ganacias;
+    String Fecha;
+    String mes;
+    String anyo;
+    Calendar Calendario = Calendar.getInstance();
+    ImageIcon icono = new javax.swing.ImageIcon(getClass().getResource(""));
+    String f1;
+    String metodo_pago;
+    private TableRowSorter trsFiltro;
+    String rfcactivo;
+    
     public FrmInterfaz1() {
         initComponents();
         url = "";
         impuesto = 0;
-        LblTipo.setText("Nose~Soft");
+        Perdida = 0;
+        LblTipo1.setText("Nose~Soft");
         rfcr = "";
         entradafac = 0;
-
+        metodo_pago = "";
+        rfcactivo = "";
+        ImageIcon imagen = new ImageIcon("src/IMG-20171104-WA0004.jpg");
+        Icon icono = new ImageIcon(imagen.getImage().getScaledInstance(this.LblImagen1.getWidth(), this.LblImagen1.getHeight(), 100));
+        this.LblImagen1.setIcon(icono);
+        Icon icono2 = new ImageIcon(imagen.getImage().getScaledInstance(this.LblImagen2.getWidth(), this.LblImagen2.getHeight(), 100));
+        this.LblImagen2.setIcon(icono);
+        Icon icono3 = new ImageIcon(imagen.getImage().getScaledInstance(this.LblImagen3.getWidth(), this.LblImagen3.getHeight(), 100));
+        this.LblImagen3.setIcon(icono);
+        this.repaint();
+        
     }
 
     /**
@@ -54,46 +97,70 @@ public class FrmInterfaz1 extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        TipoReporte = new javax.swing.ButtonGroup();
         jTabbedPane1 = new javax.swing.JTabbedPane();
         PestanaLeerarchivo = new javax.swing.JPanel();
         BtnCargar = new javax.swing.JButton();
-        TxtRFC = new javax.swing.JTextField();
-        jLabel2 = new javax.swing.JLabel();
         BtnSalir1 = new javax.swing.JButton();
+        jLayeredPane1 = new javax.swing.JLayeredPane();
+        LblTipo1 = new javax.swing.JLabel();
+        jLabel11 = new javax.swing.JLabel();
+        Lbl5 = new javax.swing.JLabel();
+        LblNombree1 = new javax.swing.JLabel();
+        LblRFCE1 = new javax.swing.JLabel();
+        Lbl6 = new javax.swing.JLabel();
+        LblFecha1 = new javax.swing.JLabel();
+        jLabel13 = new javax.swing.JLabel();
+        Lbl7 = new javax.swing.JLabel();
+        LblNombrer1 = new javax.swing.JLabel();
+        LblRFCR1 = new javax.swing.JLabel();
+        LblImagen1 = new javax.swing.JLabel();
+        RBCombustible = new javax.swing.JRadioButton();
         pestanaconsulta = new javax.swing.JPanel();
-        LblTipo = new javax.swing.JLabel();
-        Lbl3 = new javax.swing.JLabel();
-        jLabel3 = new javax.swing.JLabel();
-        LblNombree = new javax.swing.JLabel();
-        jLabel4 = new javax.swing.JLabel();
-        Lbl4 = new javax.swing.JLabel();
-        LblRFCR = new javax.swing.JLabel();
-        Lbl2 = new javax.swing.JLabel();
-        LblNombrer = new javax.swing.JLabel();
-        LblFecha = new javax.swing.JLabel();
-        LblRFCE = new javax.swing.JLabel();
         BtnSalir = new javax.swing.JButton();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        TFacturasRecibos = new javax.swing.JTable();
+        TxtBuscar = new javax.swing.JTextField();
+        jLabel1 = new javax.swing.JLabel();
+        LblImagen3 = new javax.swing.JLabel();
         pestanaGenerarreporte = new javax.swing.JPanel();
         jButton1 = new javax.swing.JButton();
         jLabel5 = new javax.swing.JLabel();
         cmbxMes = new javax.swing.JComboBox();
-        cmbxTipoDeReporte1 = new javax.swing.JComboBox();
         jLabel6 = new javax.swing.JLabel();
         jLabel7 = new javax.swing.JLabel();
         TXTanyo = new javax.swing.JTextField();
         jLabel8 = new javax.swing.JLabel();
         jLabel9 = new javax.swing.JLabel();
         Lblimpuesto = new javax.swing.JLabel();
-        jLabel11 = new javax.swing.JLabel();
         jLabel12 = new javax.swing.JLabel();
         Lblganancias = new javax.swing.JLabel();
         LblPerdidas = new javax.swing.JLabel();
-        Lblutilidadbruta = new javax.swing.JLabel();
-        TXTSueldo = new javax.swing.JTextField();
-        jLabel10 = new javax.swing.JLabel();
         jtxtdir = new javax.swing.JLabel();
+        BtnSALIR = new javax.swing.JButton();
+        LblImagen2 = new javax.swing.JLabel();
+        RBtnMensual = new javax.swing.JRadioButton();
+        RBtnAnual = new javax.swing.JRadioButton();
+        BtnModificar = new javax.swing.JPanel();
+        jButton2 = new javax.swing.JButton();
+        TxtRfcactivo = new javax.swing.JTextField();
+        jLabel3 = new javax.swing.JLabel();
+        jLabel4 = new javax.swing.JLabel();
+        Lblactivo = new javax.swing.JLabel();
+        RBEditar = new javax.swing.JRadioButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        addWindowFocusListener(new java.awt.event.WindowFocusListener() {
+            public void windowGainedFocus(java.awt.event.WindowEvent evt) {
+                formWindowGainedFocus(evt);
+            }
+            public void windowLostFocus(java.awt.event.WindowEvent evt) {
+            }
+        });
+
+        jTabbedPane1.setBackground(new java.awt.Color(204, 255, 204));
+
+        PestanaLeerarchivo.setBackground(new java.awt.Color(153, 153, 255));
 
         BtnCargar.setText("Cargar Archivo");
         BtnCargar.addActionListener(new java.awt.event.ActionListener() {
@@ -102,11 +169,6 @@ public class FrmInterfaz1 extends javax.swing.JFrame {
             }
         });
 
-        TxtRFC.setEditable(false);
-
-        jLabel2.setFont(new java.awt.Font("Adobe Arabic", 0, 24)); // NOI18N
-        jLabel2.setText("Introduzca RFC:");
-
         BtnSalir1.setText("Salir");
         BtnSalir1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -114,66 +176,152 @@ public class FrmInterfaz1 extends javax.swing.JFrame {
             }
         });
 
+        javax.swing.GroupLayout jLayeredPane1Layout = new javax.swing.GroupLayout(jLayeredPane1);
+        jLayeredPane1.setLayout(jLayeredPane1Layout);
+        jLayeredPane1Layout.setHorizontalGroup(
+            jLayeredPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 136, Short.MAX_VALUE)
+        );
+        jLayeredPane1Layout.setVerticalGroup(
+            jLayeredPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 100, Short.MAX_VALUE)
+        );
+
+        LblTipo1.setFont(new java.awt.Font("Tahoma", 3, 26)); // NOI18N
+        LblTipo1.setForeground(new java.awt.Color(0, 0, 204));
+        LblTipo1.setText("___________");
+
+        jLabel11.setFont(new java.awt.Font("Book Antiqua", 0, 14)); // NOI18N
+        jLabel11.setText("RFC EMISOR:");
+
+        Lbl5.setFont(new java.awt.Font("Book Antiqua", 0, 14)); // NOI18N
+        Lbl5.setText("Nombre Emisor:");
+
+        LblNombree1.setText("___________________________");
+
+        LblRFCE1.setText("___________________________");
+
+        Lbl6.setFont(new java.awt.Font("Book Antiqua", 0, 18)); // NOI18N
+        Lbl6.setText("Fecha:");
+
+        LblFecha1.setText("_______________________");
+
+        jLabel13.setFont(new java.awt.Font("Book Antiqua", 0, 14)); // NOI18N
+        jLabel13.setText("RFC RECEPTOR:");
+
+        Lbl7.setFont(new java.awt.Font("Book Antiqua", 0, 14)); // NOI18N
+        Lbl7.setText("Nombre Receptor:");
+
+        LblNombrer1.setText("___________________________");
+
+        LblRFCR1.setText("___________________________");
+
+        RBCombustible.setText("Combustible");
+
         javax.swing.GroupLayout PestanaLeerarchivoLayout = new javax.swing.GroupLayout(PestanaLeerarchivo);
         PestanaLeerarchivo.setLayout(PestanaLeerarchivoLayout);
         PestanaLeerarchivoLayout.setHorizontalGroup(
             PestanaLeerarchivoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, PestanaLeerarchivoLayout.createSequentialGroup()
-                .addContainerGap(654, Short.MAX_VALUE)
-                .addComponent(BtnSalir1, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(71, 71, 71))
             .addGroup(PestanaLeerarchivoLayout.createSequentialGroup()
-                .addGap(177, 177, 177)
-                .addGroup(PestanaLeerarchivoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(BtnCargar)
-                    .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 255, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
-                .addComponent(TxtRFC, javax.swing.GroupLayout.PREFERRED_SIZE, 116, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(327, Short.MAX_VALUE))
+                .addGap(29, 29, 29)
+                .addGroup(PestanaLeerarchivoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(PestanaLeerarchivoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                        .addGroup(PestanaLeerarchivoLayout.createSequentialGroup()
+                            .addGroup(PestanaLeerarchivoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                .addGroup(PestanaLeerarchivoLayout.createSequentialGroup()
+                                    .addGroup(PestanaLeerarchivoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                                        .addGroup(PestanaLeerarchivoLayout.createSequentialGroup()
+                                            .addComponent(Lbl6)
+                                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                            .addComponent(LblFecha1, javax.swing.GroupLayout.PREFERRED_SIZE, 146, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                        .addComponent(LblTipo1, javax.swing.GroupLayout.PREFERRED_SIZE, 196, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                    .addGap(74, 74, 74)
+                                    .addComponent(BtnCargar, javax.swing.GroupLayout.PREFERRED_SIZE, 156, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addGroup(PestanaLeerarchivoLayout.createSequentialGroup()
+                                    .addComponent(jLabel11)
+                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                    .addComponent(LblRFCE1, javax.swing.GroupLayout.PREFERRED_SIZE, 182, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                    .addComponent(jLabel13)
+                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                    .addComponent(LblRFCR1)))
+                            .addGap(128, 128, 128))
+                        .addGroup(PestanaLeerarchivoLayout.createSequentialGroup()
+                            .addComponent(Lbl5)
+                            .addGap(18, 18, 18)
+                            .addComponent(LblNombree1)
+                            .addGap(18, 18, 18)
+                            .addComponent(Lbl7)
+                            .addGap(18, 18, 18)
+                            .addComponent(LblNombrer1)
+                            .addGap(116, 116, 116)))
+                    .addGroup(PestanaLeerarchivoLayout.createSequentialGroup()
+                        .addGap(381, 381, 381)
+                        .addComponent(RBCombustible)))
+                .addGroup(PestanaLeerarchivoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(PestanaLeerarchivoLayout.createSequentialGroup()
+                        .addGap(259, 259, 259)
+                        .addComponent(jLayeredPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(PestanaLeerarchivoLayout.createSequentialGroup()
+                        .addGap(18, 18, 18)
+                        .addComponent(LblImagen1, javax.swing.GroupLayout.PREFERRED_SIZE, 286, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(636, Short.MAX_VALUE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, PestanaLeerarchivoLayout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(BtnSalir1, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(347, 347, 347))
         );
         PestanaLeerarchivoLayout.setVerticalGroup(
             PestanaLeerarchivoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(PestanaLeerarchivoLayout.createSequentialGroup()
-                .addContainerGap()
+                .addGroup(PestanaLeerarchivoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(PestanaLeerarchivoLayout.createSequentialGroup()
+                        .addGap(114, 114, 114)
+                        .addComponent(LblTipo1)
+                        .addGap(80, 80, 80)
+                        .addGroup(PestanaLeerarchivoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(Lbl6)
+                            .addComponent(LblFecha1)))
+                    .addGroup(PestanaLeerarchivoLayout.createSequentialGroup()
+                        .addGap(52, 52, 52)
+                        .addComponent(RBCombustible)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(BtnCargar, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(PestanaLeerarchivoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(TxtRFC, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(29, 29, 29)
-                .addComponent(BtnCargar, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(116, 116, 116)
-                .addComponent(BtnSalir1)
-                .addContainerGap(134, Short.MAX_VALUE))
+                    .addComponent(jLabel11)
+                    .addComponent(LblRFCE1)
+                    .addComponent(jLabel13)
+                    .addComponent(LblRFCR1))
+                .addGroup(PestanaLeerarchivoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(PestanaLeerarchivoLayout.createSequentialGroup()
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(BtnSalir1)
+                        .addGap(25, 25, 25))
+                    .addGroup(PestanaLeerarchivoLayout.createSequentialGroup()
+                        .addGap(27, 27, 27)
+                        .addGroup(PestanaLeerarchivoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(Lbl5)
+                            .addComponent(LblNombree1)
+                            .addComponent(Lbl7)
+                            .addComponent(LblNombrer1))
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
+            .addGroup(PestanaLeerarchivoLayout.createSequentialGroup()
+                .addContainerGap(18, Short.MAX_VALUE)
+                .addComponent(LblImagen1, javax.swing.GroupLayout.PREFERRED_SIZE, 282, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jLayeredPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(113, 113, 113))
         );
 
         jTabbedPane1.addTab("Leer Archivo", PestanaLeerarchivo);
 
-        LblTipo.setFont(new java.awt.Font("Tahoma", 3, 24)); // NOI18N
-        LblTipo.setText("___________");
-
-        Lbl3.setFont(new java.awt.Font("Book Antiqua", 0, 14)); // NOI18N
-        Lbl3.setText("Nombre Emisor:");
-
-        jLabel3.setFont(new java.awt.Font("Book Antiqua", 0, 14)); // NOI18N
-        jLabel3.setText("RFC EMISOR:");
-
-        LblNombree.setText("___________________________");
-
-        jLabel4.setFont(new java.awt.Font("Book Antiqua", 0, 14)); // NOI18N
-        jLabel4.setText("RFC RECEPTOR:");
-
-        Lbl4.setFont(new java.awt.Font("Book Antiqua", 0, 14)); // NOI18N
-        Lbl4.setText("Nombre Receptor:");
-
-        LblRFCR.setText("___________________________");
-
-        Lbl2.setFont(new java.awt.Font("Book Antiqua", 0, 18)); // NOI18N
-        Lbl2.setText("Fecha:");
-
-        LblNombrer.setText("___________________________");
-
-        LblFecha.setText("_______________________");
-
-        LblRFCE.setText("___________________________");
+        pestanaconsulta.setBackground(new java.awt.Color(153, 153, 255));
+        pestanaconsulta.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusGained(java.awt.event.FocusEvent evt) {
+                pestanaconsultaFocusGained(evt);
+            }
+        });
 
         BtnSalir.setText("Salir");
         BtnSalir.addActionListener(new java.awt.event.ActionListener() {
@@ -182,77 +330,65 @@ public class FrmInterfaz1 extends javax.swing.JFrame {
             }
         });
 
+        TFacturasRecibos.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+
+            },
+            new String [] {
+
+            }
+        ));
+        jScrollPane1.setViewportView(TFacturasRecibos);
+
+        TxtBuscar.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                TxtBuscarKeyTyped(evt);
+            }
+        });
+
+        jLabel1.setText("Busqueda por Fecha:");
+
         javax.swing.GroupLayout pestanaconsultaLayout = new javax.swing.GroupLayout(pestanaconsulta);
         pestanaconsulta.setLayout(pestanaconsultaLayout);
         pestanaconsultaLayout.setHorizontalGroup(
             pestanaconsultaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pestanaconsultaLayout.createSequentialGroup()
-                .addGap(0, 0, Short.MAX_VALUE)
-                .addComponent(BtnSalir, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(97, 97, 97))
             .addGroup(pestanaconsultaLayout.createSequentialGroup()
                 .addGroup(pestanaconsultaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(pestanaconsultaLayout.createSequentialGroup()
-                        .addContainerGap()
-                        .addGroup(pestanaconsultaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addGroup(pestanaconsultaLayout.createSequentialGroup()
-                                .addComponent(Lbl3)
-                                .addGap(49, 49, 49)
-                                .addComponent(LblNombree))
-                            .addGroup(pestanaconsultaLayout.createSequentialGroup()
-                                .addComponent(jLabel3)
-                                .addGap(18, 18, 18)
-                                .addComponent(LblRFCE, javax.swing.GroupLayout.PREFERRED_SIZE, 203, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                        .addGap(67, 67, 67)
-                        .addGroup(pestanaconsultaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addGroup(pestanaconsultaLayout.createSequentialGroup()
-                                .addComponent(Lbl4)
-                                .addGap(28, 28, 28)
-                                .addComponent(LblNombrer))
-                            .addGroup(pestanaconsultaLayout.createSequentialGroup()
-                                .addComponent(jLabel4)
-                                .addGap(0, 0, 0)
-                                .addComponent(LblRFCR, javax.swing.GroupLayout.PREFERRED_SIZE, 203, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                        .addGap(20, 20, 20)
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 452, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(pestanaconsultaLayout.createSequentialGroup()
-                        .addComponent(LblTipo, javax.swing.GroupLayout.PREFERRED_SIZE, 168, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(41, 41, 41)
-                        .addComponent(Lbl2)
+                        .addGap(35, 35, 35)
+                        .addComponent(jLabel1)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(LblFecha, javax.swing.GroupLayout.PREFERRED_SIZE, 146, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(187, Short.MAX_VALUE))
+                        .addComponent(TxtBuscar, javax.swing.GroupLayout.PREFERRED_SIZE, 172, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(36, 36, 36)
+                        .addComponent(BtnSalir, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addGap(143, 143, 143)
+                .addComponent(LblImagen3, javax.swing.GroupLayout.PREFERRED_SIZE, 277, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(955, Short.MAX_VALUE))
         );
         pestanaconsultaLayout.setVerticalGroup(
             pestanaconsultaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(pestanaconsultaLayout.createSequentialGroup()
-                .addGroup(pestanaconsultaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                .addGroup(pestanaconsultaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(pestanaconsultaLayout.createSequentialGroup()
-                        .addGap(50, 50, 50)
-                        .addComponent(LblTipo)
-                        .addGap(146, 146, 146))
+                        .addGap(22, 22, 22)
+                        .addGroup(pestanaconsultaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(BtnSalir)
+                            .addComponent(TxtBuscar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel1))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 432, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(pestanaconsultaLayout.createSequentialGroup()
-                        .addGap(40, 40, 40)
-                        .addGroup(pestanaconsultaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(Lbl2)
-                            .addComponent(LblFecha))
-                        .addGap(18, 18, 18)
-                        .addGroup(pestanaconsultaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jLabel4)
-                            .addComponent(LblRFCR, javax.swing.GroupLayout.PREFERRED_SIZE, 9, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel3)
-                            .addComponent(LblRFCE, javax.swing.GroupLayout.PREFERRED_SIZE, 9, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(26, 26, 26)
-                        .addGroup(pestanaconsultaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(Lbl4)
-                            .addComponent(LblNombrer)
-                            .addComponent(Lbl3)
-                            .addComponent(LblNombree))
-                        .addGap(48, 48, 48)))
-                .addGap(20, 20, 20)
-                .addComponent(BtnSalir)
-                .addContainerGap(101, Short.MAX_VALUE))
+                        .addGap(42, 42, 42)
+                        .addComponent(LblImagen3, javax.swing.GroupLayout.PREFERRED_SIZE, 318, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(29, Short.MAX_VALUE))
         );
 
         jTabbedPane1.addTab("Consulta Del Archivo", pestanaconsulta);
+
+        pestanaGenerarreporte.setBackground(new java.awt.Color(153, 153, 255));
 
         jButton1.setText("Generar Reporte");
         jButton1.addActionListener(new java.awt.event.ActionListener() {
@@ -265,21 +401,50 @@ public class FrmInterfaz1 extends javax.swing.JFrame {
 
         cmbxMes.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Enero", "Febrero", "Marzo", "Abril", "Mayo", "Junio", "Julio", "Agosto", "Septiembre", "Octubre", "Noviembre", "Diciembre" }));
 
-        cmbxTipoDeReporte1.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Reporte Mensual", "Reporte Anual" }));
-
         jLabel6.setText("Elige El Mes");
 
         jLabel7.setText("Ingresa el año");
 
-        jLabel8.setText("IMPUESTO");
+        TXTanyo.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                TXTanyoKeyTyped(evt);
+            }
+        });
+
+        jLabel8.setText("IMPUESTOS");
 
         jLabel9.setText("GANANCIAS");
 
-        jLabel11.setText("UTILIDAD BRUTA");
+        Lblimpuesto.setText("____________");
 
         jLabel12.setText("PERDIDAS");
 
-        jLabel10.setText("Ingresa El Sueldo Mensual");
+        Lblganancias.setText("____________");
+
+        LblPerdidas.setText("____________");
+
+        BtnSALIR.setText("Salir");
+        BtnSALIR.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                BtnSALIRActionPerformed(evt);
+            }
+        });
+
+        TipoReporte.add(RBtnMensual);
+        RBtnMensual.setText("Mensual");
+        RBtnMensual.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                RBtnMensualMouseClicked(evt);
+            }
+        });
+
+        TipoReporte.add(RBtnAnual);
+        RBtnAnual.setText("Anual");
+        RBtnAnual.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                RBtnAnualMouseClicked(evt);
+            }
+        });
 
         javax.swing.GroupLayout pestanaGenerarreporteLayout = new javax.swing.GroupLayout(pestanaGenerarreporte);
         pestanaGenerarreporte.setLayout(pestanaGenerarreporteLayout);
@@ -291,132 +456,182 @@ public class FrmInterfaz1 extends javax.swing.JFrame {
                         .addGap(60, 60, 60)
                         .addGroup(pestanaGenerarreporteLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(pestanaGenerarreporteLayout.createSequentialGroup()
-                                .addGap(60, 60, 60)
-                                .addComponent(LblPerdidas))
-                            .addGroup(pestanaGenerarreporteLayout.createSequentialGroup()
-                                .addComponent(jLabel11)
-                                .addGap(43, 43, 43)
-                                .addComponent(Lblutilidadbruta))
-                            .addComponent(jLabel12)
-                            .addComponent(jLabel9)
-                            .addComponent(jLabel8)
+                                .addComponent(jLabel8)
+                                .addGap(18, 18, 18)
+                                .addComponent(Lblimpuesto))
                             .addGroup(pestanaGenerarreporteLayout.createSequentialGroup()
                                 .addGroup(pestanaGenerarreporteLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jLabel12)
                                     .addGroup(pestanaGenerarreporteLayout.createSequentialGroup()
-                                        .addGap(69, 69, 69)
-                                        .addComponent(Lblganancias))
+                                        .addComponent(jLabel9)
+                                        .addGap(18, 18, 18)
+                                        .addGroup(pestanaGenerarreporteLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                            .addComponent(LblPerdidas)
+                                            .addComponent(Lblganancias))))
+                                .addGroup(pestanaGenerarreporteLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addGroup(pestanaGenerarreporteLayout.createSequentialGroup()
-                                        .addGap(87, 87, 87)
-                                        .addComponent(Lblimpuesto)))
-                                .addGap(82, 82, 82)
-                                .addComponent(jButton1)
-                                .addGap(57, 57, 57)
-                                .addComponent(jtxtdir, javax.swing.GroupLayout.PREFERRED_SIZE, 95, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                    .addGroup(pestanaGenerarreporteLayout.createSequentialGroup()
-                        .addGap(168, 168, 168)
-                        .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 134, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(18, 18, 18)
-                        .addComponent(cmbxTipoDeReporte1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                        .addGap(337, 337, 337)
+                                        .addComponent(jtxtdir, javax.swing.GroupLayout.PREFERRED_SIZE, 95, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                    .addGroup(pestanaGenerarreporteLayout.createSequentialGroup()
+                                        .addGap(244, 244, 244)
+                                        .addComponent(BtnSALIR)))))
+                        .addGap(502, 563, Short.MAX_VALUE))
                     .addGroup(pestanaGenerarreporteLayout.createSequentialGroup()
                         .addGap(48, 48, 48)
-                        .addComponent(jLabel7)
-                        .addGap(18, 18, 18)
                         .addGroup(pestanaGenerarreporteLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(pestanaGenerarreporteLayout.createSequentialGroup()
-                                .addComponent(jLabel10, javax.swing.GroupLayout.PREFERRED_SIZE, 125, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(31, 31, 31)
-                                .addComponent(TXTSueldo, javax.swing.GroupLayout.PREFERRED_SIZE, 78, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 134, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(RBtnMensual)
+                                .addGap(18, 18, 18)
+                                .addComponent(RBtnAnual)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(jButton1)
+                                .addGap(629, 629, 629))
                             .addGroup(pestanaGenerarreporteLayout.createSequentialGroup()
-                                .addComponent(TXTanyo, javax.swing.GroupLayout.PREFERRED_SIZE, 78, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(118, 118, 118)
                                 .addComponent(jLabel6)
-                                .addGap(29, 29, 29)
-                                .addComponent(cmbxMes, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))))
-                .addContainerGap(399, Short.MAX_VALUE))
+                                .addGap(18, 18, 18)
+                                .addComponent(cmbxMes, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(18, 18, 18)
+                                .addComponent(jLabel7)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(TXTanyo, javax.swing.GroupLayout.PREFERRED_SIZE, 78, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))))
+                .addComponent(LblImagen2, javax.swing.GroupLayout.PREFERRED_SIZE, 268, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(342, 342, 342))
         );
         pestanaGenerarreporteLayout.setVerticalGroup(
             pestanaGenerarreporteLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(pestanaGenerarreporteLayout.createSequentialGroup()
-                .addGroup(pestanaGenerarreporteLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(pestanaGenerarreporteLayout.createSequentialGroup()
-                        .addGap(10, 10, 10)
-                        .addGroup(pestanaGenerarreporteLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 19, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(cmbxTipoDeReporte1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(18, 18, 18)
-                        .addGroup(pestanaGenerarreporteLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jLabel10, javax.swing.GroupLayout.PREFERRED_SIZE, 19, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(TXTSueldo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(18, 18, 18)
-                        .addGroup(pestanaGenerarreporteLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jLabel7, javax.swing.GroupLayout.PREFERRED_SIZE, 19, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(TXTanyo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, 19, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(cmbxMes, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(62, 62, 62)
-                        .addComponent(Lblimpuesto)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(Lblganancias))
-                    .addGroup(pestanaGenerarreporteLayout.createSequentialGroup()
-                        .addGap(145, 145, 145)
-                        .addGroup(pestanaGenerarreporteLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jtxtdir, javax.swing.GroupLayout.PREFERRED_SIZE, 18, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                .addGap(39, 39, 39)
-                .addComponent(jLabel8)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jLabel9)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jLabel12)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(LblPerdidas)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 44, Short.MAX_VALUE)
-                .addGroup(pestanaGenerarreporteLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel11)
-                    .addComponent(Lblutilidadbruta))
-                .addGap(27, 27, 27))
+                .addGroup(pestanaGenerarreporteLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, pestanaGenerarreporteLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                        .addGroup(pestanaGenerarreporteLayout.createSequentialGroup()
+                            .addGap(50, 50, 50)
+                            .addComponent(LblImagen2, javax.swing.GroupLayout.PREFERRED_SIZE, 294, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGroup(javax.swing.GroupLayout.Alignment.LEADING, pestanaGenerarreporteLayout.createSequentialGroup()
+                            .addGap(145, 145, 145)
+                            .addComponent(jtxtdir, javax.swing.GroupLayout.PREFERRED_SIZE, 18, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGap(78, 78, 78)
+                            .addGroup(pestanaGenerarreporteLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                .addComponent(jLabel8)
+                                .addComponent(Lblimpuesto))
+                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                            .addGroup(pestanaGenerarreporteLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                .addComponent(jLabel9)
+                                .addComponent(Lblganancias))
+                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                            .addGroup(pestanaGenerarreporteLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                .addComponent(jLabel12)
+                                .addComponent(LblPerdidas)))
+                        .addGroup(javax.swing.GroupLayout.Alignment.LEADING, pestanaGenerarreporteLayout.createSequentialGroup()
+                            .addGap(35, 35, 35)
+                            .addGroup(pestanaGenerarreporteLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 19, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGroup(pestanaGenerarreporteLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                    .addComponent(RBtnMensual)
+                                    .addComponent(RBtnAnual)))
+                            .addGap(18, 18, 18)
+                            .addGroup(pestanaGenerarreporteLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                .addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, 19, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(cmbxMes, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(jLabel7, javax.swing.GroupLayout.PREFERRED_SIZE, 19, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(TXTanyo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, pestanaGenerarreporteLayout.createSequentialGroup()
+                        .addGap(72, 72, 72)
+                        .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(BtnSALIR)))
+                .addContainerGap(175, Short.MAX_VALUE))
         );
 
         jTabbedPane1.addTab("Generar Reporte", pestanaGenerarreporte);
+
+        jButton2.setText("Modificar");
+        jButton2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton2ActionPerformed(evt);
+            }
+        });
+
+        jLabel3.setText("INGRESA TU RFC");
+
+        jLabel4.setText("RFC-ACTIVO");
+
+        RBEditar.setText("Editar");
+
+        javax.swing.GroupLayout BtnModificarLayout = new javax.swing.GroupLayout(BtnModificar);
+        BtnModificar.setLayout(BtnModificarLayout);
+        BtnModificarLayout.setHorizontalGroup(
+            BtnModificarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(BtnModificarLayout.createSequentialGroup()
+                .addGroup(BtnModificarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(BtnModificarLayout.createSequentialGroup()
+                        .addGap(94, 94, 94)
+                        .addComponent(jLabel4)
+                        .addGap(66, 66, 66)
+                        .addComponent(Lblactivo)
+                        .addGap(143, 143, 143)
+                        .addComponent(RBEditar))
+                    .addGroup(BtnModificarLayout.createSequentialGroup()
+                        .addGap(267, 267, 267)
+                        .addComponent(jButton2))
+                    .addGroup(BtnModificarLayout.createSequentialGroup()
+                        .addGap(72, 72, 72)
+                        .addComponent(jLabel3)
+                        .addGap(55, 55, 55)
+                        .addComponent(TxtRfcactivo, javax.swing.GroupLayout.PREFERRED_SIZE, 156, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(1393, Short.MAX_VALUE))
+        );
+        BtnModificarLayout.setVerticalGroup(
+            BtnModificarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(BtnModificarLayout.createSequentialGroup()
+                .addGap(27, 27, 27)
+                .addGroup(BtnModificarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel4)
+                    .addComponent(Lblactivo)
+                    .addComponent(RBEditar))
+                .addGap(56, 56, 56)
+                .addGroup(BtnModificarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(TxtRfcactivo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel3))
+                .addGap(18, 18, 18)
+                .addComponent(jButton2)
+                .addContainerGap(336, Short.MAX_VALUE))
+        );
+
+        jTabbedPane1.addTab("Configuracion", BtnModificar);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addComponent(jTabbedPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 898, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 0, Short.MAX_VALUE))
+            .addComponent(jTabbedPane1)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jTabbedPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 397, javax.swing.GroupLayout.PREFERRED_SIZE)
+            .addComponent(jTabbedPane1)
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
-
-    private void BtnSalirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnSalirActionPerformed
-        // TODO add your handling code here:
-        System.exit(1);
-    }//GEN-LAST:event_BtnSalirActionPerformed
     private void Cargar() {
-
+        
         try {
             //int opa;
             //do {
             JFileChooser dato = new JFileChooser();
             int op = dato.showOpenDialog(this);
-
+            
             if (op == JFileChooser.APPROVE_OPTION) {
-
+                
                 url = dato.getSelectedFile().getPath();
             }
-
+            
             if (url == "") {
-
+                
                 JOptionPane.showMessageDialog(null, "No Seleccionaste Nada");
             } else {
-
+                
                 archivoXML mi_archivo = new archivoXML(url);
                 mi_archivo.open();
                 try {
@@ -427,9 +642,11 @@ public class FrmInterfaz1 extends javax.swing.JFrame {
                     String folio = mi_archivo.getNodeAttr("folio", comprobante);
                     String importe = mi_archivo.getNodeAttr("subTotal", comprobante);
                     String fecha = mi_archivo.getNodeAttr("fecha", comprobante);
+                    metodo_pago = mi_archivo.getNodeAttr("metodoDePago", comprobante);
                     System.out.println(folio);
                     System.out.println(importe);
                     System.out.println(fecha);
+                    System.out.println(metodo_pago);
                     //Emisor
                     Node emisor = mi_archivo.getNode("cfdi:Emisor", comprobante.getChildNodes());
                     String rfce = mi_archivo.getNodeAttr("rfc", emisor);
@@ -449,46 +666,14 @@ public class FrmInterfaz1 extends javax.swing.JFrame {
                     System.out.println(traslados);
                     System.out.println(retenciones);
 
-                    LblNombree.setText(nombree);
-                    LblFecha.setText(fecha);
-                    //LblImpuestos.setText(String.valueOf("Aqui Se Mostrará Su Determinado Valor"));
-                    LblNombrer.setText(nombrer);
-                    LblRFCR.setText(rfcr);
-                    this.LblRFCE.setText(rfce);
-
-                    //Esto es para insertar osease guardar en la base los datos
-                    try {
-                        //Conectamos con la base de datos
-                        Conexion mConexion = new Conexion();
-                        mConexion.Conectar("localhost", "nose_prueba", "root", "nose");
-                        //Formamos una instruccion DML -INSERT
-                        String INSERT = "insert into recibo_factura values ('?1','?2','?3','?4','?5','?6','?7','?8')";
-                        INSERT = INSERT.replace("?1", folio);
-                        INSERT = INSERT.replace("?2", importe);
-                        INSERT = INSERT.replace("?3", fecha);
-                        INSERT = INSERT.replace("?4", nombrer);
-                        INSERT = INSERT.replace("?5", nombree);
-                        INSERT = INSERT.replace("?6", rfcr);
-                        INSERT = INSERT.replace("?7", rfce);
-                        INSERT = INSERT.replace("?8", "1");
-                        //Llamamos al metodo que se encuentra en la clase conexión en el packete BaseDatos
-                        mConexion.ejecutarActualizacion(INSERT);
-                        JOptionPane.showMessageDialog(this, "guardado");
-                        this.setVisible(false);
-
-                    } catch (Exception error) {
-                        JOptionPane.showMessageDialog(this, "Error de guardar en la base de datos");
-                        System.out.println(error.toString());
-                    }
-                    /*  System.out.println(TxtRFC.getText());
-                     if (TxtRFC.getText().equals(rfce.toString())) {
-                     //Recibo
-                     /*LblNombree.setText(nombree);
+                    /*LblNombree.setText(nombree);
                      LblFecha.setText(fecha);
-                     LblTipo.setText("Recibo");
-                     LblRFCE.setText(rfce);
-                     impuesto = mCalculos.CalcularImpuestosRecibo(Float.parseFloat(importe));
-                     LblImpuestos.setText(String.valueOf("impuesto"));
+                     //LblImpuestos.setText(String.valueOf("Aqui Se Mostrará Su Determinado Valor"));
+                     ty    LblNombrer.setText(nombrer);
+                     LblRFCR.setText(rfcr);
+                     this.LblRFCE.setText(rfce);*/
+
+ /* //Esto es para insertar osease guardar en la base los datos
                      try {
                      //Conectamos con la base de datos
                      Conexion mConexion = new Conexion();
@@ -507,107 +692,710 @@ public class FrmInterfaz1 extends javax.swing.JFrame {
                      mConexion.ejecutarActualizacion(INSERT);
                      JOptionPane.showMessageDialog(this, "guardado");
                      this.setVisible(false);
+
                      } catch (Exception error) {
                      JOptionPane.showMessageDialog(this, "Error de guardar en la base de datos");
                      System.out.println(error.toString());
-                     }
-
-                     } else if (TxtRFC.getText().equals(rfcr.toString())) {
-                     //Factura
-                     LblNombrer.setText(nombrer);
-                     LblTipo.setText("Factura");
-                     LblRFCR.setText(rfcr);
-                     impuesto = mCalculos.CalcularImpuestosFactura(Float.parseFloat(importe));
-                     this.LblImpuestos.setText(String.valueOf(impuesto));
-
-                     try {
-                     //Conectamos con la base de datos
-                     Conexion mConexion = new Conexion();
-                     mConexion.Conectar("localhost", "nose_prueba", "root", "nose");
-                     //Formamos una instruccion DML -INSERT
-                     String INSERT = "insert into recibo_factura values ('?1','?2','?3','?4','?5','?6','?7','?8')";
-                     INSERT = INSERT.replace("?1", folio);
-                     INSERT = INSERT.replace("?2", importe);
-                     INSERT = INSERT.replace("?3", fecha);
-                     INSERT = INSERT.replace("?4", nombrer);
-                     INSERT = INSERT.replace("?5", nombree);
-                     INSERT = INSERT.replace("?6", rfcr);
-                     INSERT = INSERT.replace("?7", rfce);
-                     //munero 2 para identiificar el tipo en la base de datos como una factura
-                     INSERT = INSERT.replace("?8", "2");
-                     //Llamamos al metodo que se encuentra en la clase conexión en el packete BaseDatos
-                     mConexion.ejecutarActualizacion(INSERT);
-                     JOptionPane.showMessageDialog(this, "guardado");
-                     this.setVisible(false);
-                     } catch (Exception error) {
-                     JOptionPane.showMessageDialog(this, "Error de guardar en la base de datos");
-                     System.out.println(error.toString());
-                     }
                      }*/
-
+                    System.out.println(rfcactivo);
+                    if (rfcactivo.equals(rfce.toString())) {
+                        //Recibo
+                        LblNombree1.setText(nombree);
+                        LblNombrer1.setText(nombrer);
+                        LblFecha1.setText(fecha);
+                        LblTipo1.setText("Recibo");
+                        LblRFCE1.setText(rfce);
+                        LblRFCR1.setText(rfcr);
+                        impuesto = mCalculos.CalcularImpuestosRecibo(Float.parseFloat(importe));
+                        //LblImpuestos.setText(String.valueOf("impuesto"));
+                        try {
+                            //Conectamos con la base de datos
+                            Conexion mConexion = new Conexion();
+                            mConexion.Conectar("localhost", "nose_prueba", "root", "nose");
+                            //Formamos una instruccion DML -INSERT
+                            String INSERT = "insert into recibo_factura values ('?1','?2','?3','?4','?5','?6','?7','?8','?9','?a')";
+                            INSERT = INSERT.replace("?1", folio);
+                            INSERT = INSERT.replace("?2", importe);
+                            INSERT = INSERT.replace("?3", fecha);
+                            INSERT = INSERT.replace("?4", nombrer);
+                            INSERT = INSERT.replace("?5", nombree);
+                            INSERT = INSERT.replace("?6", rfcr);
+                            INSERT = INSERT.replace("?7", rfce);
+                            INSERT = INSERT.replace("?8", "Recibo");
+                            //Llamamos al metodo que se encuentra en la clase conexión en el packete BaseDatos
+                            INSERT = INSERT.replace("?9", String.valueOf(impuesto));
+                            INSERT = INSERT.replace("?a", metodo_pago);
+                            mConexion.ejecutarActualizacion(INSERT);
+                            JOptionPane.showMessageDialog(this, "guardado");
+                            //this.setVisible(false);
+                        } catch (Exception error) {
+                            JOptionPane.showMessageDialog(this, "Error de guardar en la base de datos");
+                            System.out.println(error.toString());
+                        }
+                        
+                    } else if (rfcactivo.equals(rfcr.toString())) {
+                        //Factura
+                        if (this.RBCombustible.isSelected()) {
+                            
+                            if (((this.RBCombustible.isSelected() && (metodo_pago.equals("04"))) || (this.RBCombustible.isSelected() && (metodo_pago.equals("Tarjeta credito"))))) {
+                                LblNombree1.setText(nombree);
+                                LblNombrer1.setText(nombrer);
+                                LblFecha1.setText(fecha);
+                                LblTipo1.setText("Factura");
+                                LblRFCE1.setText(rfce);
+                                LblRFCR1.setText(rfcr);
+                                
+                                try {
+                                    //Conectamos con la base de datos
+                                    Conexion mConexion = new Conexion();
+                                    mConexion.Conectar("localhost", "nose_prueba", "root", "nose");
+                                    //Formamos una instruccion DML -INSERT
+                                    String INSERT = "insert into recibo_factura values ('?1','?2','?3','?4','?5','?6','?7','?8','?9','?10')";
+                                    INSERT = INSERT.replace("?1", folio);
+                                    INSERT = INSERT.replace("?2", importe);
+                                    INSERT = INSERT.replace("?3", fecha);
+                                    INSERT = INSERT.replace("?4", nombrer);
+                                    INSERT = INSERT.replace("?5", nombree);
+                                    INSERT = INSERT.replace("?6", rfcr);
+                                    INSERT = INSERT.replace("?7", rfce);
+                                    //munero 2 para identiificar el tipo en la base de datos como una factura
+                                    INSERT = INSERT.replace("?8", "Factura");
+                                    INSERT = INSERT.replace("?9", "0");
+                                    INSERT = INSERT.replace("?10", metodo_pago);
+                                    //Llamamos al metodo que se encuentra en la clase conexión en el packete BaseDatos
+                                    mConexion.ejecutarActualizacion(INSERT);
+                                    JOptionPane.showMessageDialog(this, "guardado");
+                                    //this.setVisible(false);
+                                } catch (Exception error) {
+                                    JOptionPane.showMessageDialog(this, "Error de guardar en la base de datos");
+                                    System.out.println(error.toString());
+                                }
+                                
+                                JOptionPane.showMessageDialog(null, "Se apagado con tarjeta de credito");
+                            } else {
+                                
+                                LblNombree1.setText(nombree);
+                                LblNombrer1.setText(nombrer);
+                                LblFecha1.setText(fecha);
+                                LblTipo1.setText("Factura");
+                                LblRFCE1.setText(rfce);
+                                LblRFCR1.setText(rfcr);
+                                impuesto = mCalculos.CalcularImpuestosFactura(Float.parseFloat(importe));
+                                
+                                try {
+                                    //Conectamos con la base de datos
+                                    Conexion mConexion = new Conexion();
+                                    mConexion.Conectar("localhost", "nose_prueba", "root", "nose");
+                                    //Formamos una instruccion DML -INSERT
+                                    String INSERT = "insert into recibo_factura values ('?1','?2','?3','?4','?5','?6','?7','?8','?9','?10')";
+                                    INSERT = INSERT.replace("?1", folio);
+                                    INSERT = INSERT.replace("?2", importe);
+                                    INSERT = INSERT.replace("?3", fecha);
+                                    INSERT = INSERT.replace("?4", nombrer);
+                                    INSERT = INSERT.replace("?5", nombree);
+                                    INSERT = INSERT.replace("?6", rfcr);
+                                    INSERT = INSERT.replace("?7", rfce);
+                                    //munero 2 para identiificar el tipo en la base de datos como una factura
+                                    INSERT = INSERT.replace("?8", "Factura");
+                                    INSERT = INSERT.replace("?9", String.valueOf(impuesto));
+                                    INSERT = INSERT.replace("?10", metodo_pago);
+                                    //Llamamos al metodo que se encuentra en la clase conexión en el packete BaseDatos
+                                    mConexion.ejecutarActualizacion(INSERT);
+                                    JOptionPane.showMessageDialog(this, "guardado");
+                                    //this.setVisible(false);
+                                } catch (Exception error) {
+                                    JOptionPane.showMessageDialog(this, "Error de guardar en la base de datos");
+                                    System.out.println(error.toString());
+                                }
+                                
+                                JOptionPane.showMessageDialog(null, "Se apagado con en efectivo");
+                                
+                            }
+                            
+                        } else {
+                            LblNombree1.setText(nombree);
+                            LblNombrer1.setText(nombrer);
+                            LblFecha1.setText(fecha);
+                            LblTipo1.setText("Factura");
+                            LblRFCE1.setText(rfce);
+                            LblRFCR1.setText(rfcr);
+                            impuesto = mCalculos.CalcularImpuestosFactura(Float.parseFloat(importe));
+                            
+                            try {
+                                //Conectamos con la base de datos
+                                Conexion mConexion = new Conexion();
+                                mConexion.Conectar("localhost", "nose_prueba", "root", "nose");
+                                //Formamos una instruccion DML -INSERT
+                                String INSERT = "insert into recibo_factura values ('?1','?2','?3','?4','?5','?6','?7','?8','?9','?10')";
+                                INSERT = INSERT.replace("?1", folio);
+                                INSERT = INSERT.replace("?2", importe);
+                                INSERT = INSERT.replace("?3", fecha);
+                                INSERT = INSERT.replace("?4", nombrer);
+                                INSERT = INSERT.replace("?5", nombree);
+                                INSERT = INSERT.replace("?6", rfcr);
+                                INSERT = INSERT.replace("?7", rfce);
+                                //munero 2 para identiificar el tipo en la base de datos como una factura
+                                INSERT = INSERT.replace("?8", "Factura");
+                                INSERT = INSERT.replace("?9", String.valueOf(impuesto));
+                                INSERT = INSERT.replace("?10", metodo_pago);
+                                //Llamamos al metodo que se encuentra en la clase conexión en el packete BaseDatos
+                                mConexion.ejecutarActualizacion(INSERT);
+                                JOptionPane.showMessageDialog(this, "guardado");
+                                //this.setVisible(false);
+                            } catch (Exception error) {
+                                JOptionPane.showMessageDialog(this, "Error de guardar en la base de datos");
+                                System.out.println(error.toString());
+                            }
+                            
+                        }
+                        
+                    } else {
+                        
+                        JOptionPane.showMessageDialog(null, "RFC NO ENCONTRADO");
+                    }
                 } catch (Exception error) {
                     JOptionPane.showMessageDialog(null, "Error No Puedes abrir ese archivo");
                 }
                 if (rfcr.toString() == "") {
                     JOptionPane.showMessageDialog(null, "ESTE NO ES UN ARCHIVO FACTURA NI RECIBO");
-
+                    
                 }
             }
-                //opa = JOptionPane.showConfirmDialog(rootPane, "Desea Cargar Otro Archivo?");
+            //opa = JOptionPane.showConfirmDialog(rootPane, "Desea Cargar Otro Archivo?");
 
             // } while ((opa != 1) && (opa != 2));
         } catch (Exception error) {
             JOptionPane.showMessageDialog(null, "Error No Puedes abrir ese archivo");
             //System.out.print(error.toString());
         }
-
+        
     }
-    private void BtnCargarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnCargarActionPerformed
-
+    
+    private void pestanaconsultaGainedFocus(java.awt.event.FocusEvent evt) {
+        
+    }
+    private void formWindowGainedFocus(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowGainedFocus
         // TODO add your handling code here:
-        if (entradafac == 0) {
-            Cargar();
-        } else if (entradafac > 0) {
-            int a = JOptionPane.showConfirmDialog(rootPane, "Seguro que quieres cargar otra factura o recibo?");
-            if (a == 0) {
-                Cargar();
-            }
+        try {
 
+//            this.cmbxMes.setEnabled(false);
+            //Conectamos con la base de datos
+            Conexion mConexion = new Conexion();
+            //mConexion.Conectar("localhost", "banco", "user_banco", "13-79");
+            mConexion.Conectar("localhost", "nose_prueba", "root", "nose");
+            //String impuestos = ("select SUM(Impuesto) as total from recibo_factura where fecha >= '?2-?1-01' and fecha <= '?2-?1-31';");
+            //Realizamos una consulta sobre las tablas
+            String consulta = "select * from recibo_factura";
+            ResultSet listaClientes = mConexion.ejecutarConsulta(consulta);
+            // System.out.println(listaClientes.getFloat("Importe"));
+
+            if (listaClientes != null) {
+                //Mostramos el resuultado en las tablas
+                Object[] encabezado = {"Folio", "Fecha", "Cantidad", "Tipo"};
+                DefaultTableModel modelo = new DefaultTableModel(null, encabezado);
+                //Recorremos cada registro de la lista de datos
+                while (listaClientes.next()) {
+                    Object[] actual = {
+                        listaClientes.getString("Folio"),
+                        listaClientes.getString("Fecha"),
+                        listaClientes.getString("Importe"),
+                        listaClientes.getString("Tipo")
+                    };
+                    modelo.addRow(actual);
+                }
+                this.TFacturasRecibos.setModel(modelo);
+            }
+        } catch (Exception error) {
+            System.out.println(error.toString());
+        }
+    }//GEN-LAST:event_formWindowGainedFocus
+
+    private void RBtnAnualMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_RBtnAnualMouseClicked
+        // TODO add your handling code here:
+        if (this.RBtnAnual.isSelected()) {
+            this.cmbxMes.setEnabled(false);
+            JOptionPane.showMessageDialog(null, "Anual");
+        }
+    }//GEN-LAST:event_RBtnAnualMouseClicked
+
+    private void RBtnMensualMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_RBtnMensualMouseClicked
+        // TODO add your handling code here:
+        if (this.RBtnMensual.isSelected()) {
+            this.cmbxMes.setEnabled(true);
+            JOptionPane.showMessageDialog(null, "Mensual");
+            
         }
 
-        entradafac = 1;
-    }//GEN-LAST:event_BtnCargarActionPerformed
+    }//GEN-LAST:event_RBtnMensualMouseClicked
 
-    private void BtnSalir1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnSalir1ActionPerformed
+    private void BtnSALIRActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnSALIRActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_BtnSalir1ActionPerformed
+        System.exit(0);
+    }//GEN-LAST:event_BtnSALIRActionPerformed
+
+    private void TXTanyoKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TXTanyoKeyTyped
+        // TODO add your handling code here:
+        char caracter = evt.getKeyChar();
+        if (((caracter < '0') || (caracter > '9')) && (caracter != KeyEvent.VK_BACK_SPACE)) {
+            evt.consume();
+            JOptionPane.showMessageDialog(rootPane, "Ingresar solo numeros");
+        }
+    }//GEN-LAST:event_TXTanyoKeyTyped
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         // TODO add your handling code here:
-                String d=jtxtdir.getText();
-       // String a=this.jtxtcont.getText();
-        try {
+        //String d = jtxtdir.getText();
+        if (RBtnMensual.isSelected()) {
+            //             } else if (this.RBtnAnual.isSelected()) {
+
+            this.cmbxMes.setEnabled(true);
+            
+            mes = (String) this.cmbxMes.getSelectedItem();
+
+            //this.jPanel1.add(imagen);
+            //this.jPanel1.repaint();
+            if (mes == "Enero") {
+                mes = String.valueOf("01");
+            } else if (mes == "Febrero") {
+                mes = String.valueOf("02");
+            } else if (mes == "Marzo") {
+                mes = String.valueOf("03");
+            } else if (mes == "Abril") {
+                mes = String.valueOf("04");
+            } else if (mes == "Mayo") {
+                mes = String.valueOf("05");
+            } else if (mes == "Junio") {
+                mes = String.valueOf("06");
+            } else if (mes == "Julio") {
+                mes = String.valueOf("07");
+            } else if (mes == "Agosto") {
+                mes = String.valueOf("08");
+            } else if (mes == "Septiembre") {
+                mes = String.valueOf("09");
+            } else if (mes == "Octubre") {
+                mes = String.valueOf("10");
+            } else if (mes == "Noviembre") {
+                mes = String.valueOf("11");
+            } else if (mes == "Diciembre") {
+                mes = String.valueOf("12");
+            }
+            
+            if ((this.TXTanyo.getText().equals(""))) {
+                JOptionPane.showMessageDialog(null, "Campos Vacios");
+            } else if (((Integer.parseInt(this.TXTanyo.getText())) > Calendario.getWeekYear()) && ((Integer.parseInt(mes) > Calendario.get(Calendar.MONTH)))) {
+                JOptionPane.showMessageDialog(null, "Verifica tu fecha");
+            } else if (((Integer.parseInt(this.TXTanyo.getText())) == Calendario.getWeekYear()) && ((Integer.parseInt(mes) > Calendario.get(Calendar.MONTH)))) {
+                JOptionPane.showMessageDialog(null, " Upss Verifica tu mes");
+            } else if (((Integer.parseInt(this.TXTanyo.getText())) < Calendario.getWeekYear())) {
+                
+                System.out.println(mes);
+                anyo = this.TXTanyo.getText();
+                mCalculos = new Calculos();
+                result = mCalculos.ImpuestosMensuales(mes, anyo);
+                result2 = mCalculos.ImpuestosMensualesF(mes, anyo);
+                
+                if ((result == 0) && (result2 == 0)) {
+                    JOptionPane.showMessageDialog(null, "no existen facturas ni recibos en esta fecha");
+                } else {
+                    
+                    this.Lblimpuesto.setText(String.valueOf(result + result2));
+                    
+                    Ganacias = mCalculos.CalcularGananciasPerdidasMensuales();
+                    if (Ganacias > 0) {
+                        this.Lblganancias.setText(String.valueOf(Ganacias));
+                        this.LblPerdidas.setText("0");
+                        this.Ganancia = Ganacias;
+                        this.Perdida = 0;
+                        
+                    } else if (Ganacias < 0) {
+                        this.Lblganancias.setText("0");
+                        this.LblPerdidas.setText(String.valueOf(Ganacias));
+                        this.Perdida = Ganacias;
+                        this.Ganacias = 0;
+                        
+                    }
+                    System.out.println(result);
+                    Fecha = anyo + "-" + mes + "-" + "01";
+                    System.out.println(Fecha);
+                    System.out.println(Ganacias);
+                    System.out.println(Perdida);
+                    
+                    try {
+                        //Conectamos con la base de datos
+
+                        Conexion mConexion = new Conexion();
+                        mConexion.Conectar("localhost", "nose_prueba", "root", "nose");
+                        //Formamos una instruccion DML -INSERT
+                        String INSERT = "insert into resultados values (?1,'?2','?3','?4','?5','?6')";
+                        INSERT = INSERT.replace("?1", String.valueOf("null"));
+                        INSERT = INSERT.replace("?2", String.valueOf(result));
+                        INSERT = INSERT.replace("?3", String.valueOf(Ganacias));
+                        INSERT = INSERT.replace("?4", String.valueOf(Perdida));
+                        INSERT = INSERT.replace("?5", "0");//Esto ya no va
+                        INSERT = INSERT.replace("?6", Fecha);
+                        System.out.println(INSERT);
+                        //Llamamos al metodo que se encuentra en la clase conexión en el packete BaseDatos
+                        mConexion.ejecutarActualizacion(INSERT);
+                        JOptionPane.showMessageDialog(this, "guardado");
+                        //            this.setVisible(false);
+
+                    } catch (Exception error) {
+                        JOptionPane.showMessageDialog(this, "Error de guardar en la base de datos puede ser que ya se aya guardado en la base de datos");
+                        System.out.println(error.toString());
+                    }
+                    // String a=this.jtxtcont.getText();
+                    try {
+                        JOptionPane.showMessageDialog(this, "Selecciona La Ruta En Donde Se Guardará El Reporte");
+                        
+                        JFileChooser dlg = new JFileChooser();
+                        int option = dlg.showSaveDialog(this);
+                        Image imagen = Image.getInstance("C:\\Users\\Acer\\Documents\\Septimo Semestre\\Nacho-Scrum\\Pruebas_Nose\\PruebasN\\Nose\\src\\IMG-20171104-WA0004.jpg");
+                        imagen.setAbsolutePosition(400f, 650f);
+                        imagen.scalePercent(30f);
+                        imagen.setAlignment(Element.ALIGN_RIGHT);
+                        
+                        if (option == JFileChooser.APPROVE_OPTION) {
+                            
+                            File f = dlg.getSelectedFile();
+                            f1 = f.toString();
+                            this.jtxtdir.setText(f1);
+                            
+                        }
+                        String a = "Reporte del mes de " + this.cmbxMes.getSelectedItem().toString() + " " + this.TXTanyo.getText() + "\n" + "Impuestos mensuales: " + this.Lblimpuesto.getText() + "\n Ganancias Mensuales: " + this.Lblganancias.getText() + "\n Pedidas Mensuales: " + this.LblPerdidas.getText();
+                        FileOutputStream archivo = new FileOutputStream(f1 + ".pdf");
+                        Document doc = new Document();
+                        PdfWriter.getInstance(doc, archivo);
+                        doc.open();
+                        Font fuente = new Font();
+                        fuente.setSize(18);
+                        fuente.setFamily(FontFamily.TIMES_ROMAN.toString());
+                        doc.add(imagen);
+                        doc.add(new Paragraph(a, fuente));
+                        doc.close();
+                        //   JOptionPane.showMessageDialog(null, "Documento creado con exito");
+                    } catch (Exception e) {
+                        JOptionPane.showMessageDialog(null, "error" + e);
+                    }
+                }
+                
+            } else if (((Integer.parseInt(this.TXTanyo.getText())) == Calendario.getWeekYear()) && ((Integer.parseInt(mes) <= Calendario.get(Calendar.MONTH)))) {
+                
+                System.out.println(mes);
+                anyo = this.TXTanyo.getText();
+                mCalculos = new Calculos();
+                result = mCalculos.ImpuestosMensuales(mes, anyo);
+                if (result == 0) {
+                    JOptionPane.showMessageDialog(null, "No existen facturas ni recibos en esta fecha");
+                } else {
+                    
+                    this.Lblimpuesto.setText(String.valueOf(result));
+                    Ganacias = mCalculos.CalcularGananciasPerdidasMensuales();
+                    if (Ganacias > 0) {
+                        
+                        this.Lblganancias.setText("0");
+                        this.LblPerdidas.setText(String.valueOf(Ganacias));
+                        this.Perdida = Ganacias;
+                        this.Ganacias = 0;
+                        
+                    } else if (Ganacias < 0) {
+                        this.Lblganancias.setText(String.valueOf(Ganacias));
+                        this.LblPerdidas.setText("0");
+                        this.Ganancia = Ganacias;
+                        this.Perdida = 0;
+                        
+                    }
+                    System.out.println(result);
+                    Fecha = anyo + "-" + mes + "-" + "01";
+                    System.out.println(Fecha);
+                    System.out.println(Ganacias);
+                    System.out.println(Perdida);
+                    
+                    try {
+                        //Conectamos con la base de datos
+
+                        Conexion mConexion = new Conexion();
+                        mConexion.Conectar("localhost", "nose_prueba", "root", "nose");
+                        //Formamos una instruccion DML -INSERT
+                        String INSERT = "insert into resultados values (?1,'?2','?3','?4','?5','?6')";
+                        INSERT = INSERT.replace("?1", String.valueOf("null"));
+                        INSERT = INSERT.replace("?2", String.valueOf(result));
+                        INSERT = INSERT.replace("?3", String.valueOf(Ganacias));
+                        INSERT = INSERT.replace("?4", String.valueOf(Perdida));
+                        INSERT = INSERT.replace("?5", "0");//esto ya no va
+                        INSERT = INSERT.replace("?6", Fecha);
+                        System.out.println(INSERT);
+                        //Llamamos al metodo que se encuentra en la clase conexión en el packete BaseDatos
+                        mConexion.ejecutarActualizacion(INSERT);
+                        JOptionPane.showMessageDialog(this, "guardado");
+                        //            this.setVisible(false);
+
+                    } catch (Exception error) {
+                        JOptionPane.showMessageDialog(this, "No Se Guardo En La BD Pues Ya Esta Guardado");
+                        System.out.println(error.toString());
+                    }
+                    // String a=this.jtxtcont.getText();
+                    try {
+                        JOptionPane.showMessageDialog(this, "Selecciona La Ruta En Donde Se Guardará El Reporte");
+                        
+                        JFileChooser dlg = new JFileChooser();
+                        int option = dlg.showSaveDialog(this);
+                        Image imagen = Image.getInstance("C:\\Users\\Acer\\Documents\\Septimo Semestre\\Nacho-Scrum\\Pruebas_Nose\\PruebasN\\Nose\\src\\IMG-20171104-WA0004.jpg");
+                        imagen.setAbsolutePosition(400f, 650f);
+                        imagen.scalePercent(30f);
+                        imagen.setAlignment(Element.ALIGN_RIGHT);
+                        
+                        if (option == JFileChooser.APPROVE_OPTION) {
+                            
+                            File f = dlg.getSelectedFile();
+                            f1 = f.toString();
+                            this.jtxtdir.setText(f1);
+                            
+                        }
+                        String a = "Reporte del mes de " + this.cmbxMes.getSelectedItem().toString() + " " + this.TXTanyo.getText() + "\n" + "Impuestos mensuales: " + this.Lblimpuesto.getText() + "\n Ganancias Mensuales: " + this.Lblganancias.getText() + "\n Pedidas Mensuales: " + this.LblPerdidas.getText();
+                        FileOutputStream archivo = new FileOutputStream(f1 + ".pdf");
+                        Document doc = new Document();
+                        PdfWriter.getInstance(doc, archivo);
+                        
+                        doc.open();
+                        
+                        Font fuente = new Font();
+                        fuente.setSize(18);
+                        fuente.setFamily(FontFamily.TIMES_ROMAN.toString());
+                        doc.add(imagen);
+                        doc.add(new Paragraph(a, fuente));
+                        doc.close();
+                        //   JOptionPane.showMessageDialog(null, "Documento creado con exito");
+                    } catch (Exception e) {
+                        JOptionPane.showMessageDialog(null, "error" + e);
+                    }
+                    
+                }
+                System.out.println(mes);
+                anyo = this.TXTanyo.getText();
+                mCalculos = new Calculos();
+                result = mCalculos.ImpuestosMensuales(mes, anyo);
+                result2 = mCalculos.ImpuestosMensualesF(mes, anyo);
+                
+                if ((result == 0) && (result2 == 0)) {
+                    JOptionPane.showMessageDialog(null, "no existen facturas ni recibos en esta fecha");
+                } else {
+                    
+                    this.Lblimpuesto.setText(String.valueOf(result + result2));
+                    
+                    Ganacias = mCalculos.CalcularGananciasPerdidasMensuales();
+                    if (Ganacias > 0) {
+                        
+                        this.Lblganancias.setText("0");
+                        this.LblPerdidas.setText(String.valueOf(Ganacias));
+                        this.Perdida = Ganacias;
+                        this.Ganacias = 0;
+                        
+                    } else if (Ganacias < 0) {
+                        
+                        this.Lblganancias.setText(String.valueOf(Ganacias));
+                        this.LblPerdidas.setText("0");
+                        this.Ganancia = Ganacias;
+                        this.Perdida = 0;
+                        
+                    }
+                    System.out.println(result);
+                    Fecha = anyo + "-" + mes + "-" + "01";
+                    System.out.println(Fecha);
+                    System.out.println(Ganacias);
+                    System.out.println(Perdida);
+                    
+                    try {
+                        //Conectamos con la base de datos
+
+                        Conexion mConexion = new Conexion();
+                        mConexion.Conectar("localhost", "nose_prueba", "root", "nose");
+                        //Formamos una instruccion DML -INSERT
+                        String INSERT = "insert into resultados values (?1,'?2','?3','?4','?5','?6')";
+                        INSERT = INSERT.replace("?1", String.valueOf("null"));
+                        INSERT = INSERT.replace("?2", String.valueOf(result));
+                        INSERT = INSERT.replace("?3", String.valueOf(Ganacias));
+                        INSERT = INSERT.replace("?4", String.valueOf(Perdida));
+                        INSERT = INSERT.replace("?5", "0");
+                        INSERT = INSERT.replace("?6", Fecha);
+                        System.out.println(INSERT);
+                        //Llamamos al metodo que se encuentra en la clase conexión en el packete BaseDatos
+                        mConexion.ejecutarActualizacion(INSERT);
+                        JOptionPane.showMessageDialog(this, "guardado");
+                        //            this.setVisible(false);
+
+                    } catch (Exception error) {
+                        JOptionPane.showMessageDialog(this, "Error de guardar en la base de datos puede ser que ya se aya guardado en la base de datos");
+                        System.out.println(error.toString());
+                    }
+                    // String a=this.jtxtcont.getText();
+                    try {
+                        JOptionPane.showMessageDialog(this, "Selecciona La Ruta En Donde Se Guardará El Reporte");
+                        
+                        JFileChooser dlg = new JFileChooser();
+                        int option = dlg.showSaveDialog(this);
+                        Image imagen = Image.getInstance("C:\\Users\\Acer\\Documents\\Septimo Semestre\\Nacho-Scrum\\Pruebas_Nose\\PruebasN\\Nose\\src\\IMG-20171104-WA0004.jpg");
+                        imagen.setAbsolutePosition(400f, 650f);
+                        imagen.scalePercent(30f);
+                        imagen.setAlignment(Element.ALIGN_RIGHT);
+                        
+                        if (option == JFileChooser.APPROVE_OPTION) {
+                            
+                            File f = dlg.getSelectedFile();
+                            f1 = f.toString();
+                            this.jtxtdir.setText(f1);
+                            
+                        }
+                        String a = "Reporte del mes de " + this.cmbxMes.getSelectedItem().toString() + " " + this.TXTanyo.getText() + "\n" + "Impuestos mensuales: " + this.Lblimpuesto.getText() + "\n Ganancias Mensuales: " + this.Lblganancias.getText() + "\n Pedidas Mensuales: " + this.LblPerdidas.getText();
+                        FileOutputStream archivo = new FileOutputStream(f1 + ".pdf");
+                        Document doc = new Document();
+                        PdfWriter.getInstance(doc, archivo);
+                        doc.open();
+                        Font fuente = new Font();
+                        fuente.setSize(18);
+                        fuente.setFamily(FontFamily.TIMES_ROMAN.toString());
+                        doc.add(imagen);
+                        doc.add(new Paragraph(a, fuente));
+                        doc.close();
+                        //   JOptionPane.showMessageDialog(null, "Documento creado con exito");
+                    } catch (Exception e) {
+                        JOptionPane.showMessageDialog(null, "error" + e);
+                    }
+                }
+            }
+        } else if (this.RBtnAnual.isSelected()) {
+            if ((this.TXTanyo.getText().equals("")) || ((Integer.parseInt(this.TXTanyo.getText())) > Calendario.getWeekYear())) {
+                JOptionPane.showMessageDialog(null, "Error");
+            } else {
+                anyo = this.TXTanyo.getText();
+                this.Ganancia = mCalculos.GananciasAnuales(anyo);
+                this.Perdida = mCalculos.PerdidasAnuales(anyo);
+                this.impuesto = mCalculos.ImpuestosAnuales(anyo);
+                
+                this.Lblganancias.setText(String.valueOf(Ganancia));
+                this.LblPerdidas.setText(String.valueOf(Perdida));
+                this.Lblimpuesto.setText(String.valueOf(impuesto));
+                
+                try {
+                    JOptionPane.showMessageDialog(this, "Selecciona La Ruta En Donde Se Guardará El Reporte");
+                    
                     JFileChooser dlg = new JFileChooser();
-        int option = dlg.showSaveDialog(this);
-
-        if (option == JFileChooser.APPROVE_OPTION) {
-
-            File f = dlg.getSelectedFile();
-            String f1 = f.toString();
-            this.jtxtdir.setText(f1);
+                    int option = dlg.showSaveDialog(this);
+                    Image imagen = Image.getInstance("C:\\Users\\Acer\\Documents\\Septimo Semestre\\Nacho-Scrum\\Pruebas_Nose\\PruebasN\\Nose\\src\\IMG-20171104-WA0004.jpg");
+                    imagen.setAbsolutePosition(400f, 650f);
+                    imagen.scalePercent(30f);
+                    imagen.setAlignment(Element.ALIGN_RIGHT);
+                    
+                    if (option == JFileChooser.APPROVE_OPTION) {
+                        
+                        File f = dlg.getSelectedFile();
+                        f1 = f.toString();
+                        this.jtxtdir.setText(f1);
+                        
+                    }
+                    String a = "Reporte del año" + this.TXTanyo.getText() + "\n" + "Impuestos mensuales: " + this.Lblimpuesto.getText() + "\n Ganancias Mensuales: " + this.Lblganancias.getText() + "\n Pedidas Mensuales: " + this.LblPerdidas.getText();
+                    FileOutputStream archivo = new FileOutputStream(f1 + ".pdf");
+                    Document doc = new Document();
+                    PdfWriter.getInstance(doc, archivo);
+                    doc.open();
+                    Font fuente = new Font();
+                    fuente.setSize(18);
+                    fuente.setFamily(FontFamily.TIMES_ROMAN.toString());
+                    doc.add(imagen);
+                    doc.add(new Paragraph(a, fuente));
+                    doc.close();
+                    //   JOptionPane.showMessageDialog(null, "Documento creado con exito");
+                } catch (Exception e) {
+                    JOptionPane.showMessageDialog(null, "error" + e);
+                }
+                
+                JOptionPane.showMessageDialog(null, "Reporte Anual");
+            }
+            
+        } else {
+            JOptionPane.showMessageDialog(null, "Porfavor seleccione si el reporte es Mensual ó Anual");
         }
-String a="esta variable contiene este texto que se metera al documento pdf "+this.getName();
-            FileOutputStream archivo=  new FileOutputStream(d+".pdf");
-            Document doc= new Document();
-            PdfWriter.getInstance(doc, archivo);
-            doc.open();
-            doc.add(new Paragraph(a));
-            doc.close();
-            JOptionPane.showMessageDialog(null, "Documento creado con exito");
-        } catch (Exception e) {
-        JOptionPane.showMessageDialog(null,"error"+e);
-        }
+
     }//GEN-LAST:event_jButton1ActionPerformed
+
+    private void pestanaconsultaFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_pestanaconsultaFocusGained
+        // TODO add your handling code here:
+    }//GEN-LAST:event_pestanaconsultaFocusGained
+
+    private void TxtBuscarKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TxtBuscarKeyTyped
+        // TODO add your handling code here:
+
+        TxtBuscar.addKeyListener(new KeyAdapter() {
+            public void keyReleased(final KeyEvent e) {
+                String cadena = (TxtBuscar.getText());
+                TxtBuscar.setText(cadena);
+                repaint();
+                
+            }
+        });
+        trsFiltro = new TableRowSorter(this.TFacturasRecibos.getModel());
+        TFacturasRecibos.setRowSorter(trsFiltro);
+        trsFiltro.setRowFilter(RowFilter.regexFilter(TxtBuscar.getText(), 1));
+    }//GEN-LAST:event_TxtBuscarKeyTyped
+
+    private void BtnSalirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnSalirActionPerformed
+        // TODO add your handling code here:
+        System.exit(1);
+    }//GEN-LAST:event_BtnSalirActionPerformed
+
+    private void BtnSalir1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnSalir1ActionPerformed
+        // TODO add your handling code here:
+        System.exit(0);
+    }//GEN-LAST:event_BtnSalir1ActionPerformed
+
+    private void BtnCargarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnCargarActionPerformed
+
+        // TODO add your handling code here:
+        if (this.Lblactivo.getText().equals("")) {
+            
+            rfcactivo = JOptionPane.showInputDialog(null, "Favor De Ingresar Tu RFC");
+            this.Lblactivo.setText(rfcactivo);
+        } else {
+            
+            if (entradafac == 0) {
+                Cargar();
+            } else if (entradafac > 0) {
+                int a = JOptionPane.showConfirmDialog(rootPane, "Seguro que quieres cargar otra factura o recibo?");
+                if (a == 0) {
+                    Cargar();
+                }
+                
+            }
+            entradafac = 1;
+        }
+    }//GEN-LAST:event_BtnCargarActionPerformed
+
+    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+
+        // TODO add your handling code here:
+        if (this.RBEditar.isSelected()) {
+            
+            if (this.TxtRfcactivo.getText().equals("")) {
+                JOptionPane.showMessageDialog(null, "No Ingresaste nada");
+                
+            } else {
+                int a = JOptionPane.showConfirmDialog(rootPane, "Estas Seguro Que Tu Rfc Es Correcto (Esto puede generar que no se realizen los calculos si esta incorrecto tu rfc)");
+                if (a == 0) {
+                    
+                    this.Lblactivo.setText(this.TxtRfcactivo.getText());
+                    
+                }
+            }
+            
+        }else if(this.RBEditar.isEnabled()){
+        
+                        JOptionPane.showMessageDialog(null, "Favor De Palomear El Activo");
+
+        
+        
+        }
+        
+
+    }//GEN-LAST:event_jButton2ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -623,16 +1411,21 @@ String a="esta variable contiene este texto que se metera al documento pdf "+thi
                 if ("Nimbus".equals(info.getName())) {
                     javax.swing.UIManager.setLookAndFeel(info.getClassName());
                     break;
+                    
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(FrmInterfaz1.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(FrmInterfaz1.class
+                    .getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(FrmInterfaz1.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(FrmInterfaz1.class
+                    .getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(FrmInterfaz1.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(FrmInterfaz1.class
+                    .getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(FrmInterfaz1.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(FrmInterfaz1.class
+                    .getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
         //</editor-fold>
 
@@ -646,32 +1439,43 @@ String a="esta variable contiene este texto que se metera al documento pdf "+thi
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton BtnCargar;
+    private javax.swing.JPanel BtnModificar;
+    private javax.swing.JButton BtnSALIR;
     private javax.swing.JButton BtnSalir;
     private javax.swing.JButton BtnSalir1;
-    private javax.swing.JLabel Lbl2;
-    private javax.swing.JLabel Lbl3;
-    private javax.swing.JLabel Lbl4;
-    private javax.swing.JLabel LblFecha;
-    private javax.swing.JLabel LblNombree;
-    private javax.swing.JLabel LblNombrer;
+    private javax.swing.JLabel Lbl5;
+    private javax.swing.JLabel Lbl6;
+    private javax.swing.JLabel Lbl7;
+    private javax.swing.JLabel LblFecha1;
+    private javax.swing.JLabel LblImagen1;
+    private javax.swing.JLabel LblImagen2;
+    private javax.swing.JLabel LblImagen3;
+    private javax.swing.JLabel LblNombree1;
+    private javax.swing.JLabel LblNombrer1;
     private javax.swing.JLabel LblPerdidas;
-    private javax.swing.JLabel LblRFCE;
-    private javax.swing.JLabel LblRFCR;
-    private javax.swing.JLabel LblTipo;
+    private javax.swing.JLabel LblRFCE1;
+    private javax.swing.JLabel LblRFCR1;
+    private javax.swing.JLabel LblTipo1;
+    private javax.swing.JLabel Lblactivo;
     private javax.swing.JLabel Lblganancias;
     private javax.swing.JLabel Lblimpuesto;
-    private javax.swing.JLabel Lblutilidadbruta;
     private javax.swing.JPanel PestanaLeerarchivo;
-    private javax.swing.JTextField TXTSueldo;
+    private javax.swing.JRadioButton RBCombustible;
+    private javax.swing.JRadioButton RBEditar;
+    private javax.swing.JRadioButton RBtnAnual;
+    private javax.swing.JRadioButton RBtnMensual;
+    private javax.swing.JTable TFacturasRecibos;
     private javax.swing.JTextField TXTanyo;
-    private javax.swing.JTextField TxtRFC;
+    private javax.swing.ButtonGroup TipoReporte;
+    private javax.swing.JTextField TxtBuscar;
+    private javax.swing.JTextField TxtRfcactivo;
     private javax.swing.JComboBox cmbxMes;
-    private javax.swing.JComboBox cmbxTipoDeReporte1;
     private javax.swing.JButton jButton1;
-    private javax.swing.JLabel jLabel10;
+    private javax.swing.JButton jButton2;
+    private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel11;
     private javax.swing.JLabel jLabel12;
-    private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel13;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
@@ -679,6 +1483,8 @@ String a="esta variable contiene este texto que se metera al documento pdf "+thi
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLabel9;
+    private javax.swing.JLayeredPane jLayeredPane1;
+    private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTabbedPane jTabbedPane1;
     private javax.swing.JLabel jtxtdir;
     private javax.swing.JPanel pestanaGenerarreporte;
