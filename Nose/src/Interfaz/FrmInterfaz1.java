@@ -715,9 +715,9 @@ public class FrmInterfaz1 extends javax.swing.JFrame {
                      try {
                      //Conectamos con la base de datos
                      Conexion mConexion = new Conexion();
-                     mConexion.Conectar("localhost", "nose_prueba", "root", "nose");
+                     mConexion.Conectar("localhost", "noseprueba", "root", "1234");
                      //Formamos una instruccion DML -INSERT
-                     String INSERT = "insert into recibo_factura values ('?1','?2','?3','?4','?5','?6','?7','?8')";
+                     String INSERT = "insert into Recibo_Factura values ('?1','?2','?3','?4','?5','?6','?7','?8')";
                      INSERT = INSERT.replace("?1", folio);
                      INSERT = INSERT.replace("?2", importe);
                      INSERT = INSERT.replace("?3", fecha);
@@ -749,9 +749,9 @@ public class FrmInterfaz1 extends javax.swing.JFrame {
                         try {
                             //Conectamos con la base de datos
                             Conexion mConexion = new Conexion();
-                            mConexion.Conectar("localhost", "nose_prueba", "root", "nose");
+                            mConexion.Conectar("localhost", "noseprueba", "root", "1234");
                             //Formamos una instruccion DML -INSERT
-                            String INSERT = "insert into recibo_factura values ('?1','?2','?3','?4','?5','?6','?7','?8','?9','?a')";
+                            String INSERT = "insert into Recibo_Factura values ('?1','?2','?3','?4','?5','?6','?7','?8','?9','?a')";
                             INSERT = INSERT.replace("?1", folio);
                             INSERT = INSERT.replace("?2", importe);
                             INSERT = INSERT.replace("?3", fecha);
@@ -786,9 +786,9 @@ public class FrmInterfaz1 extends javax.swing.JFrame {
                                 try {
                                     //Conectamos con la base de datos
                                     Conexion mConexion = new Conexion();
-                                    mConexion.Conectar("localhost", "nose_prueba", "root", "nose");
+                                    mConexion.Conectar("localhost", "noseprueba", "root", "1234");
                                     //Formamos una instruccion DML -INSERT
-                                    String INSERT = "insert into recibo_factura values ('?1','?2','?3','?4','?5','?6','?7','?8','?9','?10')";
+                                    String INSERT = "insert into Recibo_Factura values ('?1','?2','?3','?4','?5','?6','?7','?8','?9','?10')";
                                     INSERT = INSERT.replace("?1", folio);
                                     INSERT = INSERT.replace("?2", importe);
                                     INSERT = INSERT.replace("?3", fecha);
@@ -823,9 +823,9 @@ public class FrmInterfaz1 extends javax.swing.JFrame {
                                 try {
                                     //Conectamos con la base de datos
                                     Conexion mConexion = new Conexion();
-                                    mConexion.Conectar("localhost", "nose_prueba", "root", "nose");
+                                    mConexion.Conectar("localhost", "noseprueba", "root", "1234");
                                     //Formamos una instruccion DML -INSERT
-                                    String INSERT = "insert into recibo_factura values ('?1','?2','?3','?4','?5','?6','?7','?8','?9','?10')";
+                                    String INSERT = "insert into Recibo_Factura values ('?1','?2','?3','?4','?5','?6','?7','?8','?9','?10')";
                                     INSERT = INSERT.replace("?1", folio);
                                     INSERT = INSERT.replace("?2", importe);
                                     INSERT = INSERT.replace("?3", fecha);
@@ -862,9 +862,9 @@ public class FrmInterfaz1 extends javax.swing.JFrame {
                             try {
                                 //Conectamos con la base de datos
                                 Conexion mConexion = new Conexion();
-                                mConexion.Conectar("localhost", "nose_prueba", "root", "nose");
+                                mConexion.Conectar("localhost", "noseprueba", "root", "1234");
                                 //Formamos una instruccion DML -INSERT
-                                String INSERT = "insert into recibo_factura values ('?1','?2','?3','?4','?5','?6','?7','?8','?9','?10')";
+                                String INSERT = "insert into Recibo_Factura values ('?1','?2','?3','?4','?5','?6','?7','?8','?9','?10')";
                                 INSERT = INSERT.replace("?1", folio);
                                 INSERT = INSERT.replace("?2", importe);
                                 INSERT = INSERT.replace("?3", fecha);
@@ -915,10 +915,19 @@ public class FrmInterfaz1 extends javax.swing.JFrame {
     private void formWindowGainedFocus(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowGainedFocus
         // TODO add your handling code here:
         try {
+            if(this.RBtnMensual.isSelected()){
+            this.TXTanyo.setEnabled(false);
+               this.cmbxMes.setEnabled(true);
+               this.TXTanyo.setText("");
+            }else if(this.RBtnAnual.isSelected()){
+        this.cmbxMes.setEnabled(false);
+         this.TXTanyo.setEnabled(true);
+            
+            }
             //Conectamos con la base de datos
             Conexion mConexion = new Conexion();
-            mConexion.Conectar("localhost", "nose_prueba", "root", "nose");
-        //String impuestos = ("select SUM(Impuesto) as total from recibo_factura where fecha >= '?2-?1-01' and fecha <= '?2-?1-31';");
+            mConexion.Conectar("localhost", "noseprueba", "root", "1234");
+        //String impuestos = ("select SUM(Impuesto) as total from Recibo_Factura where fecha >= '?2-?1-01' and fecha <= '?2-?1-31';");
             //Realizamos una consulta sobre las tablas
             String consulta = "select RFC from Usuario where idUsuario=1;";
             ResultSet listausuario = mConexion.ejecutarConsulta(consulta);
@@ -946,10 +955,10 @@ public class FrmInterfaz1 extends javax.swing.JFrame {
             //Conectamos con la base de datos
             Conexion mConexion = new Conexion();
             //mConexion.Conectar("localhost", "banco", "user_banco", "13-79");
-            mConexion.Conectar("localhost", "nose_prueba", "root", "nose");
-            //String impuestos = ("select SUM(Impuesto) as total from recibo_factura where fecha >= '?2-?1-01' and fecha <= '?2-?1-31';");
+            mConexion.Conectar("localhost", "noseprueba", "root", "1234");
+            //String impuestos = ("select SUM(Impuesto) as total from Recibo_Factura where fecha >= '?2-?1-01' and fecha <= '?2-?1-31';");
             //Realizamos una consulta sobre las tablas
-            String consulta = "select * from recibo_factura where RFC_Receptor = '"+ this.rfcactivo +"' or RFC_Emisor = '"+ this.rfcactivo +"'; ";
+            String consulta = "select * from Recibo_Factura where RFC_Receptor = '"+ this.rfcactivo +"' or RFC_Emisor = '"+ this.rfcactivo +"'; ";
             ResultSet listaClientes = mConexion.ejecutarConsulta(consulta);
             // System.out.println(listaClientes.getFloat("Importe"));
 
@@ -979,8 +988,8 @@ public class FrmInterfaz1 extends javax.swing.JFrame {
         try {
             //Conectamos con la base de datos
             Conexion mConexion = new Conexion();
-            mConexion.Conectar("localhost", "nose_prueba", "root", "nose");
-        //String impuestos = ("select SUM(Impuesto) as total from recibo_factura where fecha >= '?2-?1-01' and fecha <= '?2-?1-31';");
+            mConexion.Conectar("localhost", "noseprueba", "root", "1234");
+        //String impuestos = ("select SUM(Impuesto) as total from Recibo_Factura where fecha >= '?2-?1-01' and fecha <= '?2-?1-31';");
             //Realizamos una consulta sobre las tablas
             String consulta = "select RFC from Usuario where idUsuario=1";
             ResultSet listausuario = mConexion.ejecutarConsulta(consulta);
@@ -1007,7 +1016,7 @@ public class FrmInterfaz1 extends javax.swing.JFrame {
 
             Conexion mConexion = new Conexion();
 
-            mConexion.Conectar("localhost", "nose_prueba", "root", "nose");
+            mConexion.Conectar("localhost", "noseprueba", "root", "1234");
 
             //Formamos una instruccion DML -INSERT
             String INSERT = "insert into Usuario values ('?1','?2')";
@@ -1028,7 +1037,7 @@ public class FrmInterfaz1 extends javax.swing.JFrame {
 
             Conexion mConexion = new Conexion();
             try {
-                mConexion.Conectar("localhost", "nose_prueba", "root", "nose");
+                mConexion.Conectar("localhost", "noseprueba", "root", "1234");
             } catch (Exception ex) {
                 Logger.getLogger(FrmInterfaz1.class.getName()).log(Level.SEVERE, null, ex);
             }
@@ -1087,7 +1096,7 @@ public class FrmInterfaz1 extends javax.swing.JFrame {
             //             } else if (this.RBtnAnual.isSelected()) {
 
             this.cmbxMes.setEnabled(true);
-
+            this.TXTanyo.setEnabled(false);
             mes = (String) this.cmbxMes.getSelectedItem();
 
             //this.jPanel1.add(imagen);
@@ -1162,7 +1171,7 @@ public class FrmInterfaz1 extends javax.swing.JFrame {
                         //Conectamos con la base de datos
 
                         Conexion mConexion = new Conexion();
-                        mConexion.Conectar("localhost", "nose_prueba", "root", "nose");
+                        mConexion.Conectar("localhost", "noseprueba", "root", "1234");
                         //Formamos una instruccion DML -INSERT
                         String INSERT = "insert into resultados values (?1,'?2','?3','?4','?5','?6')";
                         INSERT = INSERT.replace("?1", String.valueOf("null"));
@@ -1252,7 +1261,7 @@ public class FrmInterfaz1 extends javax.swing.JFrame {
                         //Conectamos con la base de datos
 
                         Conexion mConexion = new Conexion();
-                        mConexion.Conectar("localhost", "nose_prueba", "root", "nose");
+                        mConexion.Conectar("localhost", "noseprueba", "root", "1234");
                         //Formamos una instruccion DML -INSERT
                         String INSERT = "insert into resultados values (?1,'?2','?3','?4','?5','?6')";
                         INSERT = INSERT.replace("?1", String.valueOf("null"));
@@ -1346,7 +1355,7 @@ public class FrmInterfaz1 extends javax.swing.JFrame {
                         //Conectamos con la base de datos
 
                         Conexion mConexion = new Conexion();
-                        mConexion.Conectar("localhost", "nose_prueba", "root", "nose");
+                        mConexion.Conectar("localhost", "noseprueba", "root", "1234");
                         //Formamos una instruccion DML -INSERT
                         String INSERT = "insert into resultados values (?1,'?2','?3','?4','?5','?6')";
                         INSERT = INSERT.replace("?1", String.valueOf("null"));
@@ -1536,7 +1545,7 @@ public class FrmInterfaz1 extends javax.swing.JFrame {
 
         }
 
-
+        this.TxtRfcactivo.setText("");
     }//GEN-LAST:event_jButton2ActionPerformed
 
     private void TxtRfcactivoKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TxtRfcactivoKeyTyped
