@@ -125,10 +125,15 @@ public class FrmInterfaz1 extends javax.swing.JFrame {
         pestanaconsulta = new javax.swing.JPanel();
         BtnSalir = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
-        TFacturasRecibos = new javax.swing.JTable();
+        TFacturasRecibos = TFacturasRecibos = new javax.swing.JTable(){
+            public boolean isCellEditable(int rowIndex, int colIndex) {
+                return false; //Disallow the editing of any cell
+            }
+        };
         TxtBuscar = new javax.swing.JTextField();
         jLabel1 = new javax.swing.JLabel();
         LblImagen3 = new javax.swing.JLabel();
+        BtnEliminar = new javax.swing.JButton();
         pestanaGenerarreporte = new javax.swing.JPanel();
         jButton1 = new javax.swing.JButton();
         jLabel5 = new javax.swing.JLabel();
@@ -355,7 +360,6 @@ public class FrmInterfaz1 extends javax.swing.JFrame {
 
             }
         ));
-        TFacturasRecibos.setEnabled(false);
         jScrollPane1.setViewportView(TFacturasRecibos);
 
         TxtBuscar.addKeyListener(new java.awt.event.KeyAdapter() {
@@ -369,6 +373,14 @@ public class FrmInterfaz1 extends javax.swing.JFrame {
 
         LblImagen3.setBackground(new java.awt.Color(204, 204, 204));
 
+        BtnEliminar.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        BtnEliminar.setText("Eliminar");
+        BtnEliminar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                BtnEliminarActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout pestanaconsultaLayout = new javax.swing.GroupLayout(pestanaconsulta);
         pestanaconsulta.setLayout(pestanaconsultaLayout);
         pestanaconsultaLayout.setHorizontalGroup(
@@ -376,18 +388,20 @@ public class FrmInterfaz1 extends javax.swing.JFrame {
             .addGroup(pestanaconsultaLayout.createSequentialGroup()
                 .addGroup(pestanaconsultaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(pestanaconsultaLayout.createSequentialGroup()
-                        .addGap(20, 20, 20)
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 452, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(pestanaconsultaLayout.createSequentialGroup()
                         .addGap(35, 35, 35)
                         .addComponent(jLabel1)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(TxtBuscar, javax.swing.GroupLayout.PREFERRED_SIZE, 172, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(36, 36, 36)
-                        .addComponent(BtnSalir, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addGap(143, 143, 143)
+                        .addComponent(BtnSalir, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(pestanaconsultaLayout.createSequentialGroup()
+                        .addGap(20, 20, 20)
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 452, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addComponent(BtnEliminar)))
+                .addGap(52, 52, 52)
                 .addComponent(LblImagen3, javax.swing.GroupLayout.PREFERRED_SIZE, 277, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(955, Short.MAX_VALUE))
+                .addContainerGap(949, Short.MAX_VALUE))
         );
         pestanaconsultaLayout.setVerticalGroup(
             pestanaconsultaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -399,8 +413,13 @@ public class FrmInterfaz1 extends javax.swing.JFrame {
                             .addComponent(BtnSalir)
                             .addComponent(TxtBuscar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jLabel1))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 432, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGroup(pestanaconsultaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(pestanaconsultaLayout.createSequentialGroup()
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 432, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(pestanaconsultaLayout.createSequentialGroup()
+                                .addGap(47, 47, 47)
+                                .addComponent(BtnEliminar))))
                     .addGroup(pestanaconsultaLayout.createSequentialGroup()
                         .addGap(42, 42, 42)
                         .addComponent(LblImagen3, javax.swing.GroupLayout.PREFERRED_SIZE, 318, javax.swing.GroupLayout.PREFERRED_SIZE)))
@@ -927,6 +946,7 @@ public class FrmInterfaz1 extends javax.swing.JFrame {
     }
     private void formWindowGainedFocus(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowGainedFocus
         // TODO add your handling code here:
+
         try {
             if (this.RBtnMensual.isSelected()) {
                 this.TXTanyo.setEnabled(true);
@@ -1184,7 +1204,7 @@ public class FrmInterfaz1 extends javax.swing.JFrame {
                 } else if ((result == 0) && (result2 > 0)) {
                     JOptionPane.showMessageDialog(null, "No cuenta con recibos guardados favor de ingresarlos");
 
-                } else if ((result > 0) && (result2 > 0)) {
+                } else if (((result > 0) && (result2 > 0)) || (result > 0) && (result2 == 0)) {
 
                     this.Lblimpuesto.setText(String.valueOf(result + result2));
 
@@ -1301,7 +1321,7 @@ public class FrmInterfaz1 extends javax.swing.JFrame {
                 } else if ((result == 0) && (result2 > 0)) {
                     JOptionPane.showMessageDialog(null, "No cuenta con recibos guardados favor de ingresarlos");
 
-                } else if ((result > 0) && (result2 > 0)) {
+                } else if ((result > 0) && (result2 > 0) || (result > 0) && (result2 == 0)) {
 
                     this.Lblimpuesto.setText(String.valueOf(result + result2));
 
@@ -1425,7 +1445,7 @@ public class FrmInterfaz1 extends javax.swing.JFrame {
                     JOptionPane.showMessageDialog(null, "no existen facturas ni recibos en esta fecha");
                 } else if ((result == 0) && (result2 > 0)) {
                     JOptionPane.showMessageDialog(null, "No cuenta con recibos guardados favor de ingresarlos");
-                } else if ((result > 0) && (result2 > 0)) {
+                } else if (((result > 0) && (result2 > 0)) || (result > 0) && (result2 == 0)) {
 
                     this.Lblimpuesto.setText(String.valueOf(result + result2));
 
@@ -1627,6 +1647,33 @@ public class FrmInterfaz1 extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_TxtRfcactivoKeyReleased
 
+    private void BtnEliminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnEliminarActionPerformed
+        // TODO add your handling code here:
+        int fila = this.TFacturasRecibos.getSelectedRow();
+
+        if (fila >= 0) {
+
+            //Obtenemos el OID del producto
+            String OID = (String) this.TFacturasRecibos.getValueAt(fila, 0);
+            JOptionPane.showMessageDialog(null, OID);
+            try {
+
+                Conexion mConexion = new Conexion();
+                mConexion.Conectar("localhost", "nose_prueba", "root", "nose");
+                String consulta = " delete from recibo_factura where Folio = '?1';";
+                consulta = consulta.replace("?1", OID);
+                mConexion.ejecutarActualizacion(consulta);
+                JOptionPane.showMessageDialog(null, "Eliminado");
+
+            } catch (Exception error) {
+                JOptionPane.showMessageDialog(null, "Error al Eliminar Recibo o Factura");
+                System.out.println(error.toString());
+            }
+        } else {
+            JOptionPane.showMessageDialog(this, "Selecciona un producto");
+        }
+    }//GEN-LAST:event_BtnEliminarActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -1669,6 +1716,7 @@ public class FrmInterfaz1 extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton BtnCargar;
+    private javax.swing.JButton BtnEliminar;
     private javax.swing.JPanel BtnModificar;
     private javax.swing.JButton BtnSALIR;
     private javax.swing.JButton BtnSalir;
