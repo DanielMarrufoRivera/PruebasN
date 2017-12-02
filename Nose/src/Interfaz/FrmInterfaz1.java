@@ -80,7 +80,7 @@ public class FrmInterfaz1 extends javax.swing.JFrame {
         Perdida = 0;
         LblTipo1.setText("Nose~Cont");
         rfcr = "";
-        car=0;
+        car = 0;
         entradafac = 0;
         metodo_pago = "";
         ImageIcon imagen = new ImageIcon("src/IMG-20171104-WA0004.jpg");
@@ -767,7 +767,7 @@ public class FrmInterfaz1 extends javax.swing.JFrame {
                         try {
                             //Conectamos con la base de datos
                             Conexion mConexion = new Conexion();
-                            mConexion.Conectar("localhost", "nose_prueba", "root", "nose");
+                            mConexion.Conectar("localhost", "noseprueba", "root", "1234");
                             //Formamos una instruccion DML -INSERT
                             String INSERT = "insert into Recibo_Factura values (?b,'?1','?2','?3','?4','?5','?6','?7','?8','?9','?a')";
                             INSERT = INSERT.replace("?b", "null");
@@ -804,7 +804,7 @@ public class FrmInterfaz1 extends javax.swing.JFrame {
                                 try {
                                     //Conectamos con la base de datos
                                     Conexion mConexion = new Conexion();
-                                    mConexion.Conectar("localhost", "nose_prueba", "root", "nose");
+                                    mConexion.Conectar("localhost", "noseprueba", "root", "1234");
                                     //Formamos una instruccion DML -INSERT
                                     String INSERT = "insert into Recibo_Factura values (?b,'?1','?2','?3','?4','?5','?6','?7','?8','?9','?a')";
                                     INSERT = INSERT.replace("?b", "null");
@@ -842,7 +842,7 @@ public class FrmInterfaz1 extends javax.swing.JFrame {
                                 try {
                                     //Conectamos con la base de datos
                                     Conexion mConexion = new Conexion();
-                                    mConexion.Conectar("localhost", "nose_prueba", "root", "nose");
+                                    mConexion.Conectar("localhost", "noseprueba", "root", "1234");
                                     //Formamos una instruccion DML -INSERT
                                     String INSERT = "insert into Recibo_Factura values (?b,'?1','?2','?3','?4','?5','?6','?7','?8','?9','?a')";
                                     INSERT = INSERT.replace("?b", "null");
@@ -881,7 +881,7 @@ public class FrmInterfaz1 extends javax.swing.JFrame {
                             try {
                                 //Conectamos con la base de datos
                                 Conexion mConexion = new Conexion();
-                                mConexion.Conectar("localhost", "nose_prueba", "root", "nose");
+                                mConexion.Conectar("localhost", "noseprueba", "root", "1234");
                                 //Formamos una instruccion DML -INSERT
                                 String INSERT = "insert into Recibo_Factura values (?b,'?1','?2','?3','?4','?5','?6','?7','?8','?9','?a')";
                                 INSERT = INSERT.replace("?b", "null");
@@ -954,7 +954,7 @@ public class FrmInterfaz1 extends javax.swing.JFrame {
             }
             //Conectamos con la base de datos
             Conexion mConexion = new Conexion();
-            mConexion.Conectar("localhost", "nose_prueba", "root", "nose");
+            mConexion.Conectar("localhost", "noseprueba", "root", "1234");
             //String impuestos = ("select SUM(Impuesto) as total from Recibo_Factura where fecha >= '?2-?1-01' and fecha <= '?2-?1-31';");
             //Realizamos una consulta sobre las tablas
             String consulta = "select RFC from Usuario where idUsuario=1;";
@@ -991,24 +991,23 @@ public class FrmInterfaz1 extends javax.swing.JFrame {
             }
         }
 
-       this.CargarTabla(TFacturasRecibos, "");
+        this.CargarTabla(TFacturasRecibos, "");
     }//GEN-LAST:event_formWindowGainedFocus
 
-    public void CargarTabla(JTable tabla , String Cadena){
+    public void CargarTabla(JTable tabla, String Cadena) {
         try {
-
 
             //Conectamos con la base de datos
             Conexion mConexion = new Conexion();
             //mConexion.Conectar("localhost", "banco", "user_banco", "13-79");
-            mConexion.Conectar("localhost", "nose_prueba", "root", "nose");
+            mConexion.Conectar("localhost", "noseprueba", "root", "1234");
             //Realizamos una consulta sobre las tablas
             String consulta = "select * from Recibo_Factura where RFC_Receptor = '" + this.rfcactivo + "' or RFC_Emisor = '" + this.rfcactivo + "'; ";
             ResultSet listaClientes = mConexion.ejecutarConsulta(consulta);
 
             if (listaClientes != null) {
                 //Mostramos el resuultado en las tablas
-                Object[] encabezado = {"ID","Folio", "Fecha", "Cantidad", "Tipo"};
+                Object[] encabezado = {"ID", "Folio", "Fecha", "Cantidad", "Tipo"};
                 DefaultTableModel modelo = new DefaultTableModel(null, encabezado);
                 //Recorremos cada registro de la lista de datos
                 while (listaClientes.next()) {
@@ -1025,14 +1024,15 @@ public class FrmInterfaz1 extends javax.swing.JFrame {
             }
         } catch (Exception error) {
             System.out.println(error.toString());
-        } 
+        }
     }
+
     public void consultar() throws Exception {
 
         try {
             //Conectamos con la base de datos
             Conexion mConexion = new Conexion();
-            mConexion.Conectar("localhost", "nose_prueba", "root", "nose");
+            mConexion.Conectar("localhost", "noseprueba", "root", "1234");
             //String impuestos = ("select SUM(Impuesto) as total from Recibo_Factura where fecha >= '?2-?1-01' and fecha <= '?2-?1-31';");
             //Realizamos una consulta sobre las tablas
             String consulta = "select RFC from Usuario where idUsuario=1";
@@ -1060,7 +1060,7 @@ public class FrmInterfaz1 extends javax.swing.JFrame {
 
             Conexion mConexion = new Conexion();
 
-            mConexion.Conectar("localhost", "nose_prueba", "root", "nose");
+            mConexion.Conectar("localhost", "noseprueba", "root", "1234");
 
             //Formamos una instruccion DML -INSERT
             String INSERT = "insert into Usuario values ('?1','?2')";
@@ -1081,7 +1081,7 @@ public class FrmInterfaz1 extends javax.swing.JFrame {
 
             Conexion mConexion = new Conexion();
             try {
-                mConexion.Conectar("localhost", "nose_prueba", "root", "nose");
+                mConexion.Conectar("localhost", "noseprueba", "root", "1234");
             } catch (Exception ex) {
                 Logger.getLogger(FrmInterfaz1.class.getName()).log(Level.SEVERE, null, ex);
             }
@@ -1216,7 +1216,7 @@ public class FrmInterfaz1 extends javax.swing.JFrame {
                         //Conectamos con la base de datos
 
                         Conexion mConexion = new Conexion();
-                        mConexion.Conectar("localhost", "nose_prueba", "root", "nose");
+                        mConexion.Conectar("localhost", "noseprueba", "root", "1234");
                         //Formamos una instruccion DML -INSERT
                         String INSERT = "insert into Resultados values (?1,'?2','?3','?4','?5','?6')";
                         INSERT = INSERT.replace("?1", String.valueOf("null"));
@@ -1238,7 +1238,7 @@ public class FrmInterfaz1 extends javax.swing.JFrame {
                         try {
                             Conexion mConexion = new Conexion();
                             try {
-                                mConexion.Conectar("localhost", "nose_prueba", "root", "nose");
+                                mConexion.Conectar("localhost", "noseprueba", "root", "1234");
                             } catch (Exception ex) {
                                 Logger.getLogger(FrmInterfaz1.class.getName()).log(Level.SEVERE, null, ex);
                             }
@@ -1320,7 +1320,7 @@ public class FrmInterfaz1 extends javax.swing.JFrame {
                         //Conectamos con la base de datos
 
                         Conexion mConexion = new Conexion();
-                        mConexion.Conectar("localhost", "nose_prueba", "root", "nose");
+                        mConexion.Conectar("localhost", "noseprueba", "root", "1234");
                         //Formamos una instruccion DML -INSERT
                         String INSERT = "insert into Resultados values (?1,'?2','?3','?4','?5','?6')";
                         INSERT = INSERT.replace("?1", String.valueOf("null"));
@@ -1342,7 +1342,7 @@ public class FrmInterfaz1 extends javax.swing.JFrame {
                         try {
                             Conexion mConexion = new Conexion();
                             try {
-                                mConexion.Conectar("localhost", "nose_prueba", "root", "nose");
+                                mConexion.Conectar("localhost", "noseprueba", "root", "1234");
                             } catch (Exception ex) {
                                 Logger.getLogger(FrmInterfaz1.class.getName()).log(Level.SEVERE, null, ex);
                             }
@@ -1423,7 +1423,7 @@ public class FrmInterfaz1 extends javax.swing.JFrame {
                         //Conectamos con la base de datos
 
                         Conexion mConexion = new Conexion();
-                        mConexion.Conectar("localhost", "nose_prueba", "root", "nose");
+                        mConexion.Conectar("localhost", "noseprueba", "root", "1234");
                         //Formamos una instruccion DML -INSERT
                         String INSERT = "insert into Resultados values (?1,'?2','?3','?4','?5','?6')";
                         INSERT = INSERT.replace("?1", String.valueOf("null"));
@@ -1445,7 +1445,7 @@ public class FrmInterfaz1 extends javax.swing.JFrame {
                         try {
                             Conexion mConexion = new Conexion();
                             try {
-                                mConexion.Conectar("localhost", "nose_prueba", "root", "nose");
+                                mConexion.Conectar("localhost", "noseprueba", "root", "1234");
                             } catch (Exception ex) {
                                 Logger.getLogger(FrmInterfaz1.class.getName()).log(Level.SEVERE, null, ex);
                             }
@@ -1538,7 +1538,7 @@ public class FrmInterfaz1 extends javax.swing.JFrame {
                         //Conectamos con la base de datos
 
                         Conexion mConexion = new Conexion();
-                        mConexion.Conectar("localhost", "nose_prueba", "root", "nose");
+                        mConexion.Conectar("localhost", "noseprueba", "root", "1234");
                         //Formamos una instruccion DML -INSERT
                         String INSERT = "insert into Resultados values (?1,'?2','?3','?4','?5','?6')";
                         INSERT = INSERT.replace("?1", String.valueOf("null"));
@@ -1560,7 +1560,7 @@ public class FrmInterfaz1 extends javax.swing.JFrame {
                         try {
                             Conexion mConexion = new Conexion();
                             try {
-                                mConexion.Conectar("localhost", "nose_prueba", "root", "nose");
+                                mConexion.Conectar("localhost", "noseprueba", "root", "1234");
                             } catch (Exception ex) {
                                 Logger.getLogger(FrmInterfaz1.class.getName()).log(Level.SEVERE, null, ex);
                             }
@@ -1619,14 +1619,12 @@ public class FrmInterfaz1 extends javax.swing.JFrame {
                     this.Lblimpuesto.setText(String.valueOf(result + result2));
 
                     Ganacias = mCalculos.CalcularGananciasPerdidasMensuales();
-                 
-                        this.Lblganancias.setText("0");
-                        this.LblPerdidas.setText(String.valueOf(Ganacias));
-                        this.Ganancia = Ganacias;
-                        this.Perdida = 0;
 
-                 
-                    
+                    this.Lblganancias.setText("0");
+                    this.LblPerdidas.setText(String.valueOf(Ganacias));
+                    this.Ganancia = Ganacias;
+                    this.Perdida = 0;
+
                     System.out.println(result);
                     Fecha = anyo + "-" + mes + "-" + "01";
                     System.out.println(Fecha);
@@ -1637,7 +1635,7 @@ public class FrmInterfaz1 extends javax.swing.JFrame {
                         //Conectamos con la base de datos
 
                         Conexion mConexion = new Conexion();
-                        mConexion.Conectar("localhost", "nose_prueba", "root", "nose");
+                        mConexion.Conectar("localhost", "noseprueba", "root", "1234");
                         //Formamos una instruccion DML -INSERT
                         String INSERT = "insert into Resultados values (?1,'?2','?3','?4','?5','?6')";
                         INSERT = INSERT.replace("?1", String.valueOf("null"));
@@ -1659,7 +1657,7 @@ public class FrmInterfaz1 extends javax.swing.JFrame {
                         try {
                             Conexion mConexion = new Conexion();
                             try {
-                                mConexion.Conectar("localhost", "nose_prueba", "root", "nose");
+                                mConexion.Conectar("localhost", "noseprueba", "root", "1234");
                             } catch (Exception ex) {
                                 Logger.getLogger(FrmInterfaz1.class.getName()).log(Level.SEVERE, null, ex);
                             }
@@ -1740,7 +1738,7 @@ public class FrmInterfaz1 extends javax.swing.JFrame {
                         //Conectamos con la base de datos
 
                         Conexion mConexion = new Conexion();
-                        mConexion.Conectar("localhost", "nose_prueba", "root", "nose");
+                        mConexion.Conectar("localhost", "noseprueba", "root", "1234");
                         //Formamos una instruccion DML -INSERT
                         String INSERT = "insert into Resultados values (?1,'?2','?3','?4','?5','?6')";
                         INSERT = INSERT.replace("?1", String.valueOf("null"));
@@ -1762,7 +1760,7 @@ public class FrmInterfaz1 extends javax.swing.JFrame {
                         try {
                             Conexion mConexion = new Conexion();
                             try {
-                                mConexion.Conectar("localhost", "nose_prueba", "root", "nose");
+                                mConexion.Conectar("localhost", "noseprueba", "root", "1234");
                             } catch (Exception ex) {
                                 Logger.getLogger(FrmInterfaz1.class.getName()).log(Level.SEVERE, null, ex);
                             }
@@ -1892,11 +1890,11 @@ public class FrmInterfaz1 extends javax.swing.JFrame {
                     this.Lblimpuesto.setText(String.valueOf(result + result2));
 
                     Ganacias = mCalculos.CalcularGananciasPerdidasAnuales();
-                    
-                        this.Lblganancias.setText("0");
-                        this.LblPerdidas.setText(String.valueOf(Ganacias));
-                        this.Ganancia = 0;
-                        this.Perdida = Ganacias;
+
+                    this.Lblganancias.setText("0");
+                    this.LblPerdidas.setText(String.valueOf(Ganacias));
+                    this.Ganancia = 0;
+                    this.Perdida = Ganacias;
 
                     System.out.println(result);
                     Fecha = anyo + "-" + mes + "-" + "01";
@@ -2005,7 +2003,32 @@ public class FrmInterfaz1 extends javax.swing.JFrame {
     }//GEN-LAST:event_pestanaconsultaFocusGained
 
     private void TxtBuscarKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TxtBuscarKeyTyped
-        // TODO add your handling code here:
+    
+        
+
+
+// TODO add your handling code here:
+
+        char caracter = evt.getKeyChar();
+        
+        if (((caracter < '0') || (caracter > '9')) && (caracter != KeyEvent.VK_BACK_SPACE) && (caracter != '-')) {
+            evt.consume();
+            
+            JOptionPane.showMessageDialog(rootPane, "Ingresar solo numeros");
+        }
+        TxtBuscar.addKeyListener(new KeyAdapter() {
+            public void keyReleased(final KeyEvent e) {
+                String cadena = (TxtBuscar.getText());
+                TxtBuscar.setText(cadena);
+                repaint();
+
+            }
+        });
+        trsFiltro = new TableRowSorter(this.TFacturasRecibos.getModel());
+        TFacturasRecibos.setRowSorter(trsFiltro);
+        trsFiltro.setRowFilter(RowFilter.regexFilter(TxtBuscar.getText(), 2));
+
+        char car = evt.getKeyChar();
     }//GEN-LAST:event_TxtBuscarKeyTyped
 
     private void BtnSalirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnSalirActionPerformed
@@ -2019,9 +2042,8 @@ public class FrmInterfaz1 extends javax.swing.JFrame {
     }//GEN-LAST:event_BtnSalir1ActionPerformed
 
     private void BtnCargarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnCargarActionPerformed
-        this.TxtBuscar.setText(null);
         this.cadena = "";
-
+        this.TxtBuscar.setText("");
         if (entradafac == 0) {
             Cargar();
             this.LblFecha1.setText("_______________________");
@@ -2038,8 +2060,11 @@ public class FrmInterfaz1 extends javax.swing.JFrame {
 
         }
         entradafac = 1;
-        //}
-                   
+      trsFiltro = new TableRowSorter(this.TFacturasRecibos.getModel());
+        TFacturasRecibos.setRowSorter(trsFiltro);
+        trsFiltro.setRowFilter(RowFilter.regexFilter(TxtBuscar.getText(), 2));
+
+      
     }//GEN-LAST:event_BtnCargarActionPerformed
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
@@ -2062,7 +2087,7 @@ public class FrmInterfaz1 extends javax.swing.JFrame {
 
                         //Conectamos con la base de datos
                         Conexion mConexion = new Conexion();
-                        mConexion.Conectar("localhost", "nose_prueba", "root", "nose");
+                        mConexion.Conectar("localhost", "noseprueba", "root", "1234");
                         //String impuestos = ("select SUM(Impuesto) as total from Recibo_Factura where fecha >= '?2-?1-01' and fecha <= '?2-?1-31';");
                         //Realizamos una consulta sobre las tablas
                         String consulta = "DELETE FROM Resultados;";
@@ -2124,10 +2149,9 @@ public class FrmInterfaz1 extends javax.swing.JFrame {
 
     private void BtnEliminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnEliminarActionPerformed
         // TODO add your handling code here:
-        
-        this.TxtBuscar.setText(null);
+
         this.cadena = "";
-        
+
         int fila = this.TFacturasRecibos.getSelectedRow();
 
         if (fila >= 0) {
@@ -2138,8 +2162,8 @@ public class FrmInterfaz1 extends javax.swing.JFrame {
             try {
 
                 Conexion mConexion = new Conexion();
-                mConexion.Conectar("localhost", "nose_prueba", "root", "nose");
-                String consulta = " delete from recibo_factura where idRecibo_Factura = '?1';";
+                mConexion.Conectar("localhost", "noseprueba", "root", "1234");
+                String consulta = " delete from Recibo_Factura where idRecibo_Factura = '?1';";
                 consulta = consulta.replace("?1", OID);
                 mConexion.ejecutarActualizacion(consulta);
                 JOptionPane.showMessageDialog(null, "Eliminado");
@@ -2156,27 +2180,16 @@ public class FrmInterfaz1 extends javax.swing.JFrame {
     private void TxtBuscarKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TxtBuscarKeyPressed
         // TODO add your handling code here:
         
+        
+
     }//GEN-LAST:event_TxtBuscarKeyPressed
 
     private void TxtBuscarKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TxtBuscarKeyReleased
         // TODO add your handling code here:        
-        char caracter = evt.getKeyChar();
-        if (((caracter < '0') || (caracter > '9')) && (caracter != KeyEvent.VK_BACK_SPACE) && (caracter != '-')) {
-            evt.consume();
-            JOptionPane.showMessageDialog(rootPane, "Ingresar solo numeros");
-        }
+      
         
-        TxtBuscar.addKeyListener(new KeyAdapter() {
-            @Override
-            public void keyReleased(final KeyEvent ke) {
+     
 
-                trsFiltro.setRowFilter(RowFilter.regexFilter(TxtBuscar.getText(), 2));
-            }
-        });
-        trsFiltro = new TableRowSorter(this.TFacturasRecibos.getModel());
-        
-        TFacturasRecibos.setRowSorter(trsFiltro);
-        
     }//GEN-LAST:event_TxtBuscarKeyReleased
 
     private void TxtBuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_TxtBuscarActionPerformed
