@@ -32,6 +32,7 @@ import javax.swing.Icon;
 import javax.swing.ImageIcon;
 import javax.swing.JFileChooser;
 import javax.swing.JOptionPane;
+import javax.swing.JTable;
 import javax.swing.RowFilter;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableRowSorter;
@@ -363,8 +364,14 @@ public class FrmInterfaz1 extends javax.swing.JFrame {
 
             }
         ));
+        TFacturasRecibos.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
         jScrollPane1.setViewportView(TFacturasRecibos);
 
+        TxtBuscar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                TxtBuscarActionPerformed(evt);
+            }
+        });
         TxtBuscar.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyPressed(java.awt.event.KeyEvent evt) {
                 TxtBuscarKeyPressed(evt);
@@ -602,7 +609,7 @@ public class FrmInterfaz1 extends javax.swing.JFrame {
                         .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(BtnSALIR)))
-                .addContainerGap(128, Short.MAX_VALUE))
+                .addContainerGap(134, Short.MAX_VALUE))
         );
 
         jTabbedPane1.addTab("Generar Reporte", pestanaGenerarreporte);
@@ -984,6 +991,10 @@ public class FrmInterfaz1 extends javax.swing.JFrame {
             }
         }
 
+       this.CargarTabla(TFacturasRecibos, "");
+    }//GEN-LAST:event_formWindowGainedFocus
+
+    public void CargarTabla(JTable tabla , String Cadena){
         try {
 
 
@@ -1010,13 +1021,12 @@ public class FrmInterfaz1 extends javax.swing.JFrame {
                     };
                     modelo.addRow(actual);
                 }
-                this.TFacturasRecibos.setModel(modelo);
+                tabla.setModel(modelo);
             }
         } catch (Exception error) {
             System.out.println(error.toString());
-        }
-    }//GEN-LAST:event_formWindowGainedFocus
-
+        } 
+    }
     public void consultar() throws Exception {
 
         try {
@@ -2114,6 +2124,10 @@ public class FrmInterfaz1 extends javax.swing.JFrame {
 
     private void BtnEliminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnEliminarActionPerformed
         // TODO add your handling code here:
+        
+        this.TxtBuscar.setText(null);
+        this.cadena = "";
+        
         int fila = this.TFacturasRecibos.getSelectedRow();
 
         if (fila >= 0) {
@@ -2142,30 +2156,10 @@ public class FrmInterfaz1 extends javax.swing.JFrame {
     private void TxtBuscarKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TxtBuscarKeyPressed
         // TODO add your handling code here:
         
-        char caracter = evt.getKeyChar();
-        if (((caracter < '0') || (caracter > '9')) && (caracter != KeyEvent.VK_BACK_SPACE) && (caracter != '-')) {
-            evt.consume();
-            JOptionPane.showMessageDialog(rootPane, "Ingresar solo numeros");
-        }
-        
-        TxtBuscar.addKeyListener(new KeyAdapter() {
-            public void keyReleased(final KeyEvent e) {
-                 cadena = (TxtBuscar.getText());
-                TxtBuscar.setText(cadena);
-//                repaint();
-
-            }
-        });
-        trsFiltro = new TableRowSorter(this.TFacturasRecibos.getModel());
-        TFacturasRecibos.setRowSorter(trsFiltro);
-        trsFiltro.setRowFilter(RowFilter.regexFilter(TxtBuscar.getText(), 2));
-        
-
     }//GEN-LAST:event_TxtBuscarKeyPressed
 
     private void TxtBuscarKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TxtBuscarKeyReleased
-        // TODO add your handling code here:
-        
+        // TODO add your handling code here:        
         char caracter = evt.getKeyChar();
         if (((caracter < '0') || (caracter > '9')) && (caracter != KeyEvent.VK_BACK_SPACE) && (caracter != '-')) {
             evt.consume();
@@ -2173,17 +2167,21 @@ public class FrmInterfaz1 extends javax.swing.JFrame {
         }
         
         TxtBuscar.addKeyListener(new KeyAdapter() {
-            public void keyReleased(final KeyEvent e) {
-                 cadena = (TxtBuscar.getText());
-                TxtBuscar.setText(cadena);
-//                repaint();
+            @Override
+            public void keyReleased(final KeyEvent ke) {
 
+                trsFiltro.setRowFilter(RowFilter.regexFilter(TxtBuscar.getText(), 2));
             }
         });
         trsFiltro = new TableRowSorter(this.TFacturasRecibos.getModel());
+        
         TFacturasRecibos.setRowSorter(trsFiltro);
-        trsFiltro.setRowFilter(RowFilter.regexFilter(TxtBuscar.getText(), 2));
+        
     }//GEN-LAST:event_TxtBuscarKeyReleased
+
+    private void TxtBuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_TxtBuscarActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_TxtBuscarActionPerformed
 
     /**
      * @param args the command line arguments
