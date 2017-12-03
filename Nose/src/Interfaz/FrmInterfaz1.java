@@ -74,14 +74,17 @@ public class FrmInterfaz1 extends javax.swing.JFrame {
     String metodo_pago;
     private TableRowSorter trsFiltro;
     String rfcactivo;
-
+String folio, rfce;
     public FrmInterfaz1() {
         initComponents();
+        
         url = "";
         impuesto = 0;
         Perdida = 0;
         LblTipo1.setText("Nose~Cont");
         rfcr = "";
+        folio="";
+        rfce="";
         car = 0;
         entradafac = 0;
         metodo_pago = "";
@@ -429,7 +432,7 @@ public class FrmInterfaz1 extends javax.swing.JFrame {
                         .addComponent(BtnEliminar)))
                 .addGap(52, 52, 52)
                 .addComponent(LblImagen3, javax.swing.GroupLayout.PREFERRED_SIZE, 277, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(949, Short.MAX_VALUE))
+                .addContainerGap(962, Short.MAX_VALUE))
         );
         pestanaconsultaLayout.setVerticalGroup(
             pestanaconsultaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -446,7 +449,7 @@ public class FrmInterfaz1 extends javax.swing.JFrame {
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 432, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addGroup(pestanaconsultaLayout.createSequentialGroup()
-                                .addGap(47, 47, 47)
+                                .addGap(55, 55, 55)
                                 .addComponent(BtnEliminar))))
                     .addGroup(pestanaconsultaLayout.createSequentialGroup()
                         .addGap(42, 42, 42)
@@ -729,7 +732,7 @@ public class FrmInterfaz1 extends javax.swing.JFrame {
             if (url == "") {
 
                 JOptionPane.showMessageDialog(null, "No Seleccionaste Nada");
-            } else {
+            } else if (url != "") {
 
                 archivoXML mi_archivo = new archivoXML(url);
                 mi_archivo.open();
@@ -738,7 +741,7 @@ public class FrmInterfaz1 extends javax.swing.JFrame {
                     NodeList root = mi_archivo.getRoot();
                     //Padre
                     Node comprobante = mi_archivo.getNode("cfdi:Comprobante", root);
-                    String folio = mi_archivo.getNodeAttr("folio", comprobante);
+                     folio = mi_archivo.getNodeAttr("folio", comprobante);
                     String importe = mi_archivo.getNodeAttr("subTotal", comprobante);
                     String fecha = mi_archivo.getNodeAttr("fecha", comprobante);
                     metodo_pago = mi_archivo.getNodeAttr("metodoDePago", comprobante);
@@ -748,7 +751,7 @@ public class FrmInterfaz1 extends javax.swing.JFrame {
                     System.out.println(metodo_pago);
                     //Emisor
                     Node emisor = mi_archivo.getNode("cfdi:Emisor", comprobante.getChildNodes());
-                    String rfce = mi_archivo.getNodeAttr("rfc", emisor);
+                     rfce = mi_archivo.getNodeAttr("rfc", emisor);
                     nombree = mi_archivo.getNodeAttr("nombre", emisor);
                     System.out.println(rfce);
                     System.out.println(nombree);
@@ -771,7 +774,7 @@ public class FrmInterfaz1 extends javax.swing.JFrame {
                         JOptionPane.showMessageDialog(null, "Este archivo ya estaba almacenado en la BD con anterioridad ");
                     } else ////
                     {
-                        estado = true;
+                        estado = false;
                         if (rfcactivo.equals(rfce.toString())) {
                             //Recibo
                             LblNombree1.setText(nombree);
@@ -2100,11 +2103,22 @@ public class FrmInterfaz1 extends javax.swing.JFrame {
             this.LblRFCE1.setText("_______________________");
             this.LblRFCR1.setText("_______________________");
             this.LblTipo1.setText("Nose~Cont");
-            Cargar();
+             rfce="";
+            folio="";
+                     Cargar();
 
         } else if (entradafac > 0) {
             int a = JOptionPane.showConfirmDialog(rootPane, "Seguro que quieres cargar otra factura o recibo?");
             if (a == 0) {
+                this.LblFecha1.setText("_______________________");
+                this.LblNombree1.setText("_______________________");
+                this.LblNombrer1.setText("_______________________");
+                this.LblRFCE1.setText("_______________________");
+                this.LblRFCR1.setText("_______________________");
+                this.LblPerdidas.setText("____________");
+                this.Lblganancias.setText("____________");
+                this.Lblimpuesto.setText("____________");
+                TXTanyo.setText("");
                 Cargar();
             }
 
@@ -2220,45 +2234,42 @@ public class FrmInterfaz1 extends javax.swing.JFrame {
         // TODO add your handling code here:
 
         this.cadena = "";
-//
-
         int fila = this.TFacturasRecibos.getSelectedRow();
         JOptionPane.showMessageDialog(null, "fila" + fila);
-
         if (fila >= 0) {
 
-            
-                //Obtenemos el OID del producto
-                String OID = (String) this.TFacturasRecibos.getValueAt(fila, 0);
-                JOptionPane.showMessageDialog(null, "id" + OID);
+            //Obtenemos el OID del producto
+            String OID = (String) this.TFacturasRecibos.getValueAt(fila, 0);
+            JOptionPane.showMessageDialog(null, "id" + OID);
 
 //            try {
-                Conexion mConexion = new Conexion();
-               
+            Conexion mConexion = new Conexion();
+
             try {
                 mConexion.Conectar("localhost", "noseprueba", "root", "1234");
             } catch (Exception ex) {
                 Logger.getLogger(FrmInterfaz1.class.getName()).log(Level.SEVERE, null, ex);
             }
-               
-                String consulta = " delete from Recibo_Factura where idRecibo_Factura ='" + OID + "'";
+
+            String consulta = " delete from Recibo_Factura where idRecibo_Factura ='" + OID + "'";
             try {
                 //consulta = consulta.replace("?1", OID);
+
                 mConexion.ejecutarActualizacion(consulta);
-            } catch (SQLException ex) {
-                Logger.getLogger(FrmInterfaz1.class.getName()).log(Level.SEVERE, null, ex);
-            }
-                JOptionPane.showMessageDialog(null, "Eliminado");
                 this.CargarTabla(TFacturasRecibos, "");
                 trsFiltro = new TableRowSorter(this.TFacturasRecibos.getModel());
                 TFacturasRecibos.setRowSorter(trsFiltro);
                 trsFiltro.setRowFilter(RowFilter.regexFilter(TxtBuscar.getText(), 2));
 
+            } catch (SQLException ex) {
+                Logger.getLogger(FrmInterfaz1.class.getName()).log(Level.SEVERE, null, ex);
+            }
+            JOptionPane.showMessageDialog(null, "Eliminado");
+
 //            } catch (Exception error) {
 //                JOptionPane.showMessageDialog(null, "Error al Eliminar Recibo o Factura");
 //                System.out.println(error.toString());
 //            }
-          
         } else {
             JOptionPane.showMessageDialog(this, "Selecciona un producto");
         }
