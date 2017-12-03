@@ -20,6 +20,7 @@ import com.itextpdf.text.pdf.PdfPTable;
 import com.itextpdf.text.pdf.PdfWriter;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
+import java.sql.PreparedStatement;
 import java.io.File;
 import java.io.FileOutputStream;
 import java.sql.ResultSet;
@@ -49,6 +50,7 @@ public class FrmInterfaz1 extends javax.swing.JFrame {
     /**
      * Creates new form FrmInterfaz1
      */
+    boolean estado;
     String cadena;
     private String url;
     String nombree;
@@ -126,6 +128,7 @@ public class FrmInterfaz1 extends javax.swing.JFrame {
         LblRFCR1 = new javax.swing.JLabel();
         LblImagen1 = new javax.swing.JLabel();
         RBCombustible = new javax.swing.JRadioButton();
+        jLabel2 = new javax.swing.JLabel();
         pestanaconsulta = new javax.swing.JPanel();
         BtnSalir = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
@@ -243,46 +246,53 @@ public class FrmInterfaz1 extends javax.swing.JFrame {
         RBCombustible.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         RBCombustible.setText("Combustible");
 
+        jLabel2.setText("Ultimo Archivo Cargado");
+
         javax.swing.GroupLayout PestanaLeerarchivoLayout = new javax.swing.GroupLayout(PestanaLeerarchivo);
         PestanaLeerarchivo.setLayout(PestanaLeerarchivoLayout);
         PestanaLeerarchivoLayout.setHorizontalGroup(
             PestanaLeerarchivoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(PestanaLeerarchivoLayout.createSequentialGroup()
-                .addGap(29, 29, 29)
                 .addGroup(PestanaLeerarchivoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(PestanaLeerarchivoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                        .addGroup(PestanaLeerarchivoLayout.createSequentialGroup()
-                            .addComponent(LblTipo1, javax.swing.GroupLayout.PREFERRED_SIZE, 196, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addGap(74, 74, 74)
-                            .addComponent(BtnCargar, javax.swing.GroupLayout.PREFERRED_SIZE, 156, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addGap(316, 316, 316))
-                        .addGroup(PestanaLeerarchivoLayout.createSequentialGroup()
-                            .addComponent(Lbl5)
-                            .addGap(18, 18, 18)
-                            .addComponent(LblNombree1)
-                            .addGap(18, 18, 18)
-                            .addComponent(Lbl7)
-                            .addGap(18, 18, 18)
-                            .addComponent(LblNombrer1)
-                            .addGap(116, 116, 116))
-                        .addGroup(javax.swing.GroupLayout.Alignment.LEADING, PestanaLeerarchivoLayout.createSequentialGroup()
-                            .addGroup(PestanaLeerarchivoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                .addGroup(PestanaLeerarchivoLayout.createSequentialGroup()
-                                    .addComponent(Lbl6)
-                                    .addGap(44, 44, 44)
-                                    .addComponent(LblFecha1, javax.swing.GroupLayout.PREFERRED_SIZE, 190, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                .addGroup(PestanaLeerarchivoLayout.createSequentialGroup()
-                                    .addComponent(jLabel11)
-                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                    .addComponent(LblRFCE1, javax.swing.GroupLayout.PREFERRED_SIZE, 225, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                            .addComponent(jLabel13)
-                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                            .addComponent(LblRFCR1)
-                            .addGap(89, 89, 89)))
                     .addGroup(PestanaLeerarchivoLayout.createSequentialGroup()
-                        .addGap(381, 381, 381)
-                        .addComponent(RBCombustible)))
+                        .addGap(29, 29, 29)
+                        .addGroup(PestanaLeerarchivoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(PestanaLeerarchivoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                .addGroup(PestanaLeerarchivoLayout.createSequentialGroup()
+                                    .addComponent(LblTipo1, javax.swing.GroupLayout.PREFERRED_SIZE, 196, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addGap(74, 74, 74)
+                                    .addComponent(BtnCargar, javax.swing.GroupLayout.PREFERRED_SIZE, 156, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addGap(337, 337, 337))
+                                .addGroup(PestanaLeerarchivoLayout.createSequentialGroup()
+                                    .addComponent(Lbl5)
+                                    .addGap(18, 18, 18)
+                                    .addComponent(LblNombree1)
+                                    .addGap(18, 18, 18)
+                                    .addComponent(Lbl7)
+                                    .addGap(18, 18, 18)
+                                    .addComponent(LblNombrer1)
+                                    .addGap(116, 116, 116))
+                                .addGroup(javax.swing.GroupLayout.Alignment.LEADING, PestanaLeerarchivoLayout.createSequentialGroup()
+                                    .addGroup(PestanaLeerarchivoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                        .addGroup(PestanaLeerarchivoLayout.createSequentialGroup()
+                                            .addComponent(Lbl6)
+                                            .addGap(44, 44, 44)
+                                            .addComponent(LblFecha1, javax.swing.GroupLayout.PREFERRED_SIZE, 190, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                        .addGroup(PestanaLeerarchivoLayout.createSequentialGroup()
+                                            .addComponent(jLabel11)
+                                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                            .addComponent(LblRFCE1, javax.swing.GroupLayout.PREFERRED_SIZE, 225, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                    .addComponent(jLabel13)
+                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                    .addComponent(LblRFCR1)
+                                    .addGap(89, 89, 89)))
+                            .addGroup(PestanaLeerarchivoLayout.createSequentialGroup()
+                                .addGap(381, 381, 381)
+                                .addComponent(RBCombustible))))
+                    .addGroup(PestanaLeerarchivoLayout.createSequentialGroup()
+                        .addGap(270, 270, 270)
+                        .addComponent(jLabel2)))
                 .addGroup(PestanaLeerarchivoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(PestanaLeerarchivoLayout.createSequentialGroup()
                         .addGap(259, 259, 259)
@@ -290,7 +300,7 @@ public class FrmInterfaz1 extends javax.swing.JFrame {
                     .addGroup(PestanaLeerarchivoLayout.createSequentialGroup()
                         .addGap(18, 18, 18)
                         .addComponent(LblImagen1, javax.swing.GroupLayout.PREFERRED_SIZE, 286, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(608, Short.MAX_VALUE))
+                .addContainerGap(635, Short.MAX_VALUE))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, PestanaLeerarchivoLayout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(BtnSalir1, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -302,16 +312,18 @@ public class FrmInterfaz1 extends javax.swing.JFrame {
                 .addGroup(PestanaLeerarchivoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(PestanaLeerarchivoLayout.createSequentialGroup()
                         .addGap(114, 114, 114)
-                        .addComponent(LblTipo1)
-                        .addGap(80, 80, 80)
-                        .addGroup(PestanaLeerarchivoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(Lbl6)
-                            .addComponent(LblFecha1)))
+                        .addComponent(LblTipo1))
                     .addGroup(PestanaLeerarchivoLayout.createSequentialGroup()
                         .addGap(52, 52, 52)
                         .addComponent(RBCombustible)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(BtnCargar, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addGap(17, 17, 17)
+                .addComponent(jLabel2)
+                .addGap(45, 45, 45)
+                .addGroup(PestanaLeerarchivoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(Lbl6)
+                    .addComponent(LblFecha1))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(PestanaLeerarchivoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel11)
@@ -373,14 +385,14 @@ public class FrmInterfaz1 extends javax.swing.JFrame {
             }
         });
         TxtBuscar.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                TxtBuscarKeyTyped(evt);
+            }
             public void keyPressed(java.awt.event.KeyEvent evt) {
                 TxtBuscarKeyPressed(evt);
             }
             public void keyReleased(java.awt.event.KeyEvent evt) {
                 TxtBuscarKeyReleased(evt);
-            }
-            public void keyTyped(java.awt.event.KeyEvent evt) {
-                TxtBuscarKeyTyped(evt);
             }
         });
 
@@ -754,91 +766,129 @@ public class FrmInterfaz1 extends javax.swing.JFrame {
                     System.out.println(retenciones);
 
                     System.out.println(rfcactivo);
-                    boolean estado = this.verificar(folio, rfce, rfcr);
+                    estado = this.verificar(folio, rfce, rfcr);
                     if (estado == true) {
                         JOptionPane.showMessageDialog(null, "Este archivo ya estaba almacenado en la BD con anterioridad ");
-                    } else {
+                    } else ////
+                    {
+                        estado = true;
+                        if (rfcactivo.equals(rfce.toString())) {
+                            //Recibo
+                            LblNombree1.setText(nombree);
+                            LblNombrer1.setText(nombrer);
+                            LblFecha1.setText(fecha);
+                            LblTipo1.setText("Recibo");
+                            LblRFCE1.setText(rfce);
+                            LblRFCR1.setText(rfcr);
+                            impuesto = mCalculos.CalcularImpuestosRecibo(Float.parseFloat(importe));
+                            //LblImpuestos.setText(String.valueOf("impuesto"));
+                            try {
 
-                   
-                    ////
-                    if (rfcactivo.equals(rfce.toString())) {
-                        //Recibo
-                        LblNombree1.setText(nombree);
-                        LblNombrer1.setText(nombrer);
-                        LblFecha1.setText(fecha);
-                        LblTipo1.setText("Recibo");
-                        LblRFCE1.setText(rfce);
-                        LblRFCR1.setText(rfcr);
-                        impuesto = mCalculos.CalcularImpuestosRecibo(Float.parseFloat(importe));
-                        //LblImpuestos.setText(String.valueOf("impuesto"));
-                        try {
+                                //Conectamos con la base de datos
+                                Conexion mConexion = new Conexion();
+                                mConexion.Conectar("localhost", "noseprueba", "root", "1234");
+                                //Formamos una instruccion DML -INSERT
+                                String INSERT = "insert into Recibo_Factura values (?b,'?1','?2','?3','?4','?5','?6','?7','?8','?9','?a')";
+                                INSERT = INSERT.replace("?b", "null");
+                                INSERT = INSERT.replace("?1", folio);
+                                INSERT = INSERT.replace("?2", importe);
+                                INSERT = INSERT.replace("?3", fecha);
+                                INSERT = INSERT.replace("?4", nombrer);
+                                INSERT = INSERT.replace("?5", nombree);
+                                INSERT = INSERT.replace("?6", rfcr);
+                                INSERT = INSERT.replace("?7", rfce);
+                                INSERT = INSERT.replace("?8", "Recibo");
+                                //Llamamos al metodo que se encuentra en la clase conexión en el packete BaseDatos
+                                INSERT = INSERT.replace("?9", String.valueOf(impuesto));
+                                INSERT = INSERT.replace("?a", metodo_pago);
+                                mConexion.ejecutarActualizacion(INSERT);
+                                JOptionPane.showMessageDialog(this, "guardado");
+                                //this.setVisible(false);
+                            } catch (Exception error) {
+                                JOptionPane.showMessageDialog(this, "Error de guardar en la base de datos");
+                                System.out.println(error.toString());
+                            }
 
-                            //Conectamos con la base de datos
-                            Conexion mConexion = new Conexion();
-                            mConexion.Conectar("localhost", "noseprueba", "root", "1234");
-                            //Formamos una instruccion DML -INSERT
-                            String INSERT = "insert into Recibo_Factura values (?b,'?1','?2','?3','?4','?5','?6','?7','?8','?9','?a')";
-                            INSERT = INSERT.replace("?b", "null");
-                            INSERT = INSERT.replace("?1", folio);
-                            INSERT = INSERT.replace("?2", importe);
-                            INSERT = INSERT.replace("?3", fecha);
-                            INSERT = INSERT.replace("?4", nombrer);
-                            INSERT = INSERT.replace("?5", nombree);
-                            INSERT = INSERT.replace("?6", rfcr);
-                            INSERT = INSERT.replace("?7", rfce);
-                            INSERT = INSERT.replace("?8", "Recibo");
-                            //Llamamos al metodo que se encuentra en la clase conexión en el packete BaseDatos
-                            INSERT = INSERT.replace("?9", String.valueOf(impuesto));
-                            INSERT = INSERT.replace("?a", metodo_pago);
-                            mConexion.ejecutarActualizacion(INSERT);
-                            JOptionPane.showMessageDialog(this, "guardado");
-                            //this.setVisible(false);
-                        } catch (Exception error) {
-                            JOptionPane.showMessageDialog(this, "Error de guardar en la base de datos");
-                            System.out.println(error.toString());
-                        }
+                        } else if (rfcactivo.equals(rfcr.toString())) {
+                            //Factura
+                            if (this.RBCombustible.isSelected()) {
+                                if (((this.RBCombustible.isSelected() && (metodo_pago.equals("04"))) || (this.RBCombustible.isSelected() && (metodo_pago.equals("Tarjeta credito"))))) {
+                                    LblNombree1.setText(nombree);
+                                    LblNombrer1.setText(nombrer);
+                                    LblFecha1.setText(fecha);
+                                    LblTipo1.setText("Factura");
+                                    LblRFCE1.setText(rfce);
+                                    LblRFCR1.setText(rfcr);
 
-                    } else if (rfcactivo.equals(rfcr.toString())) {
-                        //Factura
-                        if (this.RBCombustible.isSelected()) {
-                            if (((this.RBCombustible.isSelected() && (metodo_pago.equals("04"))) || (this.RBCombustible.isSelected() && (metodo_pago.equals("Tarjeta credito"))))) {
-                                LblNombree1.setText(nombree);
-                                LblNombrer1.setText(nombrer);
-                                LblFecha1.setText(fecha);
-                                LblTipo1.setText("Factura");
-                                LblRFCE1.setText(rfce);
-                                LblRFCR1.setText(rfcr);
+                                    try {
+                                        //Conectamos con la base de datos
+                                        Conexion mConexion = new Conexion();
+                                        mConexion.Conectar("localhost", "noseprueba", "root", "1234");
+                                        //Formamos una instruccion DML -INSERT
+                                        String INSERT = "insert into Recibo_Factura values (?b,'?1','?2','?3','?4','?5','?6','?7','?8','?9','?a')";
+                                        INSERT = INSERT.replace("?b", "null");
+                                        INSERT = INSERT.replace("?1", folio);
+                                        INSERT = INSERT.replace("?2", importe);
+                                        INSERT = INSERT.replace("?3", fecha);
+                                        INSERT = INSERT.replace("?4", nombrer);
+                                        INSERT = INSERT.replace("?5", nombree);
+                                        INSERT = INSERT.replace("?6", rfcr);
+                                        INSERT = INSERT.replace("?7", rfce);
+                                        //munero 2 para identiificar el tipo en la base de datos como una factura
+                                        INSERT = INSERT.replace("?8", "Factura");
+                                        INSERT = INSERT.replace("?9", "0");
+                                        INSERT = INSERT.replace("?a", metodo_pago);
+                                        //Llamamos al metodo que se encuentra en la clase conexión en el packete BaseDatos
+                                        mConexion.ejecutarActualizacion(INSERT);
+                                        JOptionPane.showMessageDialog(this, "guardado");
+                                        //this.setVisible(false);
+                                    } catch (Exception error) {
+                                        JOptionPane.showMessageDialog(this, "Error de guardar en la base de datos");
+                                        System.out.println(error.toString());
+                                    }
 
-                                try {
-                                    //Conectamos con la base de datos
-                                    Conexion mConexion = new Conexion();
-                                    mConexion.Conectar("localhost", "noseprueba", "root", "1234");
-                                    //Formamos una instruccion DML -INSERT
-                                    String INSERT = "insert into Recibo_Factura values (?b,'?1','?2','?3','?4','?5','?6','?7','?8','?9','?a')";
-                                    INSERT = INSERT.replace("?b", "null");
-                                    INSERT = INSERT.replace("?1", folio);
-                                    INSERT = INSERT.replace("?2", importe);
-                                    INSERT = INSERT.replace("?3", fecha);
-                                    INSERT = INSERT.replace("?4", nombrer);
-                                    INSERT = INSERT.replace("?5", nombree);
-                                    INSERT = INSERT.replace("?6", rfcr);
-                                    INSERT = INSERT.replace("?7", rfce);
-                                    //munero 2 para identiificar el tipo en la base de datos como una factura
-                                    INSERT = INSERT.replace("?8", "Factura");
-                                    INSERT = INSERT.replace("?9", "0");
-                                    INSERT = INSERT.replace("?a", metodo_pago);
-                                    //Llamamos al metodo que se encuentra en la clase conexión en el packete BaseDatos
-                                    mConexion.ejecutarActualizacion(INSERT);
-                                    JOptionPane.showMessageDialog(this, "guardado");
-                                    //this.setVisible(false);
-                                } catch (Exception error) {
-                                    JOptionPane.showMessageDialog(this, "Error de guardar en la base de datos");
-                                    System.out.println(error.toString());
+                                    JOptionPane.showMessageDialog(null, "Se apagado con tarjeta de credito");
+                                } else {
+
+                                    LblNombree1.setText(nombree);
+                                    LblNombrer1.setText(nombrer);
+                                    LblFecha1.setText(fecha);
+                                    LblTipo1.setText("Factura");
+                                    LblRFCE1.setText(rfce);
+                                    LblRFCR1.setText(rfcr);
+                                    impuesto = mCalculos.CalcularImpuestosFactura(Float.parseFloat(importe));
+
+                                    try {
+                                        //Conectamos con la base de datos
+                                        Conexion mConexion = new Conexion();
+                                        mConexion.Conectar("localhost", "noseprueba", "root", "1234");
+                                        //Formamos una instruccion DML -INSERT
+                                        String INSERT = "insert into Recibo_Factura values (?b,'?1','?2','?3','?4','?5','?6','?7','?8','?9','?a')";
+                                        INSERT = INSERT.replace("?b", "null");
+                                        INSERT = INSERT.replace("?1", folio);
+                                        INSERT = INSERT.replace("?2", importe);
+                                        INSERT = INSERT.replace("?3", fecha);
+                                        INSERT = INSERT.replace("?4", nombrer);
+                                        INSERT = INSERT.replace("?5", nombree);
+                                        INSERT = INSERT.replace("?6", rfcr);
+                                        INSERT = INSERT.replace("?7", rfce);
+                                        //munero 2 para identiificar el tipo en la base de datos como una factura
+                                        INSERT = INSERT.replace("?8", "Factura");
+                                        INSERT = INSERT.replace("?9", String.valueOf(impuesto));
+                                        INSERT = INSERT.replace("?a", metodo_pago);
+                                        //Llamamos al metodo que se encuentra en la clase conexión en el packete BaseDatos
+                                        mConexion.ejecutarActualizacion(INSERT);
+                                        JOptionPane.showMessageDialog(this, "guardado");
+                                        //this.setVisible(false);
+                                    } catch (Exception error) {
+                                        JOptionPane.showMessageDialog(this, "Error de guardar en la base de datos");
+                                        System.out.println(error.toString());
+                                    }
+
+                                    JOptionPane.showMessageDialog(null, "Se apagado con en efectivo");
+
                                 }
-
-                                JOptionPane.showMessageDialog(null, "Se apagado con tarjeta de credito");
                             } else {
-
                                 LblNombree1.setText(nombree);
                                 LblNombrer1.setText(nombrer);
                                 LblFecha1.setText(fecha);
@@ -873,56 +923,15 @@ public class FrmInterfaz1 extends javax.swing.JFrame {
                                     JOptionPane.showMessageDialog(this, "Error de guardar en la base de datos");
                                     System.out.println(error.toString());
                                 }
-
-                                JOptionPane.showMessageDialog(null, "Se apagado con en efectivo");
-
                             }
+
                         } else {
-                            LblNombree1.setText(nombree);
-                            LblNombrer1.setText(nombrer);
-                            LblFecha1.setText(fecha);
-                            LblTipo1.setText("Factura");
-                            LblRFCE1.setText(rfce);
-                            LblRFCR1.setText(rfcr);
-                            impuesto = mCalculos.CalcularImpuestosFactura(Float.parseFloat(importe));
 
-                            try {
-                                //Conectamos con la base de datos
-                                Conexion mConexion = new Conexion();
-                                mConexion.Conectar("localhost", "noseprueba", "root", "1234");
-                                //Formamos una instruccion DML -INSERT
-                                String INSERT = "insert into Recibo_Factura values (?b,'?1','?2','?3','?4','?5','?6','?7','?8','?9','?a')";
-                                INSERT = INSERT.replace("?b", "null");
-                                INSERT = INSERT.replace("?1", folio);
-                                INSERT = INSERT.replace("?2", importe);
-                                INSERT = INSERT.replace("?3", fecha);
-                                INSERT = INSERT.replace("?4", nombrer);
-                                INSERT = INSERT.replace("?5", nombree);
-                                INSERT = INSERT.replace("?6", rfcr);
-                                INSERT = INSERT.replace("?7", rfce);
-                                //munero 2 para identiificar el tipo en la base de datos como una factura
-                                INSERT = INSERT.replace("?8", "Factura");
-                                INSERT = INSERT.replace("?9", String.valueOf(impuesto));
-                                INSERT = INSERT.replace("?a", metodo_pago);
-                                //Llamamos al metodo que se encuentra en la clase conexión en el packete BaseDatos
-                                mConexion.ejecutarActualizacion(INSERT);
-                                JOptionPane.showMessageDialog(this, "guardado");
-                                //this.setVisible(false);
-                            } catch (Exception error) {
-                                JOptionPane.showMessageDialog(this, "Error de guardar en la base de datos");
-                                System.out.println(error.toString());
-                            }
+                            JOptionPane.showMessageDialog(null, "RFC NO ENCONTRADO");
                         }
-
-                    } else {
-
-                        JOptionPane.showMessageDialog(null, "RFC NO ENCONTRADO");
                     }
-                
-                    
-                    }
-                    
-                    } catch (Exception error) {
+
+                } catch (Exception error) {
                     JOptionPane.showMessageDialog(null, "Error No Puedes abrir ese archivo");
                 }
                 if (rfcr.toString() == "") {
@@ -2105,7 +2114,7 @@ public class FrmInterfaz1 extends javax.swing.JFrame {
         TFacturasRecibos.setRowSorter(trsFiltro);
         trsFiltro.setRowFilter(RowFilter.regexFilter(TxtBuscar.getText(), 2));
 
-
+        this.CargarTabla(TFacturasRecibos, "");
     }//GEN-LAST:event_BtnCargarActionPerformed
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
@@ -2117,7 +2126,7 @@ public class FrmInterfaz1 extends javax.swing.JFrame {
 
                 JOptionPane.showMessageDialog(null, "Favor De Ingresar Tu RFC Nuevo");
 
-            }  else if (this.TxtRfcactivo.getText().equals(Lblactivo.getText())) {
+            } else if (this.TxtRfcactivo.getText().equals(Lblactivo.getText())) {
 
                 JOptionPane.showMessageDialog(null, "Es El Mismo RFC con el que se esta trabajando");
 
@@ -2144,6 +2153,17 @@ public class FrmInterfaz1 extends javax.swing.JFrame {
                         trsFiltro.setRowFilter(RowFilter.regexFilter(TxtBuscar.getText(), 2));
                         this.RBEditar.setSelected(false);
                         this.TxtRfcactivo.setEnabled(false);
+                        this.LblFecha1.setText("_______________________");
+                        this.LblNombree1.setText("_______________________");
+                        this.LblNombrer1.setText("_______________________");
+                        this.LblRFCE1.setText("_______________________");
+                        this.LblRFCR1.setText("_______________________");
+                        this.LblPerdidas.setText("____________");
+                        this.Lblganancias.setText("____________");
+                        this.Lblimpuesto.setText("____________");
+                        TXTanyo.setText("");
+
+                        this.LblTipo1.setText("Nose~Cont");
                     } catch (Exception error) {
                         JOptionPane.showMessageDialog(null, "Error al realizar Cambio De RFC");
                         System.out.println(error.toString());
@@ -2200,27 +2220,45 @@ public class FrmInterfaz1 extends javax.swing.JFrame {
         // TODO add your handling code here:
 
         this.cadena = "";
+//
 
         int fila = this.TFacturasRecibos.getSelectedRow();
+        JOptionPane.showMessageDialog(null, "fila" + fila);
 
         if (fila >= 0) {
 
-            //Obtenemos el OID del producto
-            String OID = (String) this.TFacturasRecibos.getValueAt(fila, 0);
-            JOptionPane.showMessageDialog(null, OID);
-            try {
+            
+                //Obtenemos el OID del producto
+                String OID = (String) this.TFacturasRecibos.getValueAt(fila, 0);
+                JOptionPane.showMessageDialog(null, "id" + OID);
 
+//            try {
                 Conexion mConexion = new Conexion();
+               
+            try {
                 mConexion.Conectar("localhost", "noseprueba", "root", "1234");
-                String consulta = " delete from Recibo_Factura where idRecibo_Factura = '?1';";
-                consulta = consulta.replace("?1", OID);
-                mConexion.ejecutarActualizacion(consulta);
-                JOptionPane.showMessageDialog(null, "Eliminado");
-
-            } catch (Exception error) {
-                JOptionPane.showMessageDialog(null, "Error al Eliminar Recibo o Factura");
-                System.out.println(error.toString());
+            } catch (Exception ex) {
+                Logger.getLogger(FrmInterfaz1.class.getName()).log(Level.SEVERE, null, ex);
             }
+               
+                String consulta = " delete from Recibo_Factura where idRecibo_Factura ='" + OID + "'";
+            try {
+                //consulta = consulta.replace("?1", OID);
+                mConexion.ejecutarActualizacion(consulta);
+            } catch (SQLException ex) {
+                Logger.getLogger(FrmInterfaz1.class.getName()).log(Level.SEVERE, null, ex);
+            }
+                JOptionPane.showMessageDialog(null, "Eliminado");
+                this.CargarTabla(TFacturasRecibos, "");
+                trsFiltro = new TableRowSorter(this.TFacturasRecibos.getModel());
+                TFacturasRecibos.setRowSorter(trsFiltro);
+                trsFiltro.setRowFilter(RowFilter.regexFilter(TxtBuscar.getText(), 2));
+
+//            } catch (Exception error) {
+//                JOptionPane.showMessageDialog(null, "Error al Eliminar Recibo o Factura");
+//                System.out.println(error.toString());
+//            }
+          
         } else {
             JOptionPane.showMessageDialog(this, "Selecciona un producto");
         }
@@ -2323,6 +2361,7 @@ public class FrmInterfaz1 extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel11;
     private javax.swing.JLabel jLabel12;
     private javax.swing.JLabel jLabel13;
+    private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
